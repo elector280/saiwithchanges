@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap:https://sai.ngo/sitemap.xml
