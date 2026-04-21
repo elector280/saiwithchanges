@@ -68,6 +68,58 @@
         object-fit: cover;
         border-radius: 10px;
     }
+
+    .hero-fallback {
+        background-color: #e5e7eb;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .title-banner {
+        position: relative;
+        background: #E13B35;
+        padding: 20px 30px;
+        display: inline-block;
+        width: auto;
+        min-width: 70%;
+        margin-top: -60px; /* Overlap hero */
+        z-index: 20;
+    }
+
+    .title-banner::before,
+    .title-banner::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0px;
+        width: 36px;
+        transform: skewX(-20deg);
+        transform-origin: bottom right;
+    }
+
+    /* Blue bar */
+    .title-banner::before {
+        right: -18px;
+        background: #2261aa;
+    }
+
+    /* Yellow bar */
+    .title-banner::after {
+        right: -42px;
+        background: #fff0a1;
+    }
+    
+    @media (max-width: 768px) {
+        .title-banner {
+            width: 100%;
+            margin-top: -30px;
+        }
+        .title-banner::before,
+        .title-banner::after {
+            display: none;
+        }
+    }
 </style>
 
 <section class="py-4 bg-light border-bottom">
@@ -90,87 +142,97 @@
     </div>
 </section>
 
-<section id="top" class="pt-4 pb-10 bg-[#f5f5f5] -mt-10 md:-mt-36 relative z-0">
-    <div class="relative rounded-sm overflow-hidden shadow-lg bg-no-repeat bg-cover bg-center"
-         style="{{ !empty($cam->cover_image_url) ? "background-image: url('".$cam->cover_image_url."');" : '' }} height: 600px; background-color:#e5e7eb;">
-        <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-[2fr,1fr] gap-6"></div>
-    </div>
+<!-- Hero Section -->
+<section id="top" class="relative w-full h-[400px] md:h-[500px] bg-center bg-cover bg-no-repeat hero-fallback" 
+         style="{{ !empty($cam->cover_image_url) ? "background-image: url('".$cam->cover_image_url."');" : '' }}">
 </section>
 
-<section class="pb-20 -mt-48 relative z-10">
-    <div class="max-w-7xl md:mx-auto grid lg:grid-cols-1 gap-6">
+<!-- Main container -->
+<section class="max-w-7xl mx-auto px-4 pb-20 relative z-10">
+    <div class="grid lg:grid-cols-[1.5fr,1fr] gap-10">
+        
+        <!-- Left Content -->
+        <div class="relative">
+            <!-- Title Block overlapping Hero -->
+            <div class="title-banner shadow-lg text-white">
+                <div class="mb-2">
+                    <span class="border border-white text-white text-xs px-2 py-1 rounded-sm">Urgent Help</span>
+                </div>
+                <h1 class="text-[26px] md:text-[36px] font-bold uppercase leading-tight tracking-wide">
+                    {{ $cam->title }}
+                </h1>
+            </div>
 
-        <article id="mainDiv" class="mainDiv overflow-visible space-y-12-">
+            <div class="bg-white p-6 md:p-8 pt-10 mt-[-20px] shadow-sm border border-gray-100 relative z-10">
+                <!-- Badges -->
+                <div class="flex flex-wrap items-center gap-6 text-sm font-semibold text-gray-800 mb-6 border-b border-gray-100 pb-4">
+                    <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500 text-lg"></i> Verified</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-trophy text-blue-600 text-lg"></i> Best NGO</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-star text-red-500 text-lg"></i> Favorite</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-certificate text-yellow-500 text-lg"></i> Certified</div>
+                </div>
 
-            <div class="bg-white shadow-md border border-gray-200 overflow-hidden md:mx-0 rounded-[4px]">
-
-                <div class="relative bg-[#D94647] text-white px-5 md:px-8 py-2 pb-1 overflow-hidden">
-                    <h2 class="text-[22px] sm:text-[26px] md:text-[34px] lg:text-[40px]
-                            font-bold uppercase leading-tight">
-                        {{ $cam->title }}
+                <!-- Short Description / Subtitle -->
+                @if(!empty($cam->short_description) || !empty($cam->description))
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-5 leading-snug">
+                        {!! strip_tags($cam->short_description ?? $cam->description) !!}
                     </h2>
+                @endif
 
-                    <div class="mt-1 flex flex-wrap gap-2">
-                        @if(!empty($cam->slug))
-                            <span class="inline-flex items-center gap-2 bg-white/15 px-3 py-1 rounded-full text-[12px] uppercase tracking-wider">
-                                <i class="fa-solid fa-link"></i> {{ $cam->slug }}
-                            </span>
-                        @endif
-
-                        @if(!empty($cam->tag_line))
-                            <span class="inline-flex items-center gap-2 bg-yellow-400 text-black px-3 py-1 rounded-full text-[12px] uppercase tracking-wider">
-                                <i class="fa-solid fa-bolt"></i> {{ $cam->tag_line }}
-                            </span>
-                        @endif
-                    </div>
+                <!-- Dynamic Content (Paragraphs) -->
+                <div class="prose max-w-none text-gray-600 text-base md:text-[17px] leading-relaxed space-y-6 mb-8">
+                    @if(!empty($cam->paragraph_one))
+                        <div>{!! $cam->paragraph_one !!}</div>
+                    @endif
+                    @if(!empty($cam->paragraph_two))
+                        <div>{!! $cam->paragraph_two !!}</div>
+                    @endif
                 </div>
 
-                <div class="px-5 md:px-8 pt-2 pb-2">
-
-                    @if(!empty($cam->short_description))
-                        <div class="mt-1 text-[14px] sm:text-[15px] md:text-[16px] text-gray-500 leading-relaxed prose max-w-none">
-                            {!! $cam->short_description !!}
-                        </div>
-                    @endif
-
-                    @if(!empty($cam->view_project_url))
-                        <a href="{{ $cam->view_project_url }}" target="_blank"
-                           class="mt-1 inline-block text-[13px] font-semibold text-[#f04848] hover:underline">
-                            {{ translate('Visit Website') }} &gt;
+                <!-- CTA Link -->
+                @if(!empty($cam->view_project_url))
+                    <div class="mb-2">
+                        <a href="{{ $cam->view_project_url }}" target="_blank" class="text-[#E13B35] font-semibold hover:underline">
+                            Visit Website >
                         </a>
-                    @endif
-                </div>
+                    </div>
+                @endif
             </div>
 
-            <div class="bg-white shadow-md border border-gray-200 overflow-hidden rounded-[4px]">
-                <div class="px-5 md:px-8 py-2">
-                    <div class="mt-2 space-y-6 text-[15px] leading-relaxed text-gray-600">
-                        @if(!empty($cam->paragraph_one))
-                            <div class="prose max-w-none">
-                                {!! $cam->paragraph_one !!}
-                            </div>
+            <!-- Secure Donations Block -->
+            <div class="mt-8 bg-white overflow-hidden shadow-sm border border-gray-100 flex flex-col md:flex-row">
+                <div class="bg-[#e45151] p-6 text-white w-full md:w-3/5 flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold uppercase leading-tight mb-6">
+                        Donations Are 100% Secure & Tax Deductible
+                    </h3>
+                    <p class="text-xs uppercase font-semibold tracking-wider text-white/90 mb-3">Our Certifications</p>
+                    <div class="flex flex-wrap items-center gap-3">
+                        @php
+                            $certifications = \App\Models\Sponsor::where('type', 'certifications')->latest()->take(4)->get();
+                        @endphp
+                        @if($certifications->count() > 0)
+                            @foreach($certifications as $cert)
+                                <img src="{{ asset('storage/sponsor/'.$cert->image) }}" class="h-10 w-10 object-contain" alt="">
+                            @endforeach
+                        @else
+                            <img src="{{ asset('images/cert-1.png') }}" class="h-10 object-contain rounded" onerror="this.style.display='none'" alt="Candid">
+                            <img src="{{ asset('images/cert-2.png') }}" class="h-10 object-contain rounded" onerror="this.style.display='none'" alt="Great Nonprofits">
                         @endif
-
-                        @if(!empty($cam->paragraph_two))
-                            <div class="prose max-w-none">
-                                {!! $cam->paragraph_two !!}
-                            </div>
-                        @endif
+                    </div>
+                </div>
+                <div class="bg-[#Fdfdfd] p-6 w-full md:w-2/5 flex flex-col justify-center items-center text-center">
+                    <p class="text-sm font-semibold text-gray-700 mb-4">You can donate with your <br> Favorite service</p>
+                    <div class="flex justify-center gap-3">
+                        <div class="w-12 h-8 bg-gray-200 border border-gray-300 rounded flex items-center justify-center"><i class="fab fa-cc-visa text-gray-600 text-xl"></i></div>
+                        <div class="w-12 h-8 bg-gray-200 border border-gray-300 rounded flex items-center justify-center"><i class="fab fa-cc-mastercard text-gray-600 text-xl"></i></div>
+                        <div class="w-12 h-8 bg-gray-200 border border-gray-300 rounded flex items-center justify-center"><i class="fab fa-paypal text-gray-600 text-xl"></i></div>
+                        <div class="w-12 h-8 bg-gray-200 border border-gray-300 rounded flex items-center justify-center"><i class="fab fa-cc-amex text-gray-600 text-xl"></i></div>
                     </div>
                 </div>
             </div>
 
-            @if(!empty($cam->donation_box))
-                <div class="bg-white shadow-md border border-gray-200 overflow-hidden rounded-[4px]">
-                    <div class="px-5 md:px-8 py-5">
-                        <div class="prose max-w-none">
-                            {!! $cam->donation_box !!}
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-            <div class="bg-white shadow-md border border-gray-200 overflow-hidden rounded-[4px]">
+            <!-- Preivew SEO Summary -->
+            <div class="bg-white shadow-sm border border-gray-100 overflow-hidden mt-8">
                 <div class="px-5 md:px-8 py-5">
                     <h4 class="font-bold mb-3">SEO / Social Summary</h4>
 
@@ -199,7 +261,24 @@
                 </div>
             </div>
 
-        </article>
+        </div>
+
+        <!-- Right Content (Widget) -->
+        <div class="lg:mt-[-100px] relative z-20">
+            <div class="sticky top-24 bg-white shadow-xl rounded-lg overflow-hidden border border-gray-100">
+                @if(!empty($cam->donation_box))
+                    <div class="w-full text-center">
+                        {!! $cam->donation_box !!}
+                    </div>
+                @else
+                    <div class="p-10 text-center text-gray-500 bg-gray-50">
+                        <i class="fas fa-hand-holding-heart text-4xl mb-3 text-gray-300"></i>
+                        <p class="font-medium">No donation widget provided.</p>
+                    </div>
+                @endif
+            </div>
+        </div>
+        
     </div>
 </section>
 @endsection
