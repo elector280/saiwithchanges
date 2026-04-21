@@ -83,48 +83,9 @@
         background-repeat: no-repeat;
     }
 
-    .title-banner {
-        position: relative;
-        background: #E13B35;
-        padding: 20px 30px;
-        display: inline-block;
-        width: auto;
-        min-width: 70%;
-        margin-top: -60px; /* Overlap hero */
-        z-index: 20;
-    }
-
-    .title-banner::before,
-    .title-banner::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0px;
-        width: 36px;
-        transform: skewX(-20deg);
-        transform-origin: bottom right;
-    }
-
-    /* Blue bar */
-    .title-banner::before {
-        right: -18px;
-        background: #2261aa;
-    }
-
-    /* Yellow bar */
-    .title-banner::after {
-        right: -42px;
-        background: #fff0a1;
-    }
-    
     @media (max-width: 768px) {
         .title-banner {
             width: 100%;
-            margin-top: -30px;
-        }
-        .title-banner::before,
-        .title-banner::after {
-            display: none;
         }
     }
 </style>
@@ -141,13 +102,30 @@
         <!-- Left Content -->
         <div class="relative">
             <!-- Title Block overlapping Hero -->
-            <div class="title-banner shadow-lg text-white">
-                <div class="mb-2">
-                    <span class="border border-white text-white text-xs px-2 py-1 rounded-sm">Urgent Help</span>
+            <div class="relative inline-block w-[95%] md:w-[85%] mt-[-40px] md:mt-[-60px] z-20">
+                <!-- Outer right area transparent to allow clip-path to show elements underneath? No, the div itself has width -->
+                
+                <!-- Yellow Stripe (Back) -->
+                <div class="absolute inset-0 bg-[#FFD100] shadow-lg hidden md:block" style="clip-path: polygon(0 0, 100% 0, calc(100% - 30px) 100%, 0 100%); z-index: 1;"></div>
+                
+                <!-- Blue Stripe (Middle) -->
+                <div class="absolute inset-0 bg-[#003893] hidden md:block" style="clip-path: polygon(0 0, calc(100% - 15px) 0, calc(100% - 45px) 100%, 0 100%); z-index: 2;"></div>
+                
+                <!-- Red Box (Front) -->
+                <div class="absolute inset-0 bg-[#E13B35] hidden md:block" style="clip-path: polygon(0 0, calc(100% - 30px) 0, calc(100% - 60px) 100%, 0 100%); z-index: 3;"></div>
+                
+                <!-- Red Box (Mobile - no clip-path) -->
+                <div class="absolute inset-0 bg-[#E13B35] md:hidden z-3 shadow-lg"></div>
+
+                <!-- Content -->
+                <div class="relative z-10 px-6 md:px-8 py-5 md:py-6 pr-[20px] md:pr-[80px]">
+                    <div class="mb-2">
+                        <span class="border border-white text-white text-xs px-2 py-1 rounded-sm">Urgent Help</span>
+                    </div>
+                    <h1 class="text-[26px] md:text-[36px] font-bold uppercase leading-tight tracking-wide text-white">
+                        {{ $cam->title }}
+                    </h1>
                 </div>
-                <h1 class="text-[26px] md:text-[36px] font-bold uppercase leading-tight tracking-wide">
-                    {{ $cam->title }}
-                </h1>
             </div>
 
             <div class="bg-white p-6 md:p-8 pt-10 mt-[-20px] shadow-sm border border-gray-100 relative z-10">

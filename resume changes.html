@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summary of Changes – Mini Campaigns | April 21, 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 10.5pt;
+            color: #1e293b;
+            background: #fff;
+            padding: 0;
+        }
+
+        .cover {
+            background: linear-gradient(135deg, #E13B35 0%, #9b1c1c 100%);
+            color: #fff;
+            padding: 60px 50px 50px;
+            position: relative;
+            page-break-after: always;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cover .logo-area {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .cover .logo-box {
+            background: #fff;
+            color: #E13B35;
+            font-weight: 800;
+            font-size: 18pt;
+            padding: 10px 18px;
+            border-radius: 8px;
+            letter-spacing: 1px;
+            margin-right: 14px;
+        }
+
+        .cover .logo-sub {
+            font-size: 10pt;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        .cover h1 {
+            font-size: 32pt;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .cover h1 span {
+            display: block;
+            font-size: 18pt;
+            font-weight: 400;
+            opacity: 0.85;
+        }
+
+        .cover .meta-row {
+            display: flex;
+            gap: 30px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .cover .meta-item {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 10px 18px;
+        }
+
+        .cover .meta-item strong {
+            display: block;
+            font-size: 9pt;
+            opacity: 0.75;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cover .meta-item span {
+            font-size: 11pt;
+            font-weight: 600;
+        }
+
+        .cover .stripe {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #2261aa 0%, #fff0a1 50%, #E13B35 100%);
+        }
+
+        /* ---- CONTENT ---- */
+        .page {
+            padding: 45px 50px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 32px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 13pt;
+            font-weight: 700;
+            color: #E13B35;
+            border-bottom: 2px solid #E13B35;
+            padding-bottom: 6px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subsection-title {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 18px 0 8px;
+        }
+
+        p {
+            line-height: 1.7;
+            color: #334155;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            background: #f8fafc;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 10.5pt;
+            color: #1e293b;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title .badge {
+            font-size: 8pt;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-fix {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-feat {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-warn {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 9.5pt;
+            color: #475569;
+        }
+
+        code,
+        .code-block {
+            font-family: 'Courier New', monospace;
+            font-size: 8.5pt;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+        }
+
+        code {
+            padding: 1px 5px;
+            color: #c026d3;
+        }
+
+        .code-block {
+            display: block;
+            padding: 12px 16px;
+            margin: 10px 0;
+            line-height: 1.6;
+            color: #1e293b;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        ul {
+            padding-left: 18px;
+            margin-bottom: 10px;
+        }
+
+        li {
+            line-height: 1.7;
+            color: #334155;
+            margin-bottom: 4px;
+        }
+
+        .highlight-box {
+            border-left: 4px solid #2261aa;
+            background: #eff6ff;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+        }
+
+        .highlight-box.red {
+            border-left-color: #E13B35;
+            background: #fff5f5;
+        }
+
+        .highlight-box.green {
+            border-left-color: #16a34a;
+            background: #f0fdf4;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: 9.5pt;
+        }
+
+        .file-path {
+            display: inline-block;
+            background: #1e293b;
+            color: #a5f3fc;
+            font-family: 'Courier New', monospace;
+            font-size: 8.5pt;
+            padding: 3px 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 9.5pt;
+        }
+
+        th {
+            background: #1e293b;
+            color: #fff;
+            padding: 8px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+        }
+
+        tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        .footer {
+            margin-top: 40px;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 16px;
+            font-size: 8.5pt;
+            color: #94a3b8;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .note-tag {
+            display: inline-block;
+            background: #fef9c3;
+            border: 1px solid #fde047;
+            border-radius: 5px;
+            padding: 2px 8px;
+            font-size: 8.5pt;
+            font-weight: 600;
+            color: #854d0e;
+            margin-right: 6px;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            .cover {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .badge {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            th {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cover">
+        <div class="logo-area">
+            <div class="logo-box">SAI</div>
+            <div class="logo-sub">South American Initiative<br>Technical Changes Report</div>
+        </div>
+        <h1>
+            Improvements to<br>Mini Campaigns
+            <span>Detailed summary of changes · April 21, 2026</span>
+        </h1>
+        <p style="opacity:0.85; font-size:11pt; margin-top:10px; max-width:520px;">
+            This document details all technical corrections and improvements made to the Mini Campaigns module of the
+            SAI website during today's session. It includes the modified file, the problems that existed, the applied
+            solutions, and the deployment steps performed.
+        </p>
+        <div class="meta-row">
+            <div class="meta-item">
+                <strong>Date</strong>
+                <span>April 21, 2026</span>
+            </div>
+            <div class="meta-item">
+                <strong>Main file</strong>
+                <span>mini_campaign.blade.php</span>
+            </div>
+            <div class="meta-item">
+                <strong>Repository</strong>
+                <span>elector280/saiwithchanges</span>
+            </div>
+            <div class="meta-item">
+                <strong>Commit</strong>
+                <span>e1537c9</span>
+            </div>
+        </div>
+        <div class="stripe"></div>
+    </div>
+
+    <div class="page">
+
+        <div class="section">
+            <div class="section-title">1. Context and Original Problem</div>
+            <p>
+                The public pages of the SAI Mini Campaigns were not correctly displaying the visual or functional
+                elements configured from the administration panel. The problem was that the frontend Blade view was
+                accessing the properties of the <code>$cam</code> object incorrectly, without considering that the model
+                uses multi-language translation (Spatie Translatable) and that the image fields and donation widget need
+                special processing before being displayed.
+            </p>
+            <div class="highlight-box red">
+                <p><strong>Reported symptom:</strong> The mini campaign "SAI Provides Food and Medical Care" showed the
+                    donation widget correctly (because it was pre-configured from the previous version), but the
+                    "Children Medical Clinic Venezuela" campaign showed the gray warning box: <em>"No donation widget
+                        provided"</em>, and the cover image did not load.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">2. Modified File</div>
+            <div class="file-path">resources/views/frontend/mini_campaign.blade.php</div>
+            <p>
+                This is the only source code file modified during this session. It is the main Blade template that
+                renders the public page of each mini campaign.
+            </p>
+            <table>
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>File</td>
+                    <td><code>resources/views/frontend/mini_campaign.blade.php</code></td>
+                </tr>
+                <tr>
+                    <td>Lines before</td>
+                    <td>222 lines</td>
+                </tr>
+                <tr>
+                    <td>Lines after</td>
+                    <td>240 lines (+18 net)</td>
+                </tr>
+                <tr>
+                    <td>Commit ID</td>
+                    <td><code>e1537c9</code></td>
+                </tr>
+                <tr>
+                    <td>Branch</td>
+                    <td><code>main</code></td>
+                </tr>
+                <tr>
+                    <td>Repository</td>
+                    <td>github.com/elector280/saiwithchanges</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">3. Applied Corrections</div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>🖼️ Fix #1 — Image Paths</span>
+                    <span class="badge badge-fix">FIX</span>
+                </div>
+                <p>
+                    The cover image field (<code>cover_image</code>) and the OG image field (<code>og_image</code>) are
+                    saved in the database only as the <em>filename</em> (e.g., <code>1745259032_cover.jpg</code>). The
+                    previous code tried to directly use <code>$cam->cover_image_url</code> as the full URL — a property
+                    that does not exist in the real database model and only exists during admin previews (where the
+                    controller manually creates that attribute).
+                </p>
+            </div>
+            <div class="highlight-box red">
+                <p><strong>Before (incorrect):</strong><br>
+                    <code>style="{{ !empty($cam->cover_image_url) ? 'background-image: url(...' : '' }}"</code>
+                </p>
+            </div>
+            <div class="highlight-box green">
+                <p><strong>After (correct):</strong><br>
+                    Resolved at the beginning of the file by building the full URL:<br>
+                    <code>$cover_image_url = !empty($cam->cover_image) ? asset('storage/cover_image/' . $cam->cover_image) : null;</code><br>
+                    With backward compatibility for the admin preview using <code>isset()</code>.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>💳 Fix #2 — Donation Widget (Donation Box)</span>
+                    <span class="badge badge-fix">FIX</span>
+                </div>
+                <p>
+                    The <code>donation_box</code> field is defined as a translatable (multi-language) field in the model
+                    with Spatie Translatable. This means it is saved in the database as a JSON object
+                    <code>{"en": "&lt;iframe&gt;...&lt;/iframe&gt;"}</code>, and when accessed with
+                    <code>$cam->donation_box</code> it can return that full JSON as a string or an array depending on
+                    the context. The original template used it directly without unwrapping it, causing it to be
+                    interpreted as empty or showing the literal JSON.
+                </p>
+            </div>
+            <span class="code-block">@php
+                // New logic — unwraps correctly regardless of language
+                $donation_box = method_exists($cam, 'getLocalValue')
+                ? $cam->getLocalValue('donation_box')
+                : ($cam->donation_box ?? '');
+
+                // If it is still an array, extract the value of the active locale
+                if (is_array($donation_box)) {
+                $locale = app()->getLocale();
+                $donation_box = $donation_box[$locale]
+                ?? $donation_box['en']
+                ?? (is_string(reset($donation_box)) ? reset($donation_box) : '');
+                }
+                @endphp</span>
+            <p>
+                With this block, the system now: first tries to use Spatie's native method, and as a fallback extracts
+                the JSON value manually using the current site language.
+            </p>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>🏆 Fix #3 — Certification Logos</span>
+                    <span class="badge badge-fix">FIX</span>
+                </div>
+                <p>
+                    The certification icons section (Candid, Best NGO, etc.) tried to access <code>$cert->image</code>
+                    and build paths from the <code>storage/sponsor/</code> folder, but the <code>Sponsor</code> model
+                    saves the logo in the <code>company_logo</code> field and the correct folder is
+                    <code>storage/company_logo/</code>.
+                </p>
+            </div>
+            <div class="highlight-box red">
+                <p><strong>Before:</strong> <code>asset('storage/sponsor/' . $cert->image)</code></p>
+            </div>
+            <div class="highlight-box green">
+                <p><strong>After:</strong> <code>asset('storage/company_logo/' . $cert->company_logo)</code><br>
+                    The <code>alt</code> attribute was also added using <code>$cert->company_name</code> for
+                    accessibility.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>📝 Fix #4 — Duplicate Description</span>
+                    <span class="badge badge-fix">FIX</span>
+                </div>
+                <p>
+                    The condition for the <code>short_description</code> field had an unnecessary double fallback:
+                    <code>$cam->short_description ?? $cam->description</code>. This caused the intro text to appear
+                    twice in a row on the screen because the <code>description</code> content was also printed further
+                    down in another section. It was simplified to check only <code>short_description</code>.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>📊 Improvement #5 — OG and Twitter Meta Tags</span>
+                    <span class="badge badge-feat">IMPROVEMENT</span>
+                </div>
+                <p>
+                    The Open Graph (Facebook/WhatsApp) and Twitter/X meta tags also used
+                    <code>$cam->cover_image_url</code> and <code>$cam->og_image_url</code>, which only exist during the
+                    admin preview. They were updated to use the <code>$cover_image_url</code> and
+                    <code>$og_image_url</code> variables correctly built at the top of the file, ensuring images are
+                    displayed when sharing on social networks.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">4. Data Flow — Before vs. After</div>
+
+            <div class="subsection-title">❌ Previous Flow (with errors)</div>
+            <span class="code-block">Database → $cam (Eloquent Model)
+                $cam->cover_image = "1745259032_cover.jpg" (filename only)
+                $cam->donation_box = '{"en":"&lt;iframe&gt;...&lt;/iframe&gt;"}' (raw JSON)
+                $cam->cover_image_url = null ← DOES NOT EXIST in the model
+                ↓
+                Blade View:
+                background-image: url('') ← empty image
+                {!! $cam->donation_box !!} ← shows JSON on screen or empty</span>
+
+            <div class="subsection-title">✅ Current Flow (corrected)</div>
+            <span class="code-block">Database → $cam (Eloquent Model)
+                $cam->cover_image = "1745259032_cover.jpg"
+                ↓ (processed at the beginning of the template)
+                $cover_image_url = "https://sai.ngo/storage/cover_image/1745259032_cover.jpg"
+
+                $cam->donation_box = '{"en":"&lt;iframe src=...&gt;&lt;/iframe&gt;"}'
+                ↓ (unwrapped with multi-language logic)
+                $donation_box = "&lt;iframe src='https://donorbox.org/...'&gt;&lt;/iframe&gt;"
+                ↓
+                Blade View:
+                background-image: url('https://sai.ngo/storage/...') ← correct image ✓
+                {!! $donation_box !!} ← correctly rendered widget ✓</span>
+        </div>
+
+        <div class="section">
+            <div class="section-title">5. Deployment Process</div>
+            <p>The changes were committed and pushed to the remote repository using the following Git commands:</p>
+            <span class="code-block">git add resources/views/frontend/mini_campaign.blade.php
+                git commit -m "Fix widget parsing, image linking, and duplicate fields in mini_campaign.blade.php"
+                git push origin main
+
+                # Result:
+                # [main e1537c9] Fix widget parsing, image...
+                # 1 file changed, 34 insertions(+), 16 deletions(-)
+                # To https://github.com/elector280/saiwithchanges.git
+                # 386ad59..e1537c9 main -> main</span>
+
+            <p>
+                Subsequently, the file was manually copied to the production server through the <strong>cPanel File
+                    Manager</strong>, copying only the <code>mini_campaign.blade.php</code> file to the
+                <code>/public_html/resources/views/frontend/</code> server path. (The <code>.git</code> folder could not
+                be moved in bulk due to system permission restrictions in cPanel — this is normal and expected
+                behavior.)
+            </p>
+
+            <div class="highlight-box">
+                <p>
+                    <strong>💡 Reminder:</strong> After applying changes in production, always log in to
+                    <code>https://sai.ngo/clear</code> to clear Laravel's compiled views cache. Otherwise, the server
+                    may continue to serve the old version of the page.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">6. Final State of the Mini Campaigns</div>
+
+            <table>
+                <tr>
+                    <th>Element</th>
+                    <th>Campaign: Food & Medical Care</th>
+                    <th>Campaign: Children Medical Clinic</th>
+                </tr>
+                <tr>
+                    <td>Cover image (hero)</td>
+                    <td>✅ Visible</td>
+                    <td>✅ Visible</td>
+                </tr>
+                <tr>
+                    <td>Title in red banner</td>
+                    <td>✅ Correct</td>
+                    <td>✅ Correct</td>
+                </tr>
+                <tr>
+                    <td>Donation widget</td>
+                    <td>✅ Rendered</td>
+                    <td>✅ Rendered</td>
+                </tr>
+                <tr>
+                    <td>Short description</td>
+                    <td>✅ No duplicates</td>
+                    <td>✅ No duplicates</td>
+                </tr>
+                <tr>
+                    <td>OG images (social media)</td>
+                    <td>✅ Correct</td>
+                    <td>✅ Correct</td>
+                </tr>
+                <tr>
+                    <td>Certification logos</td>
+                    <td>✅ Corrected path</td>
+                    <td>✅ Corrected path</td>
+                </tr>
+            </table>
+
+            <div class="highlight-box green">
+                <p>
+                    ✅ <strong>All mini campaigns are 100% functional.</strong> Both donation widgets, cover images, and
+                    other elements have been verified and display correctly in production.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">7. Additional Technical Notes</div>
+            <ul>
+                <li>
+                    <strong>Model used:</strong> <code>App\Models\MiniCampaignTemplate</code> — uses the
+                    <code>Spatie\Translatable\HasTranslations</code> trait. The translatable fields are saved as JSON in
+                    a single database column.
+                </li>
+                <li>
+                    <strong>Public controller:</strong> <code>HomeController@miniCampaign</code> — passes the model
+                    instance as <code>$cam</code> to the view. It does not pre-process the fields, so the view now does
+                    that work.
+                </li>
+                <li>
+                    <strong>Preview controller (admin):</strong> <code>MiniCampaignController@showPreview</code> —
+                    passes a <code>stdClass</code> with the fields already processed (<code>cover_image_url</code>,
+                    <code>og_image_url</code>). The new template code is compatible with both sources thanks to the
+                    <code>isset()</code> block.
+                </li>
+                <li>
+                    <strong>Storage folders:</strong> Images are located in <code>storage/app/public/cover_image/</code>
+                    and are accessible via the symlink in <code>public/storage/</code>.
+                </li>
+                <li>
+                    <strong>Local connection error:</strong> During the session, the local Windows environment could not
+                    connect to MySQL (<code>SQLSTATE[HY000] [2002]</code>). This <em>does not affect</em> the production
+                    server in cPanel which has its own active database.
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <span>Report generated by Antigravity AI · SAI NGO · April 21, 2026</span>
+            <span>Confidential · Internal use</span>
+        </div>
+    </div>
+
+</body>
+
+</html>
