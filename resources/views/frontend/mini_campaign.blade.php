@@ -5,6 +5,24 @@
 @section('meta_keyword', $cam->meta_keywords ?? '')
 
 @section('meta')
+@php
+    $cover_image_url = !empty($cam->cover_image) ? asset('storage/cover_image/' . $cam->cover_image) : null;
+    $og_image_url = !empty($cam->og_image) ? asset('storage/og_image/' . $cam->og_image) : null;
+    
+    // For admin preview fallback compatibility
+    if (isset($cam->cover_image_url)) {
+        $cover_image_url = $cam->cover_image_url;
+    }
+    if (isset($cam->og_image_url)) {
+        $og_image_url = $cam->og_image_url;
+    }
+
+    $donation_box = method_exists($cam, 'getLocalValue') ? $cam->getLocalValue('donation_box') : ($cam->donation_box ?? '');
+    if (is_array($donation_box)) {
+        $locale = app()->getLocale();
+        $donation_box = $donation_box[$locale] ?? $donation_box['en'] ?? (is_string(reset($donation_box)) ? reset($donation_box) : '');
+    }
+@endphp
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ config('app.name') }}">
     <meta property="og:locale" content="en_US">
@@ -18,13 +36,13 @@
         <meta property="og:description" content="{{ $cam->og_description ?: $cam->meta_description }}">
     @endif
 
-    @if(!empty($cam->og_image_url))
-        <meta property="og:image" content="{{ $cam->og_image_url }}">
-        <meta property="og:image:secure_url" content="{{ $cam->og_image_url }}">
+    @if(!empty($og_image_url))
+        <meta property="og:image" content="{{ $og_image_url }}">
+        <meta property="og:image:secure_url" content="{{ $og_image_url }}">
         <meta property="og:image:alt" content="{{ $cam->og_title ?: $cam->title }}">
-    @elseif(!empty($cam->cover_image_url))
-        <meta property="og:image" content="{{ $cam->cover_image_url }}">
-        <meta property="og:image:secure_url" content="{{ $cam->cover_image_url }}">
+    @elseif(!empty($cover_image_url))
+        <meta property="og:image" content="{{ $cover_image_url }}">
+        <meta property="og:image:secure_url" content="{{ $cover_image_url }}">
         <meta property="og:image:alt" content="{{ $cam->og_title ?: $cam->title }}">
     @endif
 
@@ -38,10 +56,10 @@
         <meta name="twitter:description" content="{{ $cam->og_description ?: $cam->meta_description }}">
     @endif
 
-    @if(!empty($cam->og_image_url))
-        <meta name="twitter:image" content="{{ $cam->og_image_url }}">
-    @elseif(!empty($cam->cover_image_url))
-        <meta name="twitter:image" content="{{ $cam->cover_image_url }}">
+    @if(!empty($og_image_url))
+        <meta name="twitter:image" content="{{ $og_image_url }}">
+    @elseif(!empty($cover_image_url))
+        <meta name="twitter:image" content="{{ $cover_image_url }}">
     @endif
 
     @if(!empty($cam->canonical_url))
@@ -113,7 +131,7 @@
 
 <!-- Hero Section -->
 <section id="top" class="relative w-full h-[400px] md:h-[500px] bg-center bg-cover bg-no-repeat hero-fallback" 
-         style="{{ !empty($cam->cover_image_url) ? "background-image: url('".$cam->cover_image_url."');" : '' }}">
+         style="{{ !empty($cover_image_url) ? "background-image: url('".$cover_image_url."');" : '' }}">
 </section>
 
 <!-- Main container -->
@@ -142,9 +160,9 @@
                 </div>
 
                 <!-- Short Description / Subtitle -->
-                @if(!empty($cam->short_description) || !empty($cam->description))
+                @if(!empty($cam->short_description))
                     <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-5 leading-snug">
-                        {!! strip_tags($cam->short_description ?? $cam->description) !!}
+                        {!! strip_tags($cam->short_description) !!}
                     </h2>
                 @endif
 
@@ -181,7 +199,7 @@
                         @endphp
                         @if($certifications->count() > 0)
                             @foreach($certifications as $cert)
-                                <img src="{{ asset('storage/sponsor/'.$cert->image) }}" class="h-10 w-10 object-contain" alt="">
+                                <img src="{{ asset('storage/company_logo/'.$cert->company_logo) }}" class="h-10 w-auto object-contain" alt="{{ $cert->company_name }}">
                             @endforeach
                         @else
                             <img src="{{ asset('images/cert-1.png') }}" class="h-10 object-contain rounded" onerror="this.style.display='none'" alt="Candid">
@@ -204,9 +222,9 @@
         <!-- Right Content (Widget) -->
         <div class="lg:mt-[-100px] relative z-20">
             <div class="sticky top-24 bg-white shadow-xl rounded-lg overflow-hidden border border-gray-100">
-                @if(!empty($cam->donation_box))
+                @if(!empty($donation_box))
                     <div class="w-full text-center">
-                        {!! $cam->donation_box !!}
+                        {!! $donation_box !!}
                     </div>
                 @else
                     <div class="p-10 text-center text-gray-500 bg-gray-50">
