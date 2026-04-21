@@ -101,30 +101,22 @@
         
         <!-- Left Content -->
         <div class="relative">
-            <!-- Title Block overlapping Hero -->
-            <div class="relative inline-block w-[95%] md:w-[85%] mt-[-40px] md:mt-[-60px] z-20">
-                <!-- Outer right area transparent to allow clip-path to show elements underneath? No, the div itself has width -->
-                
-                <!-- Yellow Stripe (Back) -->
-                <div class="absolute inset-0 bg-[#FFD100] shadow-lg hidden md:block" style="clip-path: polygon(0 0, 100% 0, calc(100% - 30px) 100%, 0 100%); z-index: 1;"></div>
-                
-                <!-- Blue Stripe (Middle) -->
-                <div class="absolute inset-0 bg-[#003893] hidden md:block" style="clip-path: polygon(0 0, calc(100% - 15px) 0, calc(100% - 45px) 100%, 0 100%); z-index: 2;"></div>
-                
-                <!-- Red Box (Front) -->
-                <div class="absolute inset-0 bg-[#E13B35] hidden md:block" style="clip-path: polygon(0 0, calc(100% - 30px) 0, calc(100% - 60px) 100%, 0 100%); z-index: 3;"></div>
-                
-                <!-- Red Box (Mobile - no clip-path) -->
-                <div class="absolute inset-0 bg-[#E13B35] md:hidden z-3 shadow-lg"></div>
-
-                <!-- Content -->
-                <div class="relative z-10 px-6 md:px-8 py-5 md:py-6 pr-[20px] md:pr-[80px]">
-                    <div class="mb-2">
+            <!-- Title Block overlapping Hero (matching live donation page) -->
+            <div class="relative inline-block w-[95%] md:w-[85%] mt-[-40px] md:mt-[-60px] z-20 shadow-lg">
+                <!-- TOP RED HEADER -->
+                <div class="relative bg-[#D94647] text-white px-2 md:px-8 py-4 overflow-hidden rounded-[2px]">
+                    <div class="mb-2 px-3 md:px-0">
                         <span class="border border-white text-white text-xs px-2 py-1 rounded-sm">Urgent Help</span>
                     </div>
-                    <h1 class="text-[26px] md:text-[36px] font-bold uppercase leading-tight tracking-wide text-white">
+                    <h1 class="px-3 md:px-0 text-[26px] md:text-[34px] lg:text-[40px] font-bold uppercase leading-tight relative z-10 w-[90%]">
                         {{ $cam->title }}
                     </h1>
+
+                    <!-- right ribbon (blue + yellow) -->
+                    <div class="absolute top-0 -right-2 hidden w-16 h-full md:block z-0">
+                        <div class="absolute inset-y-0 right-5 w-7 bg-[#2261aa] skew-x-[42deg]"></div>
+                        <div class="absolute inset-y-0 right-0 w-6 bg-[#fff0a1] skew-x-[42deg]"></div>
+                    </div>
                 </div>
             </div>
 
