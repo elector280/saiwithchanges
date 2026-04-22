@@ -26,8 +26,7 @@
   <link rel="stylesheet" href="{{ asset('backend-asset') }}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{ asset('backend-asset') }}/plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="{{ asset('backend-asset') }}/plugins/summernote/summernote-bs4.min.css">
+  <!-- TinyMCE -->
 
   <!-- Select2 -->
   <link rel="stylesheet" href="{{ asset('backend-asset/plugins/select2/css/select2.min.css') }}">
@@ -205,8 +204,33 @@ table.dataTable {
 <script src="{{ asset('backend-asset') }}/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('backend-asset') }}/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="{{ asset('backend-asset') }}/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- TinyMCE -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.3/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        tinymce.init({
+            selector: '.summernote, .tinymce, #summernote',
+            height: 400,
+            plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
+            toolbar: 'undo redo | blocks | ' +
+            'bold italic backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | image | help',
+            content_style: 'body { font-family: anthropicSans, "anthropicSans Fallback", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; }',
+            images_upload_url: '{{ route("tinymce.upload") }}',
+            automatic_uploads: true,
+            relative_urls: false,
+            remove_script_host: false,
+            document_base_url: '{{ url("/") }}/',
+            file_picker_types: 'image',
+            setup: function (editor) {
+                editor.on('change', function () {
+                    editor.save();
+                });
+            }
+        });
+    });
+</script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('backend-asset') }}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->

@@ -628,20 +628,16 @@
 
 
 
-@include('admin.summernote_modal')
 
 @endsection
 
 @section('js')
 @section('js')
-{{-- Summernote --}}
-<script src="{{ asset('backend-asset/plugins/summernote/summernote-bs4.min.js') }}"></script>
 
 {{-- Tempus Dominus (datepicker) --}}
 <script src="{{ asset('backend-asset/plugins/moment/moment.min.js') }}"></script>
 <script src="{{ asset('backend-asset/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
-<script src="{{ asset('backend-asset') }}/summernote-custom-input.js"></script>
 
 <script>
 $(function () {
@@ -677,12 +673,10 @@ $(function () {
         const slug  = $(`input[name="slug[${locale}]"]`).val() || '';
         const short = $(`textarea[name="short_description[${locale}]"]`).val() || '';
 
-        // summernote html
+        tinymce.triggerSave();
         let desc = '';
         const $descTextarea = $(`textarea[name="description[${locale}]"]`);
-        if ($descTextarea.length && $descTextarea.hasClass('summernote')) {
-            desc = $descTextarea.summernote('code') || '';
-        } else {
+        if ($descTextarea.length) {
             desc = $descTextarea.val() || '';
         }
 
@@ -729,10 +723,7 @@ $(function () {
     $('#confirmUpdate').on('click', function (e) {
         e.preventDefault();
 
-        // sync summernote -> textarea
-        $('.summernote').each(function () {
-            $(this).val($(this).summernote('code'));
-        });
+        tinymce.triggerSave();
 
         // disable confirm to avoid double click
         $('#confirmUpdate').prop('disabled', true);

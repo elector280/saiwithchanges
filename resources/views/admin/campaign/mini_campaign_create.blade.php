@@ -667,7 +667,7 @@
     </form>
 </div>
 
-@include('admin.summernote_modal')
+
 @endsection
 
 @section('js')

@@ -3,7 +3,6 @@
 @section('title', 'Report Create')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('backend-asset/plugins/summernote/summernote-bs4.min.css') }}">
 
 <style>
     .note-editor.note-frame {
@@ -516,11 +515,8 @@ $langCode = \App\Models\Language::where('language_code', $locale)->first();
 
 
 
-
-@include('admin.summernote_modal')
 @endsection
 @section('js')
-<script src="{{ asset('backend-asset/plugins/summernote/summernote-bs4.min.js') }}"></script>
 
 {{-- Tempus Dominus --}}
 <script src="{{ asset('backend-asset/plugins/moment/moment.min.js') }}"></script>
@@ -528,7 +524,6 @@ $langCode = \App\Models\Language::where('language_code', $locale)->first();
 
 
 
-<script src="{{ asset('backend-asset') }}/summernote-custom-input.js"></script>
 
 
 
@@ -576,8 +571,9 @@ $(function () {
         const slug  = $(`input[name="slug[${locale}]"]`).val() || '';
         const short = $(`textarea[name="short_description[${locale}]"]`).val() || '';
 
+        tinymce.triggerSave();
         const descTextarea = $(`textarea[name="description[${locale}]"]`);
-        const desc = descTextarea.length ? descTextarea.summernote('code') : '';
+        const desc = descTextarea.length ? descTextarea.val() : '';
 
         const seoTitle = $(`input[name="seo_title[${locale}]"]`).val() || '';
         const metaDesc = $(`input[name="meta_description[${locale}]"]`).val() || '';
@@ -622,10 +618,7 @@ $(function () {
     $('#confirmUpdate').on('click', function (e) {
         e.preventDefault();
 
-        // sync summernote -> textarea
-        $('.summernote').each(function () {
-            $(this).val($(this).summernote('code'));
-        });
+        tinymce.triggerSave();
 
         // disable to prevent double click
         $('#confirmUpdate').prop('disabled', true);

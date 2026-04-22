@@ -35,7 +35,7 @@
 
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.css">
+
 
     </head>
 
@@ -110,8 +110,31 @@
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.js"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.3/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                tinymce.init({
+                    selector: '.summernote, .tinymce, #summernote',
+                    height: 400,
+                    plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
+                    toolbar: 'undo redo | blocks | ' +
+                    'bold italic backcolor | alignleft aligncenter ' +
+                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                    'removeformat | image | help',
+                    images_upload_url: '{{ route("tinymce.upload") }}',
+                    automatic_uploads: true,
+                    relative_urls: false,
+                    remove_script_host: false,
+                    document_base_url: '{{ url("/") }}/',
+                    file_picker_types: 'image',
+                    setup: function (editor) {
+                        editor.on('change', function () {
+                            editor.save();
+                        });
+                    }
+                });
+            });
+        </script>
         <script>
         @if(Session::has('message'))
         var type = "{{ Session::get('alert-type','info') }}"
@@ -134,24 +157,6 @@
         }
         @endif 
         </script>
-
-            <script>
-                $(function () {
-                    $('#summernote').summernote({
-                        height: 260,
-                        placeholder: 'Write here...',
-                        toolbar: [
-                            ['style', ['style']],
-                            ['font', ['bold', 'italic', 'underline', 'clear']],
-                            ['para', ['ul', 'ol', 'paragraph']],
-                            ['insert', ['link', 'picture', 'video']],
-                            ['view', ['fullscreen', 'codeview']]
-                        ]
-                    });
-                });
-                </script>
-
-
         <!-- Requirment datatables -->
         <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('backend/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>

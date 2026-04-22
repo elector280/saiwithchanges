@@ -164,6 +164,8 @@ Route::middleware('auth')->group(function () {
 */
 
 Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::post('/tinymce/upload', [\App\Http\Controllers\TinyMCEController::class, 'upload'])->name('tinymce.upload');
+
     Route::get('/media', [MediaController::class, 'index'])->name('admin.media.index');
     Route::post('/media/folder', [MediaController::class, 'createFolder'])->name('admin.media.folder.create');
     Route::post('/media/upload', [MediaController::class, 'upload'])->name('admin.media.upload');

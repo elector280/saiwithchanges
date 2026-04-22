@@ -1080,7 +1080,7 @@ $locale = Session::get('locale', config('app.locale'));
 
 
 
-@include('admin.summernote_modal')
+
 @endsection
 
 
@@ -1099,7 +1099,7 @@ $locale = Session::get('locale', config('app.locale'));
 </script>
 
 
-<script src="{{ asset('backend-asset') }}/summernote-custom-input.js"></script>
+
 
 
 @endsection 

@@ -469,7 +469,7 @@
 
 
 
-@include('admin.summernote_modal')
+
 
 
 @endsection
