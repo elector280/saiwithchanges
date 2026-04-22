@@ -412,6 +412,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    window.addEventListener('resize', function () {
+        if (window.innerWidth >= 1024 && isOpen()) {
+            setMenu(false);
+        }
+    });
+
     setMenu(false);
 
     const buttons = document.querySelectorAll('[data-accordion^="m-"]');
