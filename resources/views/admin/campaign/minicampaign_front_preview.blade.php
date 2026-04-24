@@ -76,48 +76,9 @@
         background-repeat: no-repeat;
     }
 
-    .title-banner {
-        position: relative;
-        background: #E13B35;
-        padding: 20px 30px;
-        display: inline-block;
-        width: auto;
-        min-width: 70%;
-        margin-top: -60px; /* Overlap hero */
-        z-index: 20;
-    }
-
-    .title-banner::before,
-    .title-banner::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0px;
-        width: 36px;
-        transform: skewX(-20deg);
-        transform-origin: bottom right;
-    }
-
-    /* Blue bar */
-    .title-banner::before {
-        right: -18px;
-        background: #2261aa;
-    }
-
-    /* Yellow bar */
-    .title-banner::after {
-        right: -42px;
-        background: #fff0a1;
-    }
-    
     @media (max-width: 768px) {
-        .title-banner {
+        .title-banner-wrapper {
             width: 100%;
-            margin-top: -30px;
-        }
-        .title-banner::before,
-        .title-banner::after {
-            display: none;
         }
     }
 </style>
@@ -153,14 +114,23 @@
         
         <!-- Left Content -->
         <div class="relative">
-            <!-- Title Block overlapping Hero -->
-            <div class="title-banner shadow-lg text-white">
-                <div class="mb-2">
-                    <span class="border border-white text-white text-xs px-2 py-1 rounded-sm">Urgent Help</span>
+            <!-- Title Block overlapping Hero (matching live donation page) -->
+            <div class="relative inline-block w-[95%] md:w-[85%] mt-[-40px] md:mt-[-60px] z-20 shadow-lg title-banner-wrapper">
+                <!-- TOP RED HEADER -->
+                <div class="relative bg-[#D94647] text-white px-2 md:px-8 py-4 overflow-hidden rounded-[2px]">
+                    <div class="mb-2 px-3 md:px-0">
+                        <span class="border border-white text-white text-xs px-2 py-1 rounded-sm">Urgent Help</span>
+                    </div>
+                    <h1 class="px-3 md:px-0 text-[26px] md:text-[34px] lg:text-[40px] font-bold uppercase leading-tight relative z-10 w-[90%]">
+                        {{ $cam->title }}
+                    </h1>
+
+                    <!-- right ribbon (blue + yellow) -->
+                    <div class="absolute top-0 -right-2 hidden w-16 h-full md:block z-0">
+                        <div class="absolute inset-y-0 right-5 w-7 bg-[#2261aa] skew-x-[42deg]"></div>
+                        <div class="absolute inset-y-0 right-0 w-6 bg-[#fff0a1] skew-x-[42deg]"></div>
+                    </div>
                 </div>
-                <h1 class="text-[26px] md:text-[36px] font-bold uppercase leading-tight tracking-wide">
-                    {{ $cam->title }}
-                </h1>
             </div>
 
             <div class="bg-white p-6 md:p-8 pt-10 mt-[-20px] shadow-sm border border-gray-100 relative z-10">

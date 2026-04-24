@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>System Update Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+
+            .shadow-lg {
+                box-shadow: none !important;
+            }
+
+            .border-gray-200 {
+                border-color: transparent !important;
+            }
+
+            .container-print {
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 py-10 px-4 md:px-8">
+
+    <div class="max-w-4xl mx-auto container-print text-right mb-4 no-print">
+        <button onclick="window.print()"
+            class="bg-[#e45151] hover:bg-red-700 text-white font-semibold py-2 px-6 rounded shadow-md transition duration-200 flex items-center inline-flex gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                    d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z"
+                    clip-rule="evenodd" />
+            </svg>
+            Print / Save as PDF
+        </button>
+    </div>
+
+    <div class="max-w-4xl mx-auto container-print bg-white p-8 md:p-12 shadow-lg rounded-xl border border-gray-200">
+        <header
+            class="border-b-2 border-gray-100 pb-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Technical Updates Report</h1>
+                <p class="text-gray-500 mt-1 font-medium">Detail of recent implementations and improvements on the
+                    platform</p>
+            </div>
+            <div class="text-left md:text-right bg-gray-50 p-4 rounded border border-gray-100 w-full md:w-auto">
+                <p class="text-sm font-semibold text-gray-800">Date: <span class="font-normal text-gray-600">April 24,
+                        2026</span></p>
+                <p class="text-sm font-semibold text-gray-800 mt-1">Author: <span
+                        class="font-normal text-gray-600">Development Team</span></p>
+            </div>
+        </header>
+
+        <section class="mb-10">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                <span
+                    class="bg-[#e45151] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">1</span>
+                Executive Summary
+            </h2>
+            <div class="pl-11 text-gray-600 leading-relaxed">
+                <p>
+                    This document consolidates the technical interventions carried out during the recent development
+                    sessions. Efforts have been strategically focused on three pillars: <strong>the visual restructuring
+                        and conversion of Mini Campaigns</strong>, <strong>the integration of Mailgun for email
+                        infrastructure</strong>, and <strong>the modernization of the administration panel by migrating
+                        to TinyMCE</strong>.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-10 page-break-inside-avoid">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                <span
+                    class="bg-[#e45151] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">2</span>
+                Redesign and Optimization of Mini Campaigns
+            </h2>
+            <div class="pl-11">
+                <p class="text-gray-600 leading-relaxed mb-5">
+                    A deep frontend redesign was carried out for the "Mini Campaigns," rigorously aligning them with the
+                    approved design prototype. The primary goal was to improve user experience and boost conversion
+                    rates.
+                </p>
+                <div class="bg-gray-50 border-l-4 border-[#e45151] p-5 rounded">
+                    <ul class="space-y-4 text-gray-700 text-sm">
+                        <li>
+                            <strong class="text-gray-900 block mb-1">Two-Column Structure (Sticky Widget):</strong>
+                            Migrated from a single-column layout to a two-column arrangement on large screens. Narrative
+                            content is located on the left, while the <em>Donation Widget</em> is anchored on the right
+                            using "sticky" positioning, ensuring the call to action persists as the user scrolls.
+                        </li>
+                        <li>
+                            <strong class="text-gray-900 block mb-1">Banner Visual Alignment (Pixel-Perfect):</strong>
+                            The title banner was recoded to exactly match the main donation page. This required the use
+                            of modern CSS properties (<code>clip-path</code>) to recreate the decorative diagonal
+                            stripes without overloading the DOM with heavy images.
+                        </li>
+                        <li>
+                            <strong class="text-gray-900 block mb-1">"Secure Donations" Trust Block:</strong>
+                            A dynamic visual validation block was designed and implemented at the bottom, detailing
+                            "100% Secure & Tax Deductible," dynamically displaying database certifications and payment
+                            method logos (Visa, MasterCard, PayPal, Amex) to build donor trust.
+                        </li>
+                        <li>
+                            <strong class="text-gray-900 block mb-1">Template Logic Fixes:</strong>
+                            Resolved parsing conflicts in the widget, fixed broken image links
+                            (<code>image linking</code>), and cleaned up duplicate variables and data fields within the
+                            <code>mini_campaign.blade.php</code> source code.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10 page-break-inside-avoid">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                <span
+                    class="bg-[#e45151] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">3</span>
+                Transactional Email API Integration (Mailgun)
+            </h2>
+            <div class="pl-11">
+                <p class="text-gray-600 leading-relaxed mb-5">
+                    To resolve deliverability and latency issues and ensure all system emails reach the inbox (avoiding
+                    SPAM), basic sending was replaced with a robust integration with <strong>Mailgun</strong>.
+                </p>
+                <div class="bg-gray-50 border-l-4 border-[#e45151] p-5 rounded">
+                    <ul class="space-y-4 text-gray-700 text-sm">
+                        <li>
+                            <strong class="text-gray-900 block mb-1">Dependency Installation:</strong>
+                            The <code>symfony/mailgun-mailer</code> package was required via Composer, providing the
+                            Laravel application with native capability to communicate with the Mailgun API.
+                        </li>
+                        <li>
+                            <strong class="text-gray-900 block mb-1">Framework Configuration:</strong>
+                            Environment files and <code>config/services.php</code> were securely parameterized, adding
+                            the necessary directives for the domain, official endpoint, and the secret key provided by
+                            the service.
+                        </li>
+                        <li>
+                            <strong class="text-gray-900 block mb-1">Transition to Secure Driver:</strong>
+                            The global configuration (<code>config/mail.php</code>) was updated so the system officially
+                            uses the <code>mailgun</code> driver instead of outdated SMTP or Sendmail, enabling parallel
+                            sending and telemetry by Mailgun.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10 page-break-inside-avoid">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                <span
+                    class="bg-[#e45151] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">4</span>
+                Implementation of New Rich Text Editor (TinyMCE)
+            </h2>
+            <div class="pl-11">
+                <p class="text-gray-600 leading-relaxed mb-5">
+                    As part of the content management improvement, the system completely migrated from the legacy
+                    "Summernote" editor to <strong>TinyMCE</strong>, offering greater stability, cleaner HTML code, and
+                    superior tools for the administration team.
+                </p>
+                <div class="bg-gray-50 border-l-4 border-[#e45151] p-5 rounded">
+                    <ul class="space-y-4 text-gray-700 text-sm">
+                        <li>
+                            <strong class="text-gray-900 block mb-1">Global Replacement in Views:</strong>
+                            Summernote initializations were removed from multiple templates (Campaign Creation/Editing,
+                            Mini Campaigns, Stories, and Master Settings), systematically replacing them with the
+                            TinyMCE instance in <code>admin_master.blade.php</code>.
+                        </li>
+                        <li>
+                            <strong class="text-gray-900 block mb-1">Dedicated Image Controller:</strong>
+                            To maintain workflow efficiency, a new controller (<code>TinyMCEController.php</code>) and
+                            specific route were programmed, allowing administrators to upload images by dragging them
+                            directly into the editor. The controller processes the file locally and returns the public
+                            URL.
+                        </li>
+                        <li>
+                            <strong class="text-gray-900 block mb-1">Optimized Configuration:</strong>
+                            The editor was initialized via CDN to avoid saturating local resources, activating advanced
+                            modules for tables, lists, previews, link embedding, and source code mode.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-6 page-break-inside-avoid">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                <span
+                    class="bg-[#e45151] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">5</span>
+                Other Fixes Performed
+            </h2>
+            <div class="pl-11">
+                <div class="bg-gray-50 border-l-4 border-[#e45151] p-5 rounded">
+                    <ul class="space-y-4 text-gray-700 text-sm">
+                        <li>
+                            <strong class="text-gray-900 block mb-1">Admin Menu Responsiveness:</strong>
+                            A known bug where the mobile menu overlap caused the desktop view to collapse (break) when
+                            resizing the window abruptly or rotating a mobile device's screen was fixed. Behavior was
+                            stabilized using Tailwind and event handling.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-12 pt-6 border-t border-gray-200 text-center text-xs text-gray-400">
+            <p>End of Document - Automated Technical Reporting System</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>
