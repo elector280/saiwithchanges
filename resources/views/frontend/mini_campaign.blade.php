@@ -52,9 +52,18 @@
 </style>
 
 {{-- HERO SECTION --}}
+@php
+    if (!empty($cover_image_url)) {
+        $hero_bg = "background-image: url('{$cover_image_url}');";
+    } elseif (!empty($setting->donate_hero_image)) {
+        $hero_bg = "background-image: url('" . asset('storage/donate_hero_image/'.$setting->donate_hero_image) . "');";
+    } else {
+        $hero_bg = '';
+    }
+@endphp
 <section id="top" class="pt-4 pb-10 -mt-10 md:-mt-36 relative z-0">
     <div class="relative rounded-sm overflow-hidden shadow-lg bg-no-repeat bg-cover bg-center"
-         style="{{ !empty($cover_image_url) ? \"background-image: url('\" . $cover_image_url . \"');\" : (!empty($setting->donate_hero_image) ? \"background-image: url('\" . asset('storage/donate_hero_image/'.$setting->donate_hero_image) . \"');\" : '') }} height: 600px;">
+         style="{{ $hero_bg }} height: 600px;">
 
         <!-- RED GRADIENT OVERLAY -->
         <div class="absolute inset-0 pointer-events-none z-10"
