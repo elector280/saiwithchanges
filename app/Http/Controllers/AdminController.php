@@ -10,6 +10,7 @@ use App\Models\Sponsor;
 use App\Models\Story;
 use App\Models\SubscribeEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
@@ -20,6 +21,31 @@ class AdminController extends Controller
         $data['sponsor_count'] = Sponsor::count();
         $data['review_count'] = Review::count();
         $data['campaign_count'] = Campaign::count();
+
+        // Fetch Sentry Issues
+        $sentry_issues = [];
+        $sentryToken = config('services.sentry_api.token');
+        $orgSlug = config('services.sentry_api.org_slug');
+        $projectSlug = config('services.sentry_api.project_slug');
+
+        if ($sentryToken && $orgSlug && $projectSlug) {
+            try {
+                $response = Http::withToken($sentryToken)
+                    ->timeout(3)
+                    ->get("https://sentry.io/api/0/projects/{$orgSlug}/{$projectSlug}/issues/", [
+                        'statsPeriod' => '14d',
+                        'query' => 'is:unresolved',
+                        'limit' => 5
+                    ]);
+
+                if ($response->successful()) {
+                    $sentry_issues = $response->json();
+                }
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('Failed to fetch Sentry issues: ' . $e->getMessage());
+            }
+        }
+        $data['sentry_issues'] = $sentry_issues;
 
         return view('admin.dashboard', $data);
     }

@@ -82,6 +82,76 @@
     <!-- ./col -->
   </div>
 
+  <!-- Sentry Issues Panel -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card card-danger card-outline">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-exclamation-triangle text-danger"></i> 
+            Recent Sentry Errors ({{ config('services.sentry_api.project_slug', 'saingo') }})
+          </h3>
+          <div class="card-tools">
+            <a href="https://sentry.io/organizations/{{ config('services.sentry_api.org_slug', 'malcacorp') }}/issues/?project={{ config('services.sentry_api.project_slug', 'php-laravel-f8') }}" target="_blank" class="btn btn-sm btn-outline-danger">
+              View All in Sentry <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          @if(isset($sentry_issues) && is_array($sentry_issues) && count($sentry_issues) > 0)
+            <div class="table-responsive">
+              <table class="table table-striped table-valign-middle m-0">
+                <thead>
+                  <tr>
+                    <th>Issue</th>
+                    <th>Events</th>
+                    <th>Users Affected</th>
+                    <th>First Seen</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($sentry_issues as $issue)
+                  <tr>
+                    <td>
+                      <div class="d-flex flex-column">
+                        <span class="text-bold text-danger">{{ $issue['title'] ?? 'Unknown Error' }}</span>
+                        <span class="text-muted text-sm text-truncate" style="max-width: 400px;" title="{{ $issue['culprit'] ?? '' }}">{{ $issue['culprit'] ?? '' }}</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="badge bg-warning text-dark">{{ $issue['count'] ?? 0 }}</span>
+                    </td>
+                    <td>
+                      <span class="badge bg-info">{{ $issue['userCount'] ?? 0 }}</span>
+                    </td>
+                    <td>
+                      <span class="text-muted text-sm">
+                        {{ isset($issue['firstSeen']) ? \Carbon\Carbon::parse($issue['firstSeen'])->diffForHumans() : 'N/A' }}
+                      </span>
+                    </td>
+                    <td>
+                      <a href="{{ $issue['permalink'] ?? '#' }}" target="_blank" class="btn btn-sm btn-default">
+                        View <i class="fas fa-arrow-right"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          @else
+            <div class="p-4 text-center text-muted">
+              <i class="fas fa-check-circle text-success mb-2" style="font-size: 2.5rem;"></i>
+              <h5>All clear!</h5>
+              <p>No recent unresolved errors found, or Sentry is currently unreachable.</p>
+            </div>
+          @endif
+        </div>
+      </div>
+    </div>
+  </div>
+
 {{--
  <form action="{{ route('campaign.gallery.migrate.old') }}"
       method="POST"
