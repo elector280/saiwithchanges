@@ -18,7 +18,7 @@
           <tr>
             <td style="padding:24px 24px 10px; text-align:center; background:#ffffff;">
               <img
-                src="{{ config('app.url') . '/images/logo.png' }}"
+                src="{{ config('app.url') . '/images/logo/logo.png' }}"
                 alt="Company Logo"
                 style="height:58px; width:auto; display:block; margin:0 auto;"
               >
