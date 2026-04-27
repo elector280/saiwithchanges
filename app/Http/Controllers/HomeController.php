@@ -755,6 +755,34 @@ public function showStoryFooterImage($reportSlug, $imageSlug, $ext)
 
     /*
     |--------------------------------------------------------------------------
+    | 2.5. Mini Campaign খোঁজো
+    |--------------------------------------------------------------------------
+    */
+    $slugOnly = preg_replace('#^(es/)?mini-campaign/#', '', $currentSlug);
+    if ($slugOnly !== $currentSlug) {
+        $miniCampaign = \App\Models\MiniCampaignTemplate::where(function ($q) use ($supported, $slugOnly) {
+            foreach ($supported as $lang) {
+                $q->orWhere("slug->$lang", $slugOnly);
+            }
+        })->first();
+
+        if ($miniCampaign) {
+            $newSlug = $miniCampaign->getTranslation('slug', $locale, false)
+                ?: $miniCampaign->getTranslation('slug', 'en', false);
+
+            $newSlug = is_string($newSlug) ? trim($newSlug) : '';
+
+            if ($newSlug !== '') {
+                return redirect()->route(
+                    $locale === 'es' ? 'miniCampaignEs' : 'miniCampaign',
+                    ['slug' => $newSlug]
+                );
+            }
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | 3. Static page map
     |--------------------------------------------------------------------------
     */

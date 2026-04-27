@@ -301,7 +301,9 @@ Route::post('/donate', [HomeController::class, 'donate'])->name('donate');
 Route::post('/newsletter/subscribe', [SubscribeEmailController::class, 'subscribe'])->name('newsletter.subscribe');
 Route::get('/newsletter/unsubscribe/{token}', [SubscribeEmailController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 
-Route::post('/language/status/{language}/{campaign_slug?}', [HomeController::class, 'languageUpdateStatus'])->name('languageUpdateStatus');
+Route::post('/language/status/{language}/{campaign_slug?}', [HomeController::class, 'languageUpdateStatus'])
+    ->where('campaign_slug', '.*')
+    ->name('languageUpdateStatus');
 
 Route::middleware('auth')->group(function () {
     Route::post('/admin/campaign-gallery/migrate-old-data', [HomeController::class, 'migrate'])->name('campaign.gallery.migrate.old');
