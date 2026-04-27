@@ -179,6 +179,46 @@
           novalidate>
         @csrf
 
+        <div class="form-group mb-4">
+            <div class="alert mb-0 py-2 px-3 w3-round-large"
+                id="campaignUrlBox"
+                style="background-color: #DFF5F3;">
+                <div class="d-flex align-items-center flex-wrap" style="gap:10px;">
+                    <div id="urlViewMode" class="d-flex align-items-center flex-wrap" style="gap:10px;">
+                        <i class="fas fa-link"></i>
+                        <span id="campaignUrlText">
+                            sai.ngo/{{ $code === 'es' ? 'es/' : '' }}mini-campaign/{{ old('slug.' . $code) }}
+                        </span>
+                        <button type="button" id="editUrlBtn" class="btn btn-xs text-black border" style="background-color:#D6EADC; color:#000;">
+                            <i class="far fa-edit mr-1"></i> Edit
+                        </button>
+                    </div>
+
+                    <div id="urlEditMode" class="w-100" style="display:none;">
+                        <div class="d-flex align-items-center flex-wrap" style="gap:10px;">
+                            <span class="font-weight-bold">sai.ngo/{{ $code === 'es' ? 'es/' : '' }}mini-campaign/</span>
+                            <input type="text"
+                                id="campaignUrlInput"
+                                name="slug[{{ $code }}]"
+                                class="form-control"
+                                style="max-width:350px;"
+                                value="{{ old('slug.' . $code) }}"
+                                placeholder="usa/help-venezuela">
+                            <button type="button" id="saveUrlBtn" class="btn btn-success btn-sm">
+                                <i class="far fa-check-circle mr-1"></i> Done
+                            </button>
+                            <button type="button" id="cancelUrlBtn" class="btn btn-secondary btn-sm">
+                                <i class="fas fa-times mr-1"></i> Cancel
+                            </button>
+                        </div>
+                        @error('slug.' . $code)
+                            <small class="text-danger d-block mt-2">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="card w3-round-large mini-form-card">
             <div class="card-header seo-card-header">
                 <div class="d-flex align-items-start">
@@ -349,7 +389,7 @@
 
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-md-6 mb-3">
+                    <div class="col-12 col-md-12 mb-3">
                         <label class="font-weight-bold">Campaign Title</label>
                         <input type="text"
                                name="title[{{ $code }}]"
@@ -360,19 +400,6 @@
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                         <small class="text-muted">The main headline shown at the top of this mini campaign page.</small>
-                    </div>
-
-                    <div class="col-12 col-md-6 mb-3">
-                        <label class="font-weight-bold">URL Slug</label>
-                        <input type="text"
-                               name="slug[{{ $code }}]"
-                               value="{{ old('slug.' . $code) }}"
-                               placeholder="e.g. sai-donate-help-venezuela-en"
-                               class="form-control @error('slug.' . $code) is-invalid @enderror">
-                        @error('slug.' . $code)
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                        @enderror
-                        <small class="text-muted">Used to build the page URL. Lowercase, hyphenated, no spaces.</small>
                     </div>
                 </div>
 
@@ -677,6 +704,34 @@
             const locale = @json($code);
             const oldCover = '';
             const oldOg = '';
+
+            let originalUrl = $('#campaignUrlInput').val();
+
+            $('#editUrlBtn').on('click', function () {
+                originalUrl = $('#campaignUrlInput').val();
+                $('#urlViewMode').hide();
+                $('#urlEditMode').show();
+            });
+
+            $('#cancelUrlBtn').on('click', function () {
+                $('#campaignUrlInput').val(originalUrl);
+                $('#urlEditMode').hide();
+                $('#urlViewMode').show();
+            });
+
+            $('#saveUrlBtn').on('click', function () {
+                let fullUrl = $('#campaignUrlInput').val().trim();
+                if (fullUrl === '') {
+                    $('#campaignUrlInput').addClass('is-invalid');
+                    return;
+                }
+                $('#campaignUrlInput').removeClass('is-invalid');
+                
+                const localePrefix = "{{ $code === 'es' ? 'es/' : '' }}";
+                $('#campaignUrlText').text('sai.ngo/' + localePrefix + 'mini-campaign/' + fullUrl);
+                $('#urlEditMode').hide();
+                $('#urlViewMode').show();
+            });
 
             function updateCharCount(inputSelector, counterSelector) {
                 const value = $(inputSelector).val() || '';
