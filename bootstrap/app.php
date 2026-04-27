@@ -24,7 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        if (class_exists(Integration::class)) {
+        if (class_exists(Integration::class, false)) {
             Integration::handles($exceptions);
         }
     })->create();
