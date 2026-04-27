@@ -12,6 +12,7 @@
         "php": "^8.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "sentry/sentry-laravel": "*",
         "spatie/laravel-permission": "*",
         "spatie/laravel-translatable": "*",
         "symfony/http-client": "*",
