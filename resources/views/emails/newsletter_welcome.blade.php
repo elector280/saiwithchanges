@@ -16,7 +16,7 @@
                style="width:600px; max-width:92%; background:#ffffff; border-radius:14px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,.08);">
           <!-- Header -->
           <tr>
-            <td style="padding:24px 24px 10px; text-align:center; background:#ffffff;">
+            <td style="padding:24px 24px; text-align:center; background:#D94647;">
               <img
                 src="{{ config('app.url') . '/images/logo/logo.png' }}"
                 alt="Company Logo"
