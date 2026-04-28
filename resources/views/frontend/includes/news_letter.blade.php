@@ -30,9 +30,9 @@
                  {{ translate('HELP VENEZUELAN REFUESS') }}
               </p>
 
-              <h2 class="mt-3 text-[26px] sm:text-[34px] lg:text-[40px] leading-[1.05] font-semibold uppercase">
+              <div class="mt-3 text-[26px] sm:text-[34px] lg:text-[40px] leading-[1.05] font-semibold uppercase">
                 {!! translate('SUSCRIBE TO OUR NEWSLETTER') !!}
-              </h2>
+              </div>
             </div>
           </div>
 

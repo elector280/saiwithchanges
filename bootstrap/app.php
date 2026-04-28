@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         
         $middleware->append(\App\Http\Middleware\ForceLowercaseUrl::class);
+        $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
         
         $middleware->alias([
             'check' => \App\Http\Middleware\CheckAge::class,

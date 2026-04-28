@@ -1,7 +1,7 @@
 <aside id="campaignSidebar" aria-label="Donation and newsletter sidebar"
   class="hidden lg:flex lg:flex-col gap-5 w-full">
 
-  <h2 class="sr-only">Donation and newsletter</h2>
+  <div class="sr-only">Donation and newsletter</div>
 
   @if(!empty($campaign->donorbox_code))
     <div class="w-full max-w-none bg-white border border-gray-200 rounded-sm shadow-md overflow-hidden

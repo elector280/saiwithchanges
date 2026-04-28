@@ -1,8 +1,8 @@
 <section class="pb-16 bg-white">
     <div class="max-w-7xl px-4 md:px-0 mx-auto text-center">
-        <h2 class="text-[18px] md:text-2xl font-bold uppercase text-[#d93832]">
+        <div class="text-[18px] md:text-2xl font-bold uppercase text-[#d93832]">
             {{ translate('OUR SPONSORS') }}
-        </h2>
+        </div>
 
         @php
             $sponsor = App\Models\Sponsor::where('type', 'sponsors')->latest()->get();
