@@ -263,6 +263,9 @@ public function campaignsdetails($path, $slug)
               ->orWhere('slug->es', $slug);
         })
         ->where('status', 'published')
+        ->with(['stories' => function ($q) {
+            $q->where('status', 'published');
+        }])
         ->firstOrFail();
 
     $validPaths = array_filter([
@@ -323,7 +326,9 @@ public function campaignsdetails($path, $slug)
     
         $locale = $language->language_code;
 
-        $story = Story::where("slug->$locale", $slug)->orWhere("slug->en", $slug)->firstOrFail();
+        $story = Story::where(function ($q) use ($locale, $slug) {
+            $q->where("slug->$locale", $slug)->orWhere("slug->en", $slug);
+        })->where('status', 'published')->firstOrFail();
 
         // dd($story->view_count);
         $story->increment('view_count');

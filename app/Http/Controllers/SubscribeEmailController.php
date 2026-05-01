@@ -13,7 +13,7 @@ class SubscribeEmailController extends Controller
    public function subscribe(Request $request)
 {
     $data = $request->validate([
-        'email' => ['required','email','max:255'],
+        'email' => ['required', 'email:rfc,dns', 'max:255'],
     ]);
 
     $subscriber = SubscribeEmail::firstOrNew(['email' => $data['email']]);
