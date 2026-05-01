@@ -326,8 +326,9 @@ public function campaignsdetails($path, $slug)
     
         $locale = $language->language_code;
 
-        $story = Story::where(function ($q) use ($locale, $slug) {
-            $q->where("slug->$locale", $slug)->orWhere("slug->en", $slug);
+        $story = Story::where(function ($q) use ($slug) {
+            $q->where("slug->es", $slug)
+              ->orWhere("slug->en", $slug);
         })->where('status', 'published')->firstOrFail();
 
         // dd($story->view_count);

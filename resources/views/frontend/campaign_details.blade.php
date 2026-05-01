@@ -490,7 +490,7 @@
                                         <span>{{ $story->created_at->format('j M Y') }}</span>
                                         <span>by {{ $story->user->name ?? '' }}</span>
                                     </div>
-                                    <a href="{{ route('blogDetails', $story->slug) }}"
+                                    <a href="{{ session('locale', config('app.locale')) === 'es' ? route('blogDetailsEs', $story->slug) : route('blogDetails', $story->slug) }}"
                                         class="mt-auto inline-flex items-center justify-center px-4 py-2 text-[11px] font-bold uppercase bg-[#f04848] text-white rounded-sm">
                                          {{ translate('Read more') }}  &gt;
                                     </a>

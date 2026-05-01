@@ -179,7 +179,7 @@
                         <div class="flex items-center justify-between text-[11px] text-slate-500">
                             <span class="whitespace-nowrap">{{ $item->created_at->format('j M Y') }}</span>
 
-                            <a href="{{ route('blogDetails', $item->slug) }}"
+                            <a href="{{ session('locale', config('app.locale')) === 'es' ? route('blogDetailsEs', $item->slug) : route('blogDetails', $item->slug) }}"
                             class="inline-flex items-center justify-center h-8 px-10 border border-[#ffb2b2]
                                     text-[#ff8a8a] bg-white text-[12px] font-medium rounded-sm whitespace-nowrap"  style="border: 1px solid red !important;">
                                  {{ translate('Read more') }} &gt;

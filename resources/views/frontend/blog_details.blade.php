@@ -367,7 +367,7 @@
                     </div>
 
                     {{-- Right part: Read More button --}}
-                    <a href="{{ route('blogDetails', $rs->slug) }}"
+                    <a href="{{ session('locale', config('app.locale')) === 'es' ? route('blogDetailsEs', $rs->slug) : route('blogDetails', $rs->slug) }}"
                     class="inline-flex items-center justify-center
                             border border-[#ff6b6b] text-[#ff6b6b]
                             px-4 py-2 text-[12px] font-medium rounded-[2px]
