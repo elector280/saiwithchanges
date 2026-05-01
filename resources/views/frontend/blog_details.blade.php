@@ -213,14 +213,20 @@
 
 
             {{-- SHORT DESCRIPTION --}}
-            @if(!empty($story->description))
-              <div class="text-[13px] md:text-[14px] text-gray-500 leading-relaxed mb-5">
-                {!! $story->description !!}
+            @if(!empty($story->short_description))
+              <div class="text-[13px] md:text-[14px] text-gray-500 leading-relaxed mb-5 font-medium">
+                {!! $story->short_description !!}
               </div>
             @endif
 
-            {{-- MAIN BODY (summary + long parts) --}}
+            {{-- MAIN BODY (Full Report Content) --}}
             <div class="space-y-5 text-[13px] md:text-[14px] text-gray-600 leading-relaxed">
+
+              @if(!empty($story->description))
+                <div class="prose max-w-none">
+                  {!! $story->description !!}
+                </div>
+              @endif
 
               @if(!empty($story->summary))
                 <div class="prose max-w-none">
