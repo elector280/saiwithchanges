@@ -217,7 +217,7 @@ table.dataTable {
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | image | help',
             content_style: 'body { font-family: anthropicSans, "anthropicSans Fallback", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; }',
-            images_upload_url: '{{ route("tinymce.upload") }}',
+            images_upload_url: '{{ route("tinymce.upload") . "?_token=" . csrf_token() }}',
             automatic_uploads: true,
             relative_urls: false,
             remove_script_host: false,
