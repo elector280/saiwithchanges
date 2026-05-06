@@ -183,6 +183,19 @@ class CampaignController extends Controller
         $campaign->footer_image2 = $name;
     }
 
+    /**
+     * -----------------------------
+     * HEADER PHOTO
+     * -----------------------------
+     */
+    $campaign->header_photo_layout = $request->header_photo_layout ?? 'object-cover object-center';
+    if ($request->hasFile('header_photo')) {
+        $file = $request->file('header_photo');
+        $name = time() . '_header.' . $file->getClientOriginalExtension();
+        Storage::disk('public')->put('hero_image/' . $name, File::get($file));
+        $campaign->header_photo = $name;
+    }
+
     $campaign->save();
 
     /**
@@ -349,6 +362,14 @@ public function miniCampaignStore(Request $request)
             $name = time() . '_og_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
             Storage::disk('public')->put('og_image/' . $name, File::get($file));
             $cam->og_image = $name;
+        }
+
+        $cam->header_photo_layout = $request->header_photo_layout ?? 'object-cover object-center';
+        if ($request->hasFile('header_photo')) {
+            $file = $request->file('header_photo');
+            $name = time() . '_header_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
+            Storage::disk('public')->put('hero_image/' . $name, File::get($file));
+            $cam->header_photo = $name;
         }
 
         $cam->save();
@@ -559,6 +580,23 @@ public function miniCampaignStore(Request $request)
         $name = time() . '_hero.' . $file->getClientOriginalExtension();
         Storage::disk('public')->put('footer_image2/' . $name, File::get($file));
         $campaign->footer_image2 = $name;
+    }
+
+    /**
+     * -----------------------------
+     * HEADER PHOTO replace
+     * -----------------------------
+     */
+    $campaign->header_photo_layout = $request->header_photo_layout ?? 'object-cover object-center';
+    if ($request->hasFile('header_photo')) {
+        if ($campaign->header_photo && Storage::disk('public')->exists('hero_image/' . $campaign->header_photo)) {
+            Storage::disk('public')->delete('hero_image/' . $campaign->header_photo);
+        }
+
+        $file = $request->file('header_photo');
+        $name = time() . '_header.' . $file->getClientOriginalExtension();
+        Storage::disk('public')->put('hero_image/' . $name, File::get($file));
+        $campaign->header_photo = $name;
     }
 
     $campaign->save();
@@ -970,6 +1008,18 @@ private function slugPreserveCase(string $value): string
             $name = time() . '_og_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
             Storage::disk('public')->put('og_image/' . $name, File::get($file));
             $cam->og_image = $name;
+        }
+
+        $cam->header_photo_layout = $request->header_photo_layout ?? 'object-cover object-center';
+        if ($request->hasFile('header_photo')) {
+            if ($cam->header_photo && Storage::disk('public')->exists('hero_image/' . $cam->header_photo)) {
+                Storage::disk('public')->delete('hero_image/' . $cam->header_photo);
+            }
+
+            $file = $request->file('header_photo');
+            $name = time() . '_header_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
+            Storage::disk('public')->put('hero_image/' . $name, File::get($file));
+            $cam->header_photo = $name;
         }
 
         $cam->save();

@@ -49,6 +49,47 @@
 <style>
   /* small helper (optional) */
   .shadow-soft{ box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+
+  /* ── Font override: force prose to use site font ── */
+  .prose,
+  .prose p,
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6,
+  .prose li, .prose blockquote, .prose strong, .prose em {
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  }
+
+  /* ── Font Selector Panel ── */
+  #fontSelector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    background: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: #555;
+    flex-wrap: wrap;
+  }
+  #fontSelector label { font-weight: 600; margin-right: 4px; }
+  #fontSelector select {
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 13px;
+    background: white;
+    cursor: pointer;
+  }
+  #fontSelector input[type="range"] {
+    width: 100px;
+    cursor: pointer;
+  }
+  #fontSize-display {
+    min-width: 30px;
+    font-weight: 600;
+    color: #374151;
+  }
 </style>
 
 {{-- TOP RED STRIP BACKGROUND (like screenshot) --}}
@@ -102,7 +143,13 @@
                 $ext = strtolower(pathinfo($story->image ?? '', PATHINFO_EXTENSION) ?: 'jpg');
             @endphp
 
-            @if(!empty($story->image))
+            @if(!empty($story->header_photo))
+                <img
+                    src="{{ asset('storage/story_image/'.$story->header_photo) }}"
+                    alt="{{ $title ?? '' }}"
+                    class="w-full h-full {{ $story->header_photo_layout ?? 'object-cover object-center' }}"
+                >
+            @elseif(!empty($story->image))
                 <img
                     src="{{ route('gallery.image.story', [
                         'reportSlug' => $sSlug,
@@ -110,6 +157,7 @@
                         'ext'        => $ext,
                     ]) }}"
                     alt="{{ $title ?? '' }}"
+                    class="w-full h-full object-cover object-center"
                 >
             @endif
 
@@ -219,8 +267,24 @@
               </div>
             @endif
 
+            {{-- FONT SELECTOR PANEL --}}
+            <div id="fontSelector" class="hidden sm:flex shadow-sm">
+              <label for="fontFamilySelect"><i class="fas fa-font"></i> Font:</label>
+              <select id="fontFamilySelect">
+                <option value='system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'>Default (System UI)</option>
+                <option value='"Inter", sans-serif'>Inter</option>
+                <option value='"Open Sans", sans-serif'>Open Sans</option>
+                <option value='"Lora", serif'>Lora (Serif)</option>
+                <option value='"Merriweather", serif'>Merriweather (Serif)</option>
+              </select>
+
+              <label for="fontSizeRange" style="margin-left: 10px;"><i class="fas fa-text-height"></i> Size:</label>
+              <input type="range" id="fontSizeRange" min="12" max="24" value="16" step="1">
+              <span id="fontSize-display">16px</span>
+            </div>
+
             {{-- MAIN BODY (Full Report Content) --}}
-            <div class="space-y-5 text-[13px] md:text-[14px] text-gray-600 leading-relaxed">
+            <div id="reportMainContent" class="space-y-5 text-[16px] text-gray-700 leading-relaxed">
 
               @if(!empty($story->description))
                 <div class="prose max-w-none">

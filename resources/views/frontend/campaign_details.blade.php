@@ -74,19 +74,19 @@
 
 
 <section id="top" class="pt-4 pb-10 bg-[#f5f5f5]- -mt-10 md:-mt-36 relative z-0">
-  <div class="relative rounded-sm overflow-hidden shadow-lg bg-no-repeat bg-cover bg-center
+  <div class="relative rounded-sm overflow-hidden shadow-lg h-[600px]
               transform-gpu- will-change-transform-
               transition-transform- ease-in-out- duration-[2000ms]-
-              hover:scale-[1.08]- hover:z-10"
-       style="background-image: url('{{ asset('storage/hero_image/'.$campaign->hero_image) }}'); height: 600px;">
-    <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-[2fr,1fr] gap-6"></div>
+              hover:scale-[1.08]- hover:z-10">
+    
+    @php
+       $headerImage = $campaign->header_photo ? asset('storage/hero_image/'.$campaign->header_photo) : asset('storage/hero_image/'.$campaign->hero_image);
+       $headerLayout = $campaign->header_photo && $campaign->header_photo_layout ? $campaign->header_photo_layout : 'object-cover object-center';
+    @endphp
+    
+    <img src="{{ $headerImage }}" class="absolute inset-0 w-full h-full {{ $headerLayout }}" alt="{{ $campaign->title }}" title="{{ $campaign->title }}">
 
-
-    <img
-    src="{{ asset('storage/hero_image/'.$campaign->hero_image) }}"
-    alt="{{ $campaign->title }}" title="{{ $campaign->title }}"
-    class="sr-only"
-  />
+    <div class="relative z-10 max-w-7xl mx-auto px-4 grid lg:grid-cols-[2fr,1fr] gap-6"></div>
 
     <!-- ✅ HARD AT LEFT-BOTTOM, FADES UPWARD -->
 <div class="absolute inset-0 pointer-events-none"

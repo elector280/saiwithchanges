@@ -527,6 +527,70 @@
             </div>
 
 
+        <div class="card  w3-round-large">
+            <div class="card-header seo-card-header">
+                <div class="d-flex align-items-start">
+                    <div class="seo-icon-box mr-3">
+                        <i class="far fa-image w-4"></i>
+                    </div>
+
+                    <div class="seo-header-content">
+                        <div class="d-flex align-items-center flex-wrap">
+                            <h4 class="card-title mb-0 mr-2 label-color"><b class="header-title">Header Photo & Disposition</b></h4>
+                        </div>
+                        <small class="seo-subtitle mb-0 label-color">
+                            Upload a banner image and configure how it should be displayed.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Header Photo</label>
+                            <input type="file" name="header_photo" id="header_photo_input" class="form-control" accept="image/*">
+                            <small class="seo-subtitle label-color d-block mb-2">
+                                Dedicated banner image. If not provided, the featured image is used.
+                            </small>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label>Photo Disposition (Layout)</label>
+                            <select name="header_photo_layout" id="header_photo_layout" class="form-control">
+                                <option value="object-cover object-center" {{ ($story->header_photo_layout ?? '') == 'object-cover object-center' ? 'selected' : '' }}>Cover Center (Default)</option>
+                                <option value="object-cover object-top" {{ ($story->header_photo_layout ?? '') == 'object-cover object-top' ? 'selected' : '' }}>Cover Top</option>
+                                <option value="object-cover object-bottom" {{ ($story->header_photo_layout ?? '') == 'object-cover object-bottom' ? 'selected' : '' }}>Cover Bottom</option>
+                                <option value="object-contain object-center" {{ ($story->header_photo_layout ?? '') == 'object-contain object-center' ? 'selected' : '' }}>Contain</option>
+                                <option value="object-fill" {{ ($story->header_photo_layout ?? '') == 'object-fill' ? 'selected' : '' }}>Fill (Stretch)</option>
+                            </select>
+                            <small class="seo-subtitle mb-0 label-color">
+                                Controls how the image fits within the banner area.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Live Preview</label>
+                        <div style="border: 1px dashed #ccc; padding: 5px; border-radius: 5px; background: #f9f9f9;">
+                            <div class="relative w-full h-[190px] md:h-[250px] overflow-hidden bg-gray-200" style="height: 250px; width: 100%; position: relative; overflow: hidden; background-color: #e5e7eb;">
+                                @if($story->header_photo)
+                                    <img id="header_photo_preview" src="{{ asset('storage/story_image/'.$story->header_photo) }}" style="width: 100%; height: 100%;" class="{{ $story->header_photo_layout ?? 'object-cover object-center' }}">
+                                    <div id="header_photo_placeholder" style="width: 100%; height: 100%; display: none; align-items: center; justify-content: center; color: #9ca3af;">
+                                        No Image Selected
+                                    </div>
+                                @else
+                                    <img id="header_photo_preview" src="" style="width: 100%; height: 100%; display: none;" class="{{ $story->header_photo_layout ?? 'object-cover object-center' }}">
+                                    <div id="header_photo_placeholder" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #9ca3af;">
+                                        No Image Selected
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
             <div class="card w3-round-large">
                  <div class="card-header seo-card-header">
                     <div class="d-flex align-items-start">
@@ -808,6 +872,66 @@ $(function () {
             });
         });
     });
+
+// =============== Header Photo Live Preview ===============
+const headerPhotoInput = document.getElementById('header_photo_input');
+const headerPhotoPreview = document.getElementById('header_photo_preview');
+const headerPhotoPlaceholder = document.getElementById('header_photo_placeholder');
+const headerPhotoLayout = document.getElementById('header_photo_layout');
+
+function applyLayoutClasses() {
+    if (!headerPhotoLayout || !headerPhotoPreview) return;
+    
+    // Reset classes
+    headerPhotoPreview.className = '';
+    
+    // Tailwind classes corresponding to the select value
+    const classes = headerPhotoLayout.value.split(' ');
+    
+    // Map to CSS styles directly for the admin preview to ensure it works without Tailwind being compiled for admin
+    let objectFit = 'cover';
+    let objectPosition = 'center';
+    
+    if (headerPhotoLayout.value.includes('contain')) objectFit = 'contain';
+    if (headerPhotoLayout.value.includes('fill')) objectFit = 'fill';
+    
+    if (headerPhotoLayout.value.includes('top')) objectPosition = 'top';
+    if (headerPhotoLayout.value.includes('bottom')) objectPosition = 'bottom';
+    
+    headerPhotoPreview.style.objectFit = objectFit;
+    headerPhotoPreview.style.objectPosition = objectPosition;
+    
+    // Add Tailwind classes just in case
+    classes.forEach(c => headerPhotoPreview.classList.add(c));
+}
+
+if (headerPhotoLayout) {
+    applyLayoutClasses(); // Apply initially
+}
+
+if (headerPhotoInput && headerPhotoPreview && headerPhotoLayout) {
+    headerPhotoInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                headerPhotoPreview.src = e.target.result;
+                headerPhotoPreview.style.display = 'block';
+                headerPhotoPlaceholder.style.display = 'none';
+            }
+            reader.readAsDataURL(file);
+        } else {
+            @if($story->header_photo)
+                headerPhotoPreview.src = "{{ asset('storage/story_image/'.$story->header_photo) }}";
+            @else
+                headerPhotoPreview.style.display = 'none';
+                headerPhotoPlaceholder.style.display = 'flex';
+            @endif
+        }
+    });
+
+    headerPhotoLayout.addEventListener('change', applyLayoutClasses);
+}
 </script>
 @endsection
 

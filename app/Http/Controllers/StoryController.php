@@ -144,6 +144,14 @@ class StoryController extends Controller
         }
         $story->footer_image_url = Str::slug($request->footer_image_url);
 
+        $story->header_photo_layout = $request->header_photo_layout ?? 'object-cover object-center';
+        if ($request->hasFile('header_photo')) {
+            $file = $request->file('header_photo');
+            $fileName = time() . '_header_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
+            Storage::disk('public')->put('story_image/' . $fileName, File::get($file));
+            $story->header_photo = $fileName;
+        }
+
         $story->save();
 
         return redirect()->route('stories.index')->with('success', 'Story stored successfully!');
@@ -404,6 +412,18 @@ $story->setTranslations('slug', $slugTranslations);
             $story->footer_image2 = $fileName;
         }
 
+        $story->header_photo_layout = $request->header_photo_layout ?? 'object-cover object-center';
+        if ($request->hasFile('header_photo')) {
+            if ($story->header_photo && Storage::disk('public')->exists('story_image/' . $story->header_photo)) {
+                Storage::disk('public')->delete('story_image/' . $story->header_photo);
+            }
+
+            $file = $request->file('header_photo');
+            $fileName = time() . '_header_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
+            Storage::disk('public')->put('story_image/' . $fileName, File::get($file));
+            $story->header_photo = $fileName;
+        }
+
         $story->editedby_id = auth()->id();
         $story->save();
 
@@ -438,6 +458,11 @@ $story->setTranslations('slug', $slugTranslations);
             Storage::disk('public')->delete('story_image/'.$story->image);
         }
 
+        if ($story->header_photo &&
+            Storage::disk('public')->exists('story_image/'.$story->header_photo)) {
+            Storage::disk('public')->delete('story_image/'.$story->header_photo);
+        }
+
         $story->delete();
 
         return redirect()->back()->with('success', 'Story deleted updated successfully!');
@@ -462,6 +487,10 @@ $story->setTranslations('slug', $slugTranslations);
             // ✅ Image unlink
             if ($story->image && Storage::disk('public')->exists('story_image/'.$story->image)) {
                 Storage::disk('public')->delete('story_image/'.$story->image);
+            }
+
+            if ($story->header_photo && Storage::disk('public')->exists('story_image/'.$story->header_photo)) {
+                Storage::disk('public')->delete('story_image/'.$story->header_photo);
             }
 
             // ✅ Delete record

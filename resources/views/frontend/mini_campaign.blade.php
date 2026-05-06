@@ -62,8 +62,16 @@
     }
 @endphp
 <section id="top" class="pt-4 pb-10 -mt-10 md:-mt-36 relative z-0">
-    <div class="relative rounded-sm overflow-hidden shadow-lg bg-no-repeat bg-cover bg-center"
-         style="{{ $hero_bg }} height: 600px;">
+    <div class="relative rounded-sm overflow-hidden shadow-lg h-[600px]">
+
+        @php
+           $headerImage = $cam->header_photo ? asset('storage/hero_image/'.$cam->header_photo) : ($cover_image_url ?? ($setting->donate_hero_image ? asset('storage/donate_hero_image/'.$setting->donate_hero_image) : ''));
+           $headerLayout = $cam->header_photo && $cam->header_photo_layout ? $cam->header_photo_layout : 'object-cover object-center';
+        @endphp
+        
+        @if($headerImage)
+            <img src="{{ $headerImage }}" class="absolute inset-0 w-full h-full {{ $headerLayout }}" alt="{{ $cam->title }}">
+        @endif
 
         <!-- RED GRADIENT OVERLAY -->
         <div class="absolute inset-0 pointer-events-none z-10"

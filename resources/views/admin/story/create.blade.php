@@ -432,6 +432,62 @@ $langCode = \App\Models\Language::where('language_code', $locale)->first();
 
         <div class="card  w3-round-large">
             <div class="card-header seo-card-header">
+                <div class="d-flex align-items-start">
+                    <div class="seo-icon-box mr-3">
+                        <i class="far fa-image w-4"></i>
+                    </div>
+
+                    <div class="seo-header-content">
+                        <div class="d-flex align-items-center flex-wrap">
+                            <h4 class="card-title mb-0 mr-2 label-color"><b class="header-title">Header Photo & Disposition</b></h4>
+                        </div>
+                        <small class="seo-subtitle mb-0 label-color">
+                            Upload a banner image and configure how it should be displayed.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Header Photo</label>
+                            <input type="file" name="header_photo" id="header_photo_input" class="form-control" accept="image/*">
+                            <small class="seo-subtitle label-color d-block mb-2">
+                                Dedicated banner image. If not provided, the featured image is used.
+                            </small>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label>Photo Disposition (Layout)</label>
+                            <select name="header_photo_layout" id="header_photo_layout" class="form-control">
+                                <option value="object-cover object-center">Cover Center (Default)</option>
+                                <option value="object-cover object-top">Cover Top</option>
+                                <option value="object-cover object-bottom">Cover Bottom</option>
+                                <option value="object-contain object-center">Contain</option>
+                                <option value="object-fill">Fill (Stretch)</option>
+                            </select>
+                            <small class="seo-subtitle mb-0 label-color">
+                                Controls how the image fits within the banner area.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Live Preview</label>
+                        <div style="border: 1px dashed #ccc; padding: 5px; border-radius: 5px; background: #f9f9f9;">
+                            <div class="relative w-full h-[190px] md:h-[250px] overflow-hidden bg-gray-200" style="height: 250px; width: 100%; position: relative; overflow: hidden; background-color: #e5e7eb;">
+                                <img id="header_photo_preview" src="" style="width: 100%; height: 100%; display: none;" class="object-cover object-center">
+                                <div id="header_photo_placeholder" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #9ca3af;">
+                                    No Image Selected
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card  w3-round-large">
+            <div class="card-header seo-card-header">
                     <div class="d-flex align-items-start">
                         <div class="seo-icon-box mr-3">
                             <i class="far fa-file-alt w-4"></i>
@@ -628,5 +684,53 @@ $(function () {
     });
 
 });
+
+// =============== Header Photo Live Preview ===============
+const headerPhotoInput = document.getElementById('header_photo_input');
+const headerPhotoPreview = document.getElementById('header_photo_preview');
+const headerPhotoPlaceholder = document.getElementById('header_photo_placeholder');
+const headerPhotoLayout = document.getElementById('header_photo_layout');
+
+if (headerPhotoInput && headerPhotoPreview && headerPhotoLayout) {
+    headerPhotoInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                headerPhotoPreview.src = e.target.result;
+                headerPhotoPreview.style.display = 'block';
+                headerPhotoPlaceholder.style.display = 'none';
+            }
+            reader.readAsDataURL(file);
+        } else {
+            headerPhotoPreview.style.display = 'none';
+            headerPhotoPlaceholder.style.display = 'flex';
+        }
+    });
+
+    headerPhotoLayout.addEventListener('change', function(e) {
+        // Reset classes
+        headerPhotoPreview.className = '';
+        
+        // Tailwind classes corresponding to the select value
+        const classes = e.target.value.split(' ');
+        
+        // Map to CSS styles directly for the admin preview to ensure it works without Tailwind being compiled for admin
+        let objectFit = 'cover';
+        let objectPosition = 'center';
+        
+        if (e.target.value.includes('contain')) objectFit = 'contain';
+        if (e.target.value.includes('fill')) objectFit = 'fill';
+        
+        if (e.target.value.includes('top')) objectPosition = 'top';
+        if (e.target.value.includes('bottom')) objectPosition = 'bottom';
+        
+        headerPhotoPreview.style.objectFit = objectFit;
+        headerPhotoPreview.style.objectPosition = objectPosition;
+        
+        // Add Tailwind classes just in case
+        classes.forEach(c => headerPhotoPreview.classList.add(c));
+    });
+}
 </script>
 @endsection
