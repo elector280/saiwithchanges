@@ -52,7 +52,7 @@ return new class extends Migration
             $updateTranslation('donor_cripto_title_2', ['How to donate cryptocurrenc', 'infos'], ['How to donate cryptocurrency', 'information']);
 
             // Fix Columbia to Colombia in Employer Matching
-            foreach (['double_donation_content', 'double_donation_title', 'description', 'our_mission', 'urgent_help_description'] as $sf) {
+            foreach (['emp_match_section_1', 'emp_match_section_2', 'emp_match_section_3', 'emp_match_section_4', 'emp_match_section_5', 'description', 'our_mission', 'urgent_help_description'] as $sf) {
                 $updateTranslation($sf, 'Columbia', 'Colombia');
             }
 
@@ -81,7 +81,7 @@ return new class extends Migration
                 }
             };
 
-            $fields = ['donorbox_code', 'standard_webpage_content', 'description', 'problem', 'solution', 'impact', 'short_description', 'sub_title'];
+            $fields = ['donorbox_code', 'standard_webpage_content', 'problem', 'solution', 'impact', 'short_description', 'sub_title'];
             foreach ($fields as $field) {
                 $updateCampTrans($field, 
                     ['commited', 'SAI are a 501(c)(3)', 'Columbia', 'its key old_campaigns'], 
