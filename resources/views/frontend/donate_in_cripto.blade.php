@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title', translate('How to donate in cryptocurrency page meta title'))
+@section('title', translate('Donate Cryptocurrency | SAI'))
 @section('meta_description', translate('How to donate in cryptocurrency page meta description'))
 @section('meta_keyword', translate('How to donate in cryptocurrency page meta keyword'))
 

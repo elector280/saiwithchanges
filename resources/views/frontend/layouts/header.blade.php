@@ -162,11 +162,11 @@
 
                     {{-- MORE WAYS TO HELP --}}
                     <div class="relative group">
-                        <a href="#"
-                           class="flex items-center gap-1 px-2 text-white uppercase h-14">
+                        <button type="button"
+                           class="flex items-center gap-1 px-2 text-white uppercase h-14 cursor-pointer focus:outline-none">
                             <span>{{ translate('More Ways To Help') }}</span>
                             <span class="text-[10px] mt-[2px]">▼</span>
-                        </a>
+                        </button>
 
                         <div class="absolute left-0 top-full min-w-[250px] bg-white text-slate-800 text-[13px]
                             shadow-xl border border-slate-100 hidden group-hover:block z-40">

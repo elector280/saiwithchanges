@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 
-@section('title', translate('Campaigns page meta title'))
+@section('title', translate('Campaigns | SAI'))
 @section('meta_description', translate('Campaigns page meta description'))
 @section('meta_keyword', translate('Campaigns page meta keyword'))
 

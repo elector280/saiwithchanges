@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title', translate('About us page meta title'))
+@section('title', translate('About Us | SAI'))
 @section('meta_description', translate('About us page meta description'))
 @section('meta_keyword', translate('About us page meta keyword'))
 

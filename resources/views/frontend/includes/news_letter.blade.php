@@ -22,16 +22,16 @@
           {{-- LEFT: logo + text --}}
           <div class="flex items-start gap-5 lg:ml-4">
             <div class="hidden sm:flex shrink-0 w-[90px] h-[90px] items-center justify-center">
-              <img src="{{ asset('images/Logo-Symbol.png') }}" alt="HELP VENEZUELAN REFUESS" class="w-[80px] h-auto" />
+              <img src="{{ asset('images/Logo-Symbol.png') }}" alt="HELP VENEZUELAN REFUGEES" class="w-[80px] h-auto" />
             </div>
 
             <div class="sm:pt-1">
               <p class="text-[16px] sm:text-[20px] uppercase tracking-[0.16em]- text-[#FEE79D] font-semibold">
-                 {{ translate('HELP VENEZUELAN REFUESS') }}
+                 {{ translate('HELP VENEZUELAN REFUGEES') }}
               </p>
 
               <div class="mt-3 text-[26px] sm:text-[34px] lg:text-[40px] leading-[1.05] font-semibold uppercase">
-                {!! translate('SUSCRIBE TO OUR NEWSLETTER') !!}
+                {!! translate('SUBSCRIBE TO OUR NEWSLETTER') !!}
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title', translate('Contact Us page meta title'))
+@section('title', translate('Contact Us | SAI'))
 @section('meta_description', translate('Contact Us page meta description'))
 @section('meta_keyword', translate('Contact Us page meta keyword'))
 
@@ -82,7 +82,7 @@
                 <input type="checkbox" name="terms" required
                     class="w-4 h-4 rounded-full accent-white border border-white/70 bg-transparent
                           focus:ring-2 focus:ring-white/40" />
-                <span> {{ translate('I accept term and conditions') }}</span>
+                <span> {{ translate('I accept terms and conditions') }}</span>
             </label>
 
 
@@ -111,7 +111,7 @@
       <!-- LEFT SIDE TITLE -->
       <div class="md:w-1/4">
         <h2 class="text-2xl font-bold text-left">
-           {!! translate('OUR CONTACTS INFOS') !!}
+           {!! translate('OUR CONTACT INFO') !!}
         </h2>
       </div>
 

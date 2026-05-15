@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title', translate('DONOR ADVISED FUNDS page meta title'))
+@section('title', translate('Donor Advised Funds | SAI'))
 @section('meta_description', translate('Donor Advised Funds page meta description'))
 @section('meta_keyword', translate('Donor Advised Funds page meta keyword'))
 

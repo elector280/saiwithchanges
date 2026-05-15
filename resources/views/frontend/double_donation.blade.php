@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 
-@section('title', translate('Double Your Help with Employee Matching Gifts page meta title'))
+@section('title', translate('Employee Matching Gifts | SAI'))
 @section('meta_description', translate('Double Your Help with Employee Matching Gifts page meta description'))
 @section('meta_keyword', translate('Double Your Help with Employee Matching Gifts page meta keyword'))
     

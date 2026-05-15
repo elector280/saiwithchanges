@@ -2,7 +2,7 @@
 @extends('frontend.layouts.master')
 
 
-@section('title', translate('News page meta title'))
+@section('title', translate('News | SAI'))
 @section('meta_description', translate('News page meta description'))
 @section('meta_keyword', translate('News page meta keyword'))
 

@@ -89,7 +89,7 @@
                 </div>
 
                 <div>
-                    <h3 class="font-semibold uppercase text-white/80">Donations {{ translate('Donation') }}</h3>
+                    <h3 class="font-semibold uppercase text-white/80">{{ translate('Donations') }}</h3>
                     <ul class="mt-3 space-y-2 text-white/70">
                         <li><a href="{{ route('donation') }}" class="hover:underline"> {{ translate('Donate') }}</a></li> 
                         <li><a href="{{ route('doubleDonation') }}" class="hover:underline">{{ translate('Double Donation') }}</a></li>
@@ -151,10 +151,10 @@
                     <!-- EMAIL & PHONE -->
                     <div>
                         <h3 class="font-semibold text-[#FE6668] text-[11px] uppercase"> {{ translate('Email Address') }}</h3>
-                        <p class="mt-2 text-white">{{ $setting->telephone }}</p>
+                        <p class="mt-2 text-white">{{ $setting->email }}</p>
 
                         <h3 class="mt-4 font-semibold text-[#FE6668] text-[11px] uppercase mt-2"> {{ translate('Telephone') }}</h3>
-                        <p class="mt-1">{{ $setting->email }}</p>
+                        <p class="mt-1">{{ $setting->telephone }}</p>
                     </div>
 
                     <!-- ADDRESS + SOCIAL MEDIA CHANNELS -->
