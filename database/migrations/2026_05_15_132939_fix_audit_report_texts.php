@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $settings = DB::table('settings')->first();
+        $settings = DB::table('website_settings')->first();
         if ($settings) {
             $updates = [];
 
@@ -47,7 +47,7 @@ return new class extends Migration
             }
 
             if (!empty($updates)) {
-                DB::table('settings')->update($updates);
+                DB::table('website_settings')->update($updates);
             }
         }
 
