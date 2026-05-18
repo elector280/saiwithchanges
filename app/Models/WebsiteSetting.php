@@ -56,6 +56,10 @@ class WebsiteSetting extends Model
         'emp_match_section_5',
         'donate_to_feeding_dream',
         'donate_to_orphan_program',
+        'seo_title_about',
+        'seo_description_about',
+        'seo_title_contact',
+        'seo_description_contact',
         ];
 
     protected $casts = [
@@ -102,6 +106,10 @@ class WebsiteSetting extends Model
         'emp_match_section_5' => 'array',
         'donate_to_feeding_dream' => 'array',
         'donate_to_orphan_program' => 'array',
+        'seo_title_about'          => 'array',
+        'seo_description_about'    => 'array',
+        'seo_title_contact'        => 'array',
+        'seo_description_contact'  => 'array',
     ];
 
 

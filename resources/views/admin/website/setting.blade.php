@@ -573,6 +573,42 @@ $locale = Session::get('locale', config('app.locale'));
           <div class="tab-pane fade" id="pane-about" role="tabpanel" aria-labelledby="tab-about">
             <div class="row">
 
+              {{-- ===== SEO BLOCK ABOUT ===== --}}
+              <div class="col-md-12">
+                <div class="alert alert-info mb-3">
+                  <strong><i class="fas fa-search mr-1"></i> SEO — About Us page</strong>
+                  <p class="mb-0 small">These fields control the <code>&lt;title&gt;</code> and <code>&lt;meta description&gt;</code> that Google shows for the <strong>About Us</strong> page.</p>
+                </div>
+              </div>
+
+              @foreach (App\Models\Language::where('active', 1)->get() as $language)
+                @php $code = $language->language_code; @endphp
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label><i class="fas fa-tag mr-1"></i> SEO Page Title ({{ $language->title }}) <small>(about us)</small></label>
+                  <input type="text" name="seo_title_about[{{ $code }}]"
+                         value="{{ old('seo_title_about.' . $code, $setting->getDirectValue('seo_title_about', $code)) }}"
+                         class="form-control" placeholder="e.g. About Us | South American Initiative ({{ $language->title }})">
+                  <small class="text-muted">Recommended: max 60 characters</small>
+                </div>
+              </div>
+              @endforeach
+
+              @foreach (App\Models\Language::where('active', 1)->get() as $language)
+                @php $code = $language->language_code; @endphp
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label><i class="fas fa-align-left mr-1"></i> SEO Meta Description ({{ $language->title }}) <small>(about us)</small></label>
+                  <textarea name="seo_description_about[{{ $code }}]" rows="2" class="form-control"
+                            placeholder="Short description for Google search results ({{ $language->title }})">{{ old('seo_description_about.' . $code, $setting->getDirectValue('seo_description_about', $code)) }}</textarea>
+                  <small class="text-muted">Recommended: max 160 characters</small>
+                </div>
+              </div>
+              @endforeach
+
+              <div class="col-md-12"><hr class="my-3"></div>
+              {{-- ===== END SEO BLOCK ===== --}}
+
             @foreach (App\Models\Language::where('active', 1)->get() as $language)
                 @php $code = $language->language_code; @endphp
               <div class="col-md-12">
@@ -732,6 +768,42 @@ $locale = Session::get('locale', config('app.locale'));
           {{-- ================= Donor Advised Funds ================= --}}
           <div class="tab-pane fade" id="pane-contact" role="tabpanel" aria-labelledby="tab-contact">
             <div class="row">
+
+              {{-- ===== SEO BLOCK CONTACT ===== --}}
+              <div class="col-md-12">
+                <div class="alert alert-info mb-3">
+                  <strong><i class="fas fa-search mr-1"></i> SEO — Contact Us page</strong>
+                  <p class="mb-0 small">These fields control the <code>&lt;title&gt;</code> and <code>&lt;meta description&gt;</code> that Google shows for the <strong>Contact Us</strong> page.</p>
+                </div>
+              </div>
+
+              @foreach (App\Models\Language::where('active', 1)->get() as $language)
+                @php $code = $language->language_code; @endphp
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label><i class="fas fa-tag mr-1"></i> SEO Page Title ({{ $language->title }}) <small>(contact us)</small></label>
+                  <input type="text" name="seo_title_contact[{{ $code }}]"
+                         value="{{ old('seo_title_contact.' . $code, $setting->getDirectValue('seo_title_contact', $code)) }}"
+                         class="form-control" placeholder="e.g. Contact Us | South American Initiative ({{ $language->title }})">
+                  <small class="text-muted">Recommended: max 60 characters</small>
+                </div>
+              </div>
+              @endforeach
+
+              @foreach (App\Models\Language::where('active', 1)->get() as $language)
+                @php $code = $language->language_code; @endphp
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label><i class="fas fa-align-left mr-1"></i> SEO Meta Description ({{ $language->title }}) <small>(contact us)</small></label>
+                  <textarea name="seo_description_contact[{{ $code }}]" rows="2" class="form-control"
+                            placeholder="Short description for Google search results ({{ $language->title }})">{{ old('seo_description_contact.' . $code, $setting->getDirectValue('seo_description_contact', $code)) }}</textarea>
+                  <small class="text-muted">Recommended: max 160 characters</small>
+                </div>
+              </div>
+              @endforeach
+
+              <div class="col-md-12"><hr class="my-3"></div>
+              {{-- ===== END SEO BLOCK ===== --}}
 
               @foreach (App\Models\Language::where('active', 1)->get() as $language)
                 @php $code = $language->language_code; @endphp

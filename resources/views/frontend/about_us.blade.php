@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
-@section('title', translate('About Us | SAI'))
-@section('meta_description', translate('About us page meta description'))
+@section('title', $setting->getLocalValue('seo_title_about') ?? translate('About Us | SAI'))
+@section('meta_description', $setting->getLocalValue('seo_description_about') ?? translate('About us page meta description'))
 @section('meta_keyword', translate('About us page meta keyword'))
 
 @section('meta')

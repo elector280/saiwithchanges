@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 
-@section('title',  $setting->title ?? translate('Home page meta title'))
-@section('meta_description',  $setting->subtitle ?? translate('Home page meta description'))
-@section('meta_keyword',  $setting->meta_keyword ?? translate('Home page meta keyword'))
+@section('title',  $setting->getLocalValue('title') ?? translate('Home page meta title'))
+@section('meta_description',  $setting->getLocalValue('subtitle') ?? translate('Home page meta description'))
+@section('meta_keyword',  $setting->getLocalValue('meta_keyword') ?? translate('Home page meta keyword'))
  
 
 @section('meta')

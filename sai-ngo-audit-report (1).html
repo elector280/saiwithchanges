@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sai.ngo — Website QA Audit Report</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      padding: 40px 20px;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+
+    h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+    h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+
+    .subtitle { color: #666; font-size: 13px; margin-bottom: 28px; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .stat {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+    .stat .num { font-size: 32px; font-weight: 700; }
+    .stat .label { font-size: 12px; color: #666; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat.danger .num { color: #c0392b; }
+    .stat.warning .num { color: #d68910; }
+    .stat.medium .num { color: #555; }
+
+    .section { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px 24px; margin-bottom: 20px; }
+    .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge.danger  { background: #fde8e8; color: #c0392b; }
+    .badge.warning { background: #fef3cd; color: #856404; }
+    .badge.info    { background: #e8f4fd; color: #155e8a; }
+    .badge.success { background: #e8f8f0; color: #196f3d; }
+    .badge.gray    { background: #f0f0f0; color: #555; }
+
+    .callout {
+      border-left: 4px solid;
+      padding: 10px 14px;
+      border-radius: 4px;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    .callout.danger  { border-color: #c0392b; background: #fde8e8; color: #7b241c; }
+    .callout.warning { border-color: #d68910; background: #fef3cd; color: #7d6608; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: #f7f7f7; }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; border-bottom: 2px solid #e0e0e0; color: #444; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+    td { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr.danger td  { background: #fff8f8; }
+    tr.warning td { background: #fffdf0; }
+
+    .wrong { color: #c0392b; font-family: monospace; font-size: 12px; }
+    .correct { color: #196f3d; font-family: monospace; font-size: 12px; }
+
+    .working-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .working-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px 10px;
+      background: #f7fff9;
+      border: 1px solid #d4edda;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .check { color: #196f3d; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .working-name { font-weight: 600; display: block; }
+    .working-desc { color: #555; display: block; margin-top: 2px; }
+
+    .divider { border: none; border-top: 1px solid #e8e8e8; margin: 24px 0; }
+
+    @media print {
+      body { background: white; padding: 20px; }
+      .section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <h1>sai.ngo — Website QA Audit Report</h1>
+  <p class="subtitle">Full audit via browser MCP &nbsp;·&nbsp; May 7, 2026 &nbsp;·&nbsp; All core pages, campaign pages &amp; utility pages reviewed</p>
+
+  <div class="stats">
+    <div class="stat danger">
+      <div class="num">3</div>
+      <div class="label">Critical</div>
+    </div>
+    <div class="stat warning">
+      <div class="num">7</div>
+      <div class="label">High (SEO)</div>
+    </div>
+    <div class="stat medium">
+      <div class="num">17</div>
+      <div class="label">Medium</div>
+    </div>
+    <div class="stat">
+      <div class="num">3</div>
+      <div class="label">Low</div>
+    </div>
+  </div>
+
+  <!-- CRITICAL -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Critical Issues</h2>
+      <span class="badge danger">3 issues — Fix Immediately</span>
+    </div>
+    <div class="callout danger">These issues directly harm credibility, user trust, or send visitors incorrect contact information.</div>
+    <table>
+      <thead><tr><th>Page</th><th>Issue</th><th>Description</th><th>URL</th></tr></thead>
+      <tbody>
+        <tr class="danger">
+          <td>Contact Page</td>
+          <td>Lorem Ipsum Placeholder</td>
+          <td>Live "Lorem ipsum dolor sit amet..." placeholder text is visible to all visitors on the contact form</td>
+          <td>sai.ngo/contact</td>
+        </tr>
+        <tr class="danger">
+          <td>Cryptocurrency Page</td>
+          <td>Wrong Email Domain</td>
+          <td><span class="wrong">donate@sai.org</span> is shown — should be <span class="correct">donate@sai.ngo</span></td>
+          <td>sai.ngo/how-to-donate-cryptocurrency-to-help-venezuela</td>
+        </tr>
+        <tr class="danger">
+          <td>Cryptocurrency Page</td>
+          <td>Truncated Heading</td>
+          <td><span class="wrong">"How to donate cryptocurrenc"</span> — heading is cut off mid-word</td>
+          <td>sai.ngo/how-to-donate-cryptocurrency-to-help-venezuela</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SEO META TITLES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>SEO — Placeholder Page Titles</h2>
+      <span class="badge warning">7 pages affected</span>
+    </div>
+    <div class="callout warning">Seven pages still have placeholder meta titles ending in "page meta title". These appear verbatim in Google search results and browser tabs, severely undermining trust and search rankings.</div>
+    <table>
+      <thead><tr><th>Page</th><th>Current (Wrong) Title</th></tr></thead>
+      <tbody>
+        <tr class="warning"><td>About Us</td><td><span class="wrong">About us page meta title</span></td></tr>
+        <tr class="warning"><td>Campaigns</td><td><span class="wrong">Campaigns page meta title</span></td></tr>
+        <tr class="warning"><td>Contact</td><td><span class="wrong">Contact Us page meta title</span></td></tr>
+        <tr class="warning"><td>Employer Matching</td><td><span class="wrong">Double Your Help with Employee Matching Gifts page meta title</span></td></tr>
+        <tr class="warning"><td>Donor Advised Funds</td><td><span class="wrong">DONOR ADVISED FUNDS page meta title</span></td></tr>
+        <tr class="warning"><td>Cryptocurrency</td><td><span class="wrong">How to donate in cryptocurrency page meta title</span></td></tr>
+        <tr class="warning"><td>News</td><td><span class="wrong">News page meta title</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER BUGS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Footer Bugs</h2>
+      <span class="badge warning">Site-wide · every page</span>
+    </div>
+    <table>
+      <thead><tr><th>Element</th><th>Problem</th></tr></thead>
+      <tbody>
+        <tr><td>"Email Address" label</td><td>Shows phone number <span class="wrong">(800) 563-6099</span> — the Email Address and Telephone labels are swapped with each other</td></tr>
+        <tr><td>"Telephone" label</td><td>Shows email <span class="wrong">donate@sai.ngo</span> — should be the phone number</td></tr>
+        <tr><td>"Donations Donation"</td><td>Duplicate word in footer heading — should be just <span class="correct">Donations</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SPELLING -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Spelling Errors</h2>
+      <span class="badge gray">5 errors</span>
+    </div>
+    <table>
+      <thead><tr><th>Location</th><th>Current (Wrong)</th><th>Correct</th><th>Where Found</th></tr></thead>
+      <tbody>
+        <tr><td>Site-wide (every page footer)</td><td><span class="wrong">REFUESS</span></td><td><span class="correct">REFUGEES</span></td><td>Newsletter CTA banner on every page</td></tr>
+        <tr><td>Homepage footer</td><td><span class="wrong">SUSCRIBE</span></td><td><span class="correct">SUBSCRIBE</span></td><td>Newsletter banner heading</td></tr>
+        <tr><td>All campaign pages</td><td><span class="wrong">commited</span></td><td><span class="correct">committed</span></td><td>501(c)(3) disclaimer text</td></tr>
+        <tr><td>Pets campaign</td><td><span class="wrong">neuteured</span></td><td><span class="correct">neutered</span></td><td>Campaign story/solution text</td></tr>
+        <tr><td>Homepage reviews section</td><td><span class="wrong">PEOR WE HELPED</span></td><td><span class="correct">PEOPLE WE HELPED</span></td><td>Reviews section heading</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Grammar Errors</h2>
+      <span class="badge gray">10 errors</span>
+    </div>
+    <table>
+      <thead><tr><th>Location</th><th>Current (Wrong)</th><th>Correct</th><th>Where Found</th></tr></thead>
+      <tbody>
+        <tr><td>All campaign pages</td><td><span class="wrong">SAI are a 501(c)(3) nonprofit</span></td><td><span class="correct">SAI is a 501(c)(3) nonprofit</span></td><td>501(c)(3) disclaimer (subject-verb agreement)</td></tr>
+        <tr><td>Homepage slider</td><td><span class="wrong">We are a No Profit</span></td><td><span class="correct">We are a Non Profit</span></td><td>Hero mobile slide text</td></tr>
+        <tr><td>Contact page</td><td><span class="wrong">I accept term and conditions</span></td><td><span class="correct">I accept terms and conditions</span></td><td>Form checkbox label</td></tr>
+        <tr><td>Neurosurgery campaign</td><td><span class="wrong">suffering form epilepsy</span></td><td><span class="correct">suffering from epilepsy</span></td><td>Campaign description text</td></tr>
+        <tr><td>SAI Medical Clinic campaign</td><td><span class="wrong">support for for three children</span></td><td><span class="correct">support for three children</span></td><td>$18 donation tier label (duplicate "for")</td></tr>
+        <tr><td>Orphans campaign</td><td><span class="wrong">3 mealsclothing, and shoes</span></td><td><span class="correct">3 meals, clothing, and shoes</span></td><td>$1,000 donation tier label (missing space/comma)</td></tr>
+        <tr><td>Orphans campaign</td><td><span class="wrong">for 2 month / 4 month / 6 month</span></td><td><span class="correct">for 2 months / 4 months / 6 months</span></td><td>Donation tier labels (months should be plural)</td></tr>
+        <tr><td>Cryptocurrency page</td><td><span class="wrong">Contact us for more infos</span></td><td><span class="correct">Contact us for more information</span></td><td>Section heading</td></tr>
+        <tr><td>Hospitals campaign</td><td><span class="wrong">hospitals Venezuela, and are not</span></td><td><span class="correct">hospitals in Venezuela, and are not</span></td><td>Long-term impact text (missing "in")</td></tr>
+        <tr><td>Contact page</td><td><span class="wrong">OUR CONTACTS INFOS</span></td><td><span class="correct">OUR CONTACT INFO</span></td><td>Section heading</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- COUNTRY NAME -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Country Name Error</h2>
+      <span class="badge gray">2 occurrences</span>
+    </div>
+    <div class="callout warning">"Columbia" is used instead of "Colombia" (the South American country). "Columbia" refers to Columbia University, the District of Columbia, or British Columbia — not the country.</div>
+    <table>
+      <thead><tr><th>Page</th><th>Wrong</th><th>Correct</th><th>Context</th></tr></thead>
+      <tbody>
+        <tr><td>Employer Matching page</td><td><span class="wrong">Columbia</span></td><td><span class="correct">Colombia</span></td><td>"providing aid for Venezuelan refugees in Columbia"</td></tr>
+        <tr><td>Venezuelan Refugee Fund</td><td><span class="wrong">entered Columbia</span></td><td><span class="correct">entered Colombia</span></td><td>"one million Venezuelans have entered Columbia"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CONTENT ISSUES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Content Issues</h2>
+      <span class="badge gray">2 issues</span>
+    </div>
+    <table>
+      <thead><tr><th>Page</th><th>Issue</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Help Venezuela campaign</td><td>Template variable not replaced</td><td>Text reads <span class="wrong">"its key old_campaigns"</span> — "old_campaigns" appears to be a leftover database/CMS field name</td></tr>
+        <tr><td>Pets campaign</td><td>Inconsistent capitalization</td><td>Donation tier reads <span class="wrong">"USD 100 Rescue Four dogs"</span> — "Four" should be "four" to match all other tiers</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Navigation Issues</h2>
+      <span class="badge gray">1 issue</span>
+    </div>
+    <table>
+      <thead><tr><th>Element</th><th>Problem</th></tr></thead>
+      <tbody>
+        <tr><td>"More Ways To Help ▼" nav link</td><td>Clicking navigates to <span class="wrong">/#</span> (stays on page). The dropdown only works on CSS hover — not keyboard-accessible and does not work reliably on touch/mobile devices.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- WHAT'S WORKING -->
+  <div class="section">
+    <div class="section-header">
+      <h2>What's Working ✓</h2>
+      <span class="badge success">All 9 campaigns + core pages functional</span>
+    </div>
+    <p style="font-size:13px; color:#555; margin-bottom:14px;">All campaign pages load successfully. Donation forms (powered by Donorbox) are embedded and functional. Core navigation and CTAs work as expected.</p>
+    <div class="working-grid">
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Homepage (sai.ngo/)</span><span class="working-desc">Loads correctly, hero slider functional</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">About Us</span><span class="working-desc">Loads correctly</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Campaigns listing (/projects)</span><span class="working-desc">Shows all 9 campaigns with DONATE buttons</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Endangered Animal Rescue Fund</span><span class="working-desc">Page + donation form functional</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Help Abandoned Venezuelan Pets</span><span class="working-desc">Page + donation form functional</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Help Venezuelan Hospitals</span><span class="working-desc">Page + donation form functional</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Life-Saving Neurosurgery | Venezuela</span><span class="working-desc">Page loads, Donate button functional</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Help Venezuelan Refugees</span><span class="working-desc">Page + donation form functional</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Help Venezuelan Orphans</span><span class="working-desc">Page + donation form functional</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Help Venezuela</span><span class="working-desc">Page + donation form functional</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">SAI Medical Clinic for Children</span><span class="working-desc">Page + donation form functional</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Employer Matching page</span><span class="working-desc">Page + match checker functional</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Donor Advised Funds page</span><span class="working-desc">Page + DAF form functional</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Contact Page</span><span class="working-desc">Form visible and submittable</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">News Page</span><span class="working-desc">Loads with articles and search</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">All DONATE buttons on campaigns</span><span class="working-desc">Open correct campaign donation widget</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">WhatsApp link</span><span class="working-desc">Opens with pre-filled message</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Email link (donate@sai.ngo)</span><span class="working-desc">Present and correct in header</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Scroll to top button</span><span class="working-desc">Present on all pages</span></span></div>
+      <div class="working-item"><span class="check">✓</span><span><span class="working-name">Social media links</span><span class="working-desc">Present in footer</span></span></div>
+    </div>
+  </div>
+
+  <!-- FIX PRIORITY SUMMARY -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Fix Priority Summary</h2>
+    </div>
+    <table>
+      <thead><tr><th>Priority</th><th>Issue</th><th>Pages Affected</th><th>Est. Effort</th></tr></thead>
+      <tbody>
+        <tr class="danger"><td><span class="badge danger">Critical</span></td><td>Lorem ipsum on Contact page</td><td>1</td><td>Minutes</td></tr>
+        <tr class="danger"><td><span class="badge danger">Critical</span></td><td>Wrong email domain on Crypto page</td><td>1</td><td>Minutes</td></tr>
+        <tr class="danger"><td><span class="badge danger">Critical</span></td><td>Truncated heading on Crypto page</td><td>1</td><td>Minutes</td></tr>
+        <tr class="warning"><td><span class="badge warning">High</span></td><td>Placeholder meta titles (SEO)</td><td>7</td><td>1–2 hrs</td></tr>
+        <tr class="warning"><td><span class="badge warning">High</span></td><td>Footer email/phone labels swapped</td><td>All pages</td><td>Minutes</td></tr>
+        <tr class="warning"><td><span class="badge warning">High</span></td><td>"REFUESS" → "REFUGEES" in newsletter CTA</td><td>All pages</td><td>Minutes</td></tr>
+        <tr class="warning"><td><span class="badge warning">High</span></td><td>"SUSCRIBE" → "SUBSCRIBE" on homepage</td><td>Homepage</td><td>Minutes</td></tr>
+        <tr><td><span class="badge gray">Medium</span></td><td>"commited" → "committed" in disclaimer</td><td>All campaign pages</td><td>Minutes</td></tr>
+        <tr><td><span class="badge gray">Medium</span></td><td>"SAI are" → "SAI is" (grammar)</td><td>All campaign pages</td><td>Minutes</td></tr>
+        <tr><td><span class="badge gray">Medium</span></td><td>"Columbia" → "Colombia" (country name)</td><td>2 pages</td><td>Minutes</td></tr>
+        <tr><td><span class="badge gray">Medium</span></td><td>"old_campaigns" template variable</td><td>Help Venezuela page</td><td>Minutes</td></tr>
+        <tr><td><span class="badge gray">Medium</span></td><td>"PEOR WE HELPED" → "PEOPLE WE HELPED"</td><td>Homepage</td><td>Minutes</td></tr>
+        <tr><td><span class="badge gray">Medium</span></td><td>"We are a No Profit" → "Non Profit"</td><td>Homepage</td><td>Minutes</td></tr>
+        <tr><td><span class="badge gray">Medium</span></td><td>Orphans donation tier typos</td><td>Orphans campaign</td><td>Minutes</td></tr>
+        <tr><td><span class="badge gray">Low</span></td><td>More Ways To Help nav accessibility</td><td>All pages</td><td>Hours</td></tr>
+        <tr><td><span class="badge gray">Low</span></td><td>"OUR CONTACTS INFOS" heading</td><td>Contact page</td><td>Minutes</td></tr>
+        <tr><td><span class="badge gray">Low</span></td><td>"Donations Donation" footer heading</td><td>All pages</td><td>Minutes</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:12px; color:#999; text-align:center; margin-top:24px;">
+    Audit conducted via live browser MCP session &nbsp;·&nbsp; sai.ngo &nbsp;·&nbsp; May 7, 2026 &nbsp;·&nbsp; All campaign, core, and utility pages reviewed
+  </p>
+
+</div>
+</body>
+</html>
