@@ -187,7 +187,7 @@
       </div>
 
       <div class="bg-[#fbe8e8] p-6 rounded-md">
-        <h3 class="text-lg font-bold"> {{ translate('BECOME SPONSOR') }}</h3>
+        <h3 class="text-lg font-bold"> {{ translate('Become a Sponsor') }}</h3>
         <p class="mt-3 text-sm whitespace-pre-line">
           @if(!empty($setting->become_sponsor_content))
             {!! $setting->become_sponsor_content !!}

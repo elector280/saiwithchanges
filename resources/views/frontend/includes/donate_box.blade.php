@@ -14,7 +14,7 @@
 
   <div class="bg-gradient-to-b from-[#ff5c5c] to-[#f48a4b] rounded-sm shadow-md p-5 text-white text-xs">
     <div class="font-bold text-[11px] uppercase tracking-[0.03em] mb-2">
-      {{ translate('Help Venezuelan refugees') }}
+      {{ translate('Help Support This Project') }}
     </div>
 
     <h4 class="text-xl font-semibold mb-3">

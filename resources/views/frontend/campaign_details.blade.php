@@ -175,7 +175,7 @@
                     <!-- ✅ MOBILE: Donate button under header (only mobile) -->
                    <a href="javascript:void(0)"
                     class="lg:hidden w-full block text-center mb-4 border border-[#f3b6b6] bg-[#fff1f1] text-[#D94647] font-semibold uppercase tracking-[0.10em] py-3 rounded-[2px] hiddenBtnClick">
-                    {{ translate('Donate Refugees') }}
+                    {{ translate('Donate to this Project') }}
                     </a>
 
 
@@ -527,7 +527,7 @@
 
                             <!-- RIGHT: IMAGE SIDE -->
                             <div class="relative w-full md:w-1/2 h-52 md:h-auto">
-                                <img src="{{ asset('storage/hero_image/'.$campaign->hero_image) }}" alt="{{ $setting->title }}" title="{{ $setting->title }}" class="w-full h-full object-cover">
+                                <img src="{{ asset('storage/hero_image/'.$campaign->hero_image) }}" alt="{{ $campaign->getLocalValue('title') }}" title="{{ $campaign->getLocalValue('title') }}" class="w-full h-full object-cover">
 
                                 <!-- soft red overlay যেন ইমেজ একটু ফেইড লাগে -->
                                 <div class="absolute inset-0 bg-[#f04848]/30"></div>

@@ -663,7 +663,7 @@
                 <!-- CARD 2 -->
                 <article class="flex flex-col h-full">
                     <h3 class="text-[26px] font-bold tracking-[0.04em] text-[#e13b35] uppercase">
-                        {{ translate('Become Sponsor') }}
+                        {{ translate('Become a Sponsor') }}
                     </h3>
 
                     <p class="mt-2 text-[16px] leading-relaxed text-slate-600 flex-1">

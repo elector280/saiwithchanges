@@ -99,7 +99,7 @@
 
                 <a href="javascript:void(0)"  id="donateBtn"
                     class="md:hidden w-[300px] block text-center mb-4 mx-5 my-3 border border-[#f3b6b6] bg-[#fff1f1] text-[#D94647] font-semibold uppercase tracking-[0.10em] py-3 rounded-[2px]">
-                    {{ translate('Donate Refugees') }}
+                    {{ translate('Donate to this Project') }}
                 </a>
 
                 <!-- BODY -->

@@ -44,6 +44,8 @@ Route::redirect('/about', '/about-us', 301);
 Route::redirect('/about/', '/about-us', 301);
 Route::redirect('/usa/help-venezuela/', '/project/help-venezuela', 301);
 Route::redirect('/usa/help-venezuela', '/project/help-venezuela', 301);
+Route::redirect('/news/refugess', '/news/refugees', 301);
+Route::redirect('/es/news/refugess', '/es/news/refugees', 301);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
