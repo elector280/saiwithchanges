@@ -84,6 +84,10 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/website/setting', [WebsiteSettingController::class, 'edit'])->name('websitesetting');
     Route::post('admin/website/setting/update/{setting}', [WebsiteSettingController::class, 'update'])->name('setting.update');
 
+    Route::get('admin/homepage/setting', [WebsiteSettingController::class, 'homePageSetting'])->name('admin.homepage.setting');
+    Route::post('admin/homepage/setting/update/{setting}', [WebsiteSettingController::class, 'homePageSettingUpdate'])->name('admin.homepage.setting.update');
+
+
     Route::get('admin/website/sitemap', [WebsiteSettingController::class, 'sitemap'])->name('sitemap.index');
     Route::post('admin/sitemap/sitemap/{setting}', [WebsiteSettingController::class, 'sitemapUpdate'])->name('setting.sitemap.update');
 

@@ -756,15 +756,30 @@
 
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label class="label-color">Hero Image</label>
                             <input type="file" name="hero_image" class="form-control" accept="image/*">
                             <small class="form-text text-muted">Recommended: 1440×600px. Displayed as the full-width banner at the top of the page.</small>
                         </div>
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="label-color">Hero Image Layout</label>
+                            <select name="hero_image_layout" class="form-control">
+                                <option value="object-cover object-center" {{ old('hero_image_layout') == 'object-cover object-center' ? 'selected' : '' }}>Cover Center (Default)</option>
+                                <option value="object-cover object-top" {{ old('hero_image_layout') == 'object-cover object-top' ? 'selected' : '' }}>Cover Top</option>
+                                <option value="object-cover object-bottom" {{ old('hero_image_layout') == 'object-cover object-bottom' ? 'selected' : '' }}>Cover Bottom</option>
+                                <option value="object-contain object-center" {{ old('hero_image_layout') == 'object-contain object-center' ? 'selected' : '' }}>Contain</option>
+                                <option value="object-fill" {{ old('hero_image_layout') == 'object-fill' ? 'selected' : '' }}>Fill (Stretch)</option>
+                            </select>
+                            <small class="seo-subtitle mb-0 label-color d-block mt-2">
+                                Controls how the hero image fits within its container if no Header Photo is provided.
+                            </small>
+                        </div>
+                    </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label class="label-color">Gallery Images (800x600px) images recommended</label>
                             <input type="file" name="gallery_image[]" class="form-control" multiple accept="image/*">

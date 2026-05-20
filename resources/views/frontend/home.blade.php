@@ -198,7 +198,7 @@
 
         <div class="relative">
             <img src="{{ asset('storage/hero_image/'.$item->hero_image) }}" alt="{{ $item->title }}"
-                class="object-cover w-full h-56" />
+                class="{{ $item->hero_image_layout ?? 'object-cover object-center' }} w-full h-56" />
             <div title="{{ $item->title }}"
                 class="absolute px-5 py-2 text-lg font-semibold text-center
                     -translate-x-1/2 bg-white shadow-md -bottom-0 left-1/2
@@ -305,7 +305,7 @@
                 <div class="relative z-10 flex justify-end">
                     <div class="overflow-hidden rounded-lg shadow-lg-">
                         <img src="{{ asset('storage/about_us_cover_image_home/' . $setting->about_us_cover_image_home) }}"
-                            alt="{{ translate('Volunteers helping') }}" class="object-cover md:w-full md:h-full lg:w-[420px] lg:h-[480px]" />
+                            alt="{{ translate('Volunteers helping') }}" class="{{ $setting->about_us_cover_image_home_layout ?? 'object-cover object-center' }} md:w-full md:h-full lg:w-[420px] lg:h-[480px]" />
                     </div>
                 </div>
             </div>
@@ -622,7 +622,7 @@
                     <img
                         src="{{ asset('storage/help_people_need_image/' . $setting->help_people_need_image) }}"
                         alt="{{ translate('Help people in need') }}"
-                        class="object-cover w-full h-[220px] sm:h-[260px] md:h-full md:min-h-[320px] lg:min-h-[360px]"
+                        class="{{ $setting->help_people_need_image_layout ?? 'object-cover object-center' }} w-full h-[220px] sm:h-[260px] md:h-full md:min-h-[320px] lg:min-h-[360px]"
                     />
 
                     <!-- Donate (Mobile only, overlay bottom) -->

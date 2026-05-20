@@ -53,8 +53,8 @@
             </a>
           </li>
 
-          <li class="nav-item {{ request()->routeIs('sliders.*') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link {{ request()->routeIs('sliders.*') ? 'active' : '' }}">
+          <li class="nav-item {{ request()->routeIs('sliders.*') || request()->routeIs('admin.homepage.*') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ request()->routeIs('sliders.*') || request()->routeIs('admin.homepage.*') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-copy"></i>
                   <p>
                       Page Management
@@ -63,6 +63,14 @@
               </a>
 
               <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="{{ route('admin.homepage.setting') }}"
+                        class="nav-link {{ request()->routeIs('admin.homepage.setting') ? 'active' : '' }}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Home Page</p>
+                      </a>
+                  </li>
+
                   <li class="nav-item">
                       <a href="{{ route('campaigns.index') }}"
                         class="nav-link {{ request()->routeIs('campaigns.index') ? 'active' : '' }}">

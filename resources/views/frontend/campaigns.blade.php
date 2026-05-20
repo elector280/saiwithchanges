@@ -124,7 +124,7 @@
               @endphp
             <article class="relative flex flex-col bg-[#f97373] shadow-xl overflow-hidden rounded-tl-[14px] rounded-tr-[14px] rounded-bl-none rounded-br-none">
               <div class="relative">
-                <img src="{{ asset('storage/hero_image/'.$item->hero_image) }}" alt="{{ $item->title }}" title="{{ $item->title }}" class="w-full h-56 object-cover" loading="lazy"/>
+                <img src="{{ asset('storage/hero_image/'.$item->hero_image) }}" alt="{{ $item->title }}" title="{{ $item->title }}" class="w-full h-56 {{ $item->hero_image_layout ?? 'object-cover object-center' }}" loading="lazy"/>
                 <div class="absolute bottom-0 left-1/2 -translate-x-1/2
                                 bg-white text-slate-900 px-10 py-3 rounded-t-md shadow-md 
                                 text-center text-sm font-semibold whitespace-nowrap min-w-[240px]">

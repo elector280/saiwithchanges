@@ -81,7 +81,7 @@
     
     @php
        $headerImage = $campaign->header_photo ? asset('storage/hero_image/'.$campaign->header_photo) : asset('storage/hero_image/'.$campaign->hero_image);
-       $headerLayout = $campaign->header_photo && $campaign->header_photo_layout ? $campaign->header_photo_layout : 'object-cover object-center';
+       $headerLayout = $campaign->header_photo ? ($campaign->header_photo_layout ?? 'object-cover object-center') : ($campaign->hero_image_layout ?? 'object-cover object-center');
     @endphp
     
     <img src="{{ $headerImage }}" class="absolute inset-0 w-full h-full {{ $headerLayout }}" alt="{{ $campaign->title }}" title="{{ $campaign->title }}">
@@ -527,7 +527,7 @@
 
                             <!-- RIGHT: IMAGE SIDE -->
                             <div class="relative w-full md:w-1/2 h-52 md:h-auto">
-                                <img src="{{ asset('storage/hero_image/'.$campaign->hero_image) }}" alt="{{ $campaign->getLocalValue('title') }}" title="{{ $campaign->getLocalValue('title') }}" class="w-full h-full object-cover">
+                                <img src="{{ asset('storage/hero_image/'.$campaign->hero_image) }}" alt="{{ $campaign->getLocalValue('title') }}" title="{{ $campaign->getLocalValue('title') }}" class="w-full h-full {{ $campaign->hero_image_layout ?? 'object-cover object-center' }}">
 
                                 <!-- soft red overlay যেন ইমেজ একটু ফেইড লাগে -->
                                 <div class="absolute inset-0 bg-[#f04848]/30"></div>

@@ -78,6 +78,79 @@ class WebsiteSettingController extends Controller
         return view('admin.website.setting', compact('setting'));
     }
 
+    public function homePageSetting()
+    {
+        $setting = WebsiteSetting::first();
+        return view('admin.website.home_page_setting', compact('setting'));
+    }
+
+    public function homePageSettingUpdate(Request $request, WebsiteSetting $setting)
+    {
+        $setting->about_us_title_home = $request->about_us_title_home;
+        $setting->about_us_btn_home = $request->about_us_btn_home;
+        $setting->about_us_content_home = $request->about_us_content_home;
+        $setting->about_us_cover_image_home_layout = $request->about_us_cover_image_home_layout;
+        
+        $setting->article_news_content = $request->article_news_content;
+        $setting->review_title = $request->review_title;
+        $setting->review_sub_title = $request->review_sub_title;
+        $setting->review_content = $request->review_content;
+        $setting->our_numbers_content = $request->our_numbers_content;
+        $setting->peaple_helped = $request->peaple_helped;
+        $setting->volunteers = $request->volunteers;
+        $setting->educated_children = $request->educated_children;
+        $setting->service_meal = $request->service_meal;
+        
+        $setting->help_people_need_content = $request->help_people_need_content;
+        $setting->help_people_need_btn = $request->help_people_need_btn;
+        $setting->help_people_need_image_layout = $request->help_people_need_image_layout;
+        
+        $setting->start_volunteering_content = $request->start_volunteering_content;
+        $setting->become_sponsor_content = $request->become_sponsor_content;
+        $setting->download_annual_report_content = $request->download_annual_report_content;
+        
+        $setting->contact_us_button_volun = $request->contact_us_button_volun;
+
+        $setting->editedby_id = auth()->id();
+
+        if ($request->hasFile('about_us_cover_image_home')) {
+            if ($setting->about_us_cover_image_home && Storage::disk('public')->exists('about_us_cover_image_home/' . $setting->about_us_cover_image_home)) {
+                Storage::disk('public')->delete('about_us_cover_image_home/' . $setting->about_us_cover_image_home);
+            }
+            $file = $request->file('about_us_cover_image_home');
+            $ext  = '.' . ($file->getClientOriginalExtension() ?: $file->extension());
+            $name = time() . '_home_about_cover_' . Str::random(6) . $ext;
+            Storage::disk('public')->put('about_us_cover_image_home/' . $name, File::get($file));
+            $setting->about_us_cover_image_home = $name;
+        }
+
+        if ($request->hasFile('help_people_need_image')) {
+            if ($setting->help_people_need_image && Storage::disk('public')->exists('help_people_need_image/' . $setting->help_people_need_image)) {
+                Storage::disk('public')->delete('help_people_need_image/' . $setting->help_people_need_image);
+            }
+            $file = $request->file('help_people_need_image');
+            $ext  = '.' . ($file->getClientOriginalExtension() ?: $file->extension());
+            $name = time() . '_need_help_' . Str::random(6) . $ext;
+            Storage::disk('public')->put('help_people_need_image/' . $name, File::get($file));
+            $setting->help_people_need_image = $name;
+        }
+
+        if ($request->hasFile('download_annual_report_file')) {
+            if ($setting->download_annual_report_file && Storage::disk('public')->exists('download_annual_report_file/' . $setting->download_annual_report_file)) {
+                Storage::disk('public')->delete('download_annual_report_file/' . $setting->download_annual_report_file);
+            }
+            $file = $request->file('download_annual_report_file');
+            $ext  = '.' . ($file->getClientOriginalExtension() ?: $file->extension());
+            $name = time() . '_report_' . Str::random(6) . $ext;
+            Storage::disk('public')->put('download_annual_report_file/' . $name, File::get($file));
+            $setting->download_annual_report_file = $name;
+        }
+
+        $setting->save();
+
+        return back()->with('success', 'Home Page settings updated successfully!');
+    }
+
     /**
      * Update the specified resource in storage.
      */
