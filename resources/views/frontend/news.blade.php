@@ -156,7 +156,7 @@
                     @foreach($recent_articles as $item)
                         <article class="overflow-hidden bg-white rounded-md shadow-xl text-slate-900">
                             <div class="relative">
-                                <img src="{{ asset('storage/story_image/'.$item->image) }}"
+                                <img src="{{ asset('storage/story_image/'.($item->image ?: $item->header_photo)) }}"
                                         alt="{{ $item->title }}" title="{{ $item->title }}"
                                         class="object-cover w-full h-52"
                                         onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300?text=Image+Not+Found';" />
@@ -182,7 +182,7 @@
                                 </p>
 
                                 <div class="flex items-center justify-between gap-4 text-[11px] text-slate-500">
-                                    <span class="whitespace-nowrap">{{ $item->created_at->format('j M Y') }}</span>
+                                    <span class="whitespace-nowrap">{{ optional($item->published_at ?? $item->created_at)->format('j M Y') }}</span>
 
                                     <div class="flex items-center gap-2 whitespace-nowrap">
                                         <span>By</span>
@@ -235,7 +235,7 @@
                         @foreach($cat->stories as $item)
                             <article class="overflow-hidden bg-white rounded-md shadow-xl text-slate-900">
                                 <div class="relative">
-                                    <img src="{{ asset('storage/story_image/'.$item->image) }}"
+                                    <img src="{{ asset('storage/story_image/'.($item->image ?: $item->header_photo)) }}"
                                          alt="{{ $item->title }}" title="{{ $item->title }}"
                                          class="object-cover w-full h-52"
                                          onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300?text=Image+Not+Found';" />
@@ -261,7 +261,7 @@
                                     </p>
 
                                     <div class="flex items-center justify-between gap-4 text-[11px] text-slate-500">
-                                        <span class="whitespace-nowrap">{{ $item->created_at->format('j M Y') }}</span>
+                                        <span class="whitespace-nowrap">{{ optional($item->published_at ?? $item->created_at)->format('j M Y') }}</span>
 
                                         <div class="flex items-center gap-2 whitespace-nowrap">
                                             <span>{{ translate('By') }}</span>
@@ -303,7 +303,7 @@
                     @foreach($related_stories as $item)
                         <article class="overflow-hidden bg-white rounded-md shadow-xl text-slate-900">
                             <div class="relative">
-                                <img src="{{ asset('storage/story_image/'.$item->image) }}"
+                                <img src="{{ asset('storage/story_image/'.($item->image ?: $item->header_photo)) }}"
                                         alt="{{ $item->title }}" title="{{ $item->title }}"
                                         class="object-cover w-full h-52"
                                         onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300?text=Image+Not+Found';" />
@@ -329,7 +329,7 @@
                                 </p>
 
                                 <div class="flex items-center justify-between gap-4 text-[11px] text-slate-500">
-                                    <span class="whitespace-nowrap">{{ $item->created_at->format('j M Y') }}</span>
+                                    <span class="whitespace-nowrap">{{ optional($item->published_at ?? $item->created_at)->format('j M Y') }}</span>
 
                                     <div class="flex items-center gap-2 whitespace-nowrap">
                                         <span>By</span>

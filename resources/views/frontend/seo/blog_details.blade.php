@@ -35,7 +35,7 @@
             ],
         ],
 
-        'datePublished' => optional($story->created_at)->toIso8601String(),
+        'datePublished' => optional($story->published_at ?? $story->created_at)->toIso8601String(),
         'dateModified'  => optional($story->updated_at)->toIso8601String(),
 
         'articleSection' => 'Campaign Report',

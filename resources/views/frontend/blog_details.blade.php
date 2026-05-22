@@ -232,7 +232,7 @@
 
                 <span class="inline-flex items-center gap-1 text-gray-500">
                   <i class="far fa-calendar-alt"></i>
-                  {{ optional($story->created_at)->format('M d, Y') }}
+                  {{ optional($story->published_at ?? $story->created_at)->format('M d, Y') }}
                 </span>
 
                 <span class="text-gray-400">|</span>
@@ -392,9 +392,9 @@
 
                 {{-- IMAGE --}}
                 <div class="h-[210px] bg-gray-200 overflow-hidden">
-                @if(!empty($rs->image))
+                @if(!empty($rs->image) || !empty($rs->header_photo))
                     <img
-                    src="{{ asset('storage/story_image/'.$rs->image) }}"
+                    src="{{ asset('storage/story_image/'.($rs->image ?: $rs->header_photo)) }}"
                     class="w-full h-full object-cover"
                     alt="{{ $rs->title }}" title="{{ $rs->title }}">
                 @endif
@@ -418,7 +418,7 @@
 
                     {{-- Left part: Date, Posted By, User --}}
                     <div class="flex items-center gap-4 flex-wrap">
-                        <span>{{ optional($rs->created_at)->format('j M Y') }}</span>
+                        <span>{{ optional($rs->published_at ?? $rs->created_at)->format('j M Y') }}</span>
 
                         <span class="flex items-center gap-2">
                             <span> {{ translate('Posted By') }} </span>

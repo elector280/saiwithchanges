@@ -476,7 +476,7 @@
                         @foreach($campaign->stories as $story)
                             <article class="bg-white shadow border border-gray-200 flex flex-col">
                                 <div class="h-40 bg-gray-200">
-                                    <img src="{{ asset('storage/story_image/'.$story->image) }}"
+                                    <img src="{{ asset('storage/story_image/'.($story->image ?: $story->header_photo)) }}"
                                          class="w-full h-full object-cover" alt="{{ $story->title ?? 'Story Image' }}" title="{{ $story->title ?? 'Story Image' }}">
                                 </div>
                                 <div class="p-4 flex-1 flex flex-col">
@@ -487,7 +487,7 @@
                                         {{ \Illuminate\Support\Str::limit($story->seo_title ?? '', 200) }}
                                     </p>
                                     <div class="flex items-center justify-between text-[11px] text-gray-400 mb-3">
-                                        <span>{{ $story->created_at->format('j M Y') }}</span>
+                                        <span>{{ optional($story->published_at ?? $story->created_at)->format('j M Y') }}</span>
                                         <span>by {{ $story->user->name ?? '' }}</span>
                                     </div>
                                     <a href="{{ session('locale', config('app.locale')) === 'es' ? route('blogDetailsEs', $story->slug) : route('blogDetails', $story->slug) }}"
