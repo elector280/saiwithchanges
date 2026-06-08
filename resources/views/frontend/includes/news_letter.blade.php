@@ -151,7 +151,7 @@
     <div class="sm:hidden text-center">
 
         {{-- WhatsApp icon top --}}
-        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $setting->whatsapp_number) }}?text={{ urlencode('Hello, I want to know more details.') }}"
+        <a href="https://wa.me/{{ ltrim(preg_replace('/[^0-9]/', '', $setting->whatsapp_number), '0') }}?text={{ urlencode('Hello, I want to know more details.') }}"
            target="_blank"
            class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#5dd35f] mx-auto">
             <i class="fab fa-whatsapp text-white text-3xl"></i>
@@ -159,7 +159,7 @@
 
         {{-- whatsapp text --}}
         <div class="mt-3">
-            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $setting->whatsapp_number) }}?text={{ urlencode('Hello, I want to know more details.') }}"
+            <a href="https://wa.me/{{ ltrim(preg_replace('/[^0-9]/', '', $setting->whatsapp_number), '0') }}?text={{ urlencode('Hello, I want to know more details.') }}"
                target="_blank"
                class="uppercase font-semibold text-[#1f66c2] underline underline-offset-4">
                   {{ translate('Contact us on whatsapp') }} &gt;
@@ -171,22 +171,30 @@
 
         {{-- social icons --}}
         <div class="flex items-center justify-center gap-4">
+            @if(!empty($setting->fb_url))
             <a href="{{ $setting->fb_url }}" target="_blank"
                class="w-10 h-10 rounded-lg bg-[#ff8b73] flex items-center justify-center">
                 <i class="fab fa-facebook-f text-white text-xl"></i>
             </a>
+            @endif
+            @if(!empty($setting->twitter_url))
             <a href="{{ $setting->twitter_url }}" target="_blank"
                class="w-10 h-10 rounded-lg bg-[#7ea7e6] flex items-center justify-center">
                 <i class="fab fa-twitter text-white text-xl"></i>
             </a>
+            @endif
+            @if(!empty($setting->instragram_url))
             <a href="{{ $setting->instragram_url }}" target="_blank"
                class="w-10 h-10 rounded-lg bg-[#ff6b79] flex items-center justify-center">
                 <i class="fab fa-instagram text-white text-xl"></i>
             </a>
+            @endif
+            @if(!empty($setting->youtube_url))
             <a href="{{ $setting->youtube_url }}" target="_blank"
                class="w-10 h-10 rounded-lg bg-[#1f66c2] flex items-center justify-center">
                 <i class="fab fa-youtube text-white text-xl"></i>
             </a>
+            @endif
         </div>
 
         {{-- follow text --}}
@@ -203,7 +211,7 @@
     <div class="hidden sm:flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
 
         {{-- WhatsApp --}}
-        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $setting->whatsapp_number) }}?text={{ urlencode('Hello, I want to know more details.') }}"
+        <a href="https://wa.me/{{ ltrim(preg_replace('/[^0-9]/', '', $setting->whatsapp_number), '0') }}?text={{ urlencode('Hello, I want to know more details.') }}"
            class="inline-flex items-center gap-3 font-semibold text-[#007c2e]" target="_blank">
             <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-[#5dd35f]">
                 <i class="fab fa-whatsapp text-white text-3xl"></i>
@@ -217,10 +225,18 @@
         {{-- Social --}}
         <div class="flex items-center gap-3">
             <div class="flex items-center gap-2 text-[16px]">
+                @if(!empty($setting->fb_url))
                 <a href="{{ $setting->fb_url }}" class="text-[#1877F2]" target="_blank"><i class="fab fa-facebook-f text-3xl"></i></a>
+                @endif
+                @if(!empty($setting->twitter_url))
                 <a href="{{ $setting->twitter_url }}" class="text-[#1DA1F2]" target="_blank"><i class="fab fa-twitter text-3xl"></i></a>
+                @endif
+                @if(!empty($setting->instragram_url))
                 <a href="{{ $setting->instragram_url }}" class="text-[#E4405F]" target="_blank"><i class="fab fa-instagram text-3xl"></i></a>
+                @endif
+                @if(!empty($setting->youtube_url))
                 <a href="{{ $setting->youtube_url }}" class="text-[#FF0000]" target="_blank"><i class="fab fa-youtube text-3xl"></i></a>
+                @endif
             </div>
             <a href="#" class="text-[#1f66c2] text-[16px] underline-offset-2 hover:underline">
                 {{ translate('Follow us on our social media') }}

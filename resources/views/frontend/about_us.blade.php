@@ -145,7 +145,7 @@
                         @endif
                     </p>
 
-                  <a href="{{ $setting->donate_to_feeding_dream }}" class="block w-full md:inline-block md:w-auto
+                  <a href="{{ $setting->donate_to_feeding_dream ?: route('donation') }}" class="block w-full md:inline-block md:w-auto
                         bg-[#f04848] hover:bg-[#e33838] text-white
                         text-xs md:text-sm font-semibold uppercase
                         px-8 md:px-10 py-1 rounded-md text-center
@@ -218,7 +218,7 @@
                         @endif
                     </p> 
 
-                    <a href="{{ $setting->help_people_need_btn }}"  class="self-start bg-white text-[#f15656] text-xs md:text-sm font-semibold uppercase px-9 py-1 rounded-md shadow-[0_12px_25px_rgba(0,0,0,0.25)]"  style="border: 1px solid red !important;">
+                    <a href="{{ $setting->help_people_need_btn ?: route('donation') }}"  class="self-start bg-white text-[#f15656] text-xs md:text-sm font-semibold uppercase px-9 py-1 rounded-md shadow-[0_12px_25px_rgba(0,0,0,0.25)]"  style="border: 1px solid red !important;">
                          {{ translate('Donate to Dog Sanctuary') }} &gt;
                     </a>
                 </div>
@@ -243,7 +243,7 @@
                     to eat.
                 </p>
 
-                <a href="{{ $setting->donate_to_orphan_program }}" class="block w-full md:inline-block md:w-auto
+                <a href="{{ $setting->donate_to_orphan_program ?: route('donation') }}" class="block w-full md:inline-block md:w-auto
                         bg-[#f04848] hover:bg-[#e33838] text-white
                         text-xs md:text-sm font-semibold uppercase
                         px-8 md:px-10 py-1 rounded-md text-center
@@ -418,7 +418,7 @@
         </p>
 
         <!-- ✅ button stays at bottom -->
-        <a href="{{ $setting->contact_us_button_volun }}"
+        <a href="{{ $setting->contact_us_button_volun ?: route('contactUs') }}"
            class="mt-6 inline-flex w-fit items-center justify-center border border-[#e13b35]
                   text-[#e13b35] text-[11px] uppercase px-6 py-2"  style="border: 1px solid red !important;">
           {{ translate('Contact Us') }} &gt;
@@ -438,7 +438,7 @@
           @endif
         </p>
 
-        <a href="{{ $setting->contact_us_button_volun }}"
+        <a href="{{ $setting->contact_us_button_volun ?: route('contactUs') }}"
            class="mt-6 inline-flex w-fit items-center justify-center border border-[#e13b35]
                   text-[#e13b35] text-[11px] uppercase px-6 py-2"  style="border: 1px solid red !important;">
           {{ translate('Contact Us') }} &gt;
@@ -458,7 +458,7 @@
           @endif
         </p>
 
-        <a href="{{ $setting->contact_us_button_volun }}"
+        <a href="{{ $setting->contact_us_button_volun ?: route('contactUs') }}"
            class="mt-6 inline-flex w-fit items-center justify-center border border-[#e13b35]
                   text-[#e13b35] text-[11px] uppercase px-6 py-2"  style="border: 1px solid red !important;">
           {{ translate('Contact Us') }} &gt;

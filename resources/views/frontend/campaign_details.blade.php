@@ -173,7 +173,7 @@
                 <div class="px-5 md:px-8 pt-5 pb-6">
 
                     <!-- ✅ MOBILE: Donate button under header (only mobile) -->
-                   <a href="javascript:void(0)"
+                   <a href="{{ route('donation') }}"
                     class="lg:hidden w-full block text-center mb-4 border border-[#f3b6b6] bg-[#fff1f1] text-[#D94647] font-semibold uppercase tracking-[0.10em] py-3 rounded-[2px] hiddenBtnClick">
                     {{ translate('Donate to this Project') }}
                     </a>

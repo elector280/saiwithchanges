@@ -58,7 +58,7 @@
                     </span>
                 </span>
 
-                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $setting->whatsapp_number) }}?text={{ urlencode('Hello, I want to know more details.') }}"
+                <a href="https://wa.me/{{ ltrim(preg_replace('/[^0-9]/', '', $setting->whatsapp_number), '0') }}?text={{ urlencode('Hello, I want to know more details.') }}"
                    target="_blank"
                    class="font-semibold hover:underline text-[#674C4F] hidden lg:block">
                     <strong class="text-[#674C4F] underline">Whatsapp &gt;</strong>

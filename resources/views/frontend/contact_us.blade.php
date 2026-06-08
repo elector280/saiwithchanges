@@ -140,26 +140,33 @@
           <h3 class="mb-3 text-base font-bold text-red-600"> {{ translate('Social Media Channels') }}</h3>
 
           <div class="flex items-center gap-3 text-white">
+            @if(!empty($setting->fb_url))
             <!-- Facebook -->
             <a href="{{ $setting->fb_url }}" class="flex items-center justify-center w-8 h-8 bg-blue-600 rounded-full">
               <i class="text-sm fab fa-facebook-f"></i>
             </a>
+            @endif
 
+            @if(!empty($setting->twitter_url))
             <!-- Twitter/X -->
             <a href="{{ $setting->twitter_url }}" class="flex items-center justify-center w-8 h-8 bg-blue-900 rounded-full">
               <i class="text-sm fab fa-x-twitter"></i>
             </a>
+            @endif
 
+            @if(!empty($setting->instragram_url))
             <!-- Instagram -->
             <a href="{{ $setting->instragram_url }}" class="flex items-center justify-center w-8 h-8 bg-pink-500 rounded-full">
               <i class="text-sm fab fa-instagram"></i>
             </a>
+            @endif
 
+            @if(!empty($setting->youtube_url))
             <!-- Linkedin -->
             <a href="{{ $setting->youtube_url }}" class="flex items-center justify-center w-8 h-8 bg-red-500 rounded-full">
               <i class="text-sm fab fa-youtube"></i>
             </a>
-
+            @endif
           </div>
         </div>
 

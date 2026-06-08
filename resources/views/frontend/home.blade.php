@@ -289,7 +289,7 @@
                         {!! $setting->about_us_content_home !!}
                     </div>
 
-                    <a href="{{ $setting->about_us_btn_home }}"
+                    <a href="{{ $setting->about_us_btn_home ?: route('aboutUs') }}"
                     class="mt-8 inline-flex items-center justify-center
                             border border-[#e13b35]
                             text-[#e13b35] text-[12px] font-semibold
@@ -607,7 +607,7 @@
                     </div>
 
                     <!-- Donate (Tablet+ Desktop) -->
-                    <a href="{{ $setting->help_people_need_btn }}"
+                    <a href="{{ $setting->help_people_need_btn ?: route('donation') }}"
                     class="hidden md:inline-flex mt-6 w-fit
                             items-center justify-center
                             bg-[#ffe36b] text-[#201C1B]
@@ -626,7 +626,7 @@
                     />
 
                     <!-- Donate (Mobile only, overlay bottom) -->
-                    <a href="{{ $setting->help_people_need_btn }}"
+                    <a href="{{ $setting->help_people_need_btn ?: route('donation') }}"
                     class="md:hidden absolute left-1/2 -translate-x-1/2 bottom-4
                             w-[calc(100%-2.5rem)] max-w-[340px]
                             inline-flex items-center justify-center
@@ -653,7 +653,7 @@
                         @endif
                     </p>
 
-                    <a href="{{ $setting->contact_us_button_volun }}"
+                    <a href="{{ $setting->contact_us_button_volun ?: route('contactUs') }}"
                     class="w-[220px] mt-4 inline-flex items-center justify-center border border-[#e13b35]
                             text-[#e13b35] text-[11px] uppercase px-6 py-2"  style="border: 1px solid red !important;">
                         {{ translate('Contact Us') }} &gt;
@@ -672,7 +672,7 @@
                         @endif
                     </p>
 
-                    <a href="{{ $setting->contact_us_button_volun }}"
+                    <a href="{{ $setting->contact_us_button_volun ?: route('contactUs') }}"
                     class="w-[220px] mt-4 inline-flex items-center justify-center border border-[#e13b35]
                             text-[#e13b35] text-[11px] uppercase px-6 py-2"  style="border: 1px solid red !important;">
                         {{ translate('Contact Us') }} &gt;
