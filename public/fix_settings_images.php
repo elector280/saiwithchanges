@@ -37,8 +37,29 @@ echo "<p>Storage path: $storagePath - ";
 echo is_dir($storagePath) ? "<span class='ok'>EXISTS</span>" : "<span class='bad'>MISSING!</span>";
 echo "</p>";
 
+// --- Show all tables ---
+echo "<h3>All tables in database:</h3><pre>";
+$allTables = $pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
+foreach ($allTables as $t) echo "- $t\n";
+echo "</pre>";
+
+// --- Find the settings table ---
+$possibleNames = ['settings', 'site_settings', 'app_settings', 'system_settings', 'options', 'configurations'];
+$settingsTable = null;
+foreach ($possibleNames as $name) {
+    if (in_array($name, $allTables)) {
+        $settingsTable = $name;
+        break;
+    }
+}
+if (!$settingsTable) {
+    echo "<p class='bad'>Could not find settings table! Check table list above.</p>";
+    exit;
+}
+echo "<p class='ok'>Found settings table: <strong>$settingsTable</strong></p>";
+
 // --- Get all settings ---
-$stmt = $pdo->query("SELECT * FROM settings LIMIT 1");
+$stmt = $pdo->query("SELECT * FROM $settingsTable LIMIT 1");
 $setting = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$setting) {
@@ -73,7 +94,7 @@ foreach ($imageFields as $col => $folder) {
 echo "</pre>";
 
 // --- Check if the help_people_need_image field exists ---
-$stmt2 = $pdo->query("SHOW COLUMNS FROM settings LIKE 'help_people_need_image'");
+$stmt2 = $pdo->query("SHOW COLUMNS FROM $settingsTable LIKE 'help_people_need_image'");
 $col = $stmt2->fetch();
 if ($col) {
     $val = $setting['help_people_need_image'] ?? '';
