@@ -8,6 +8,7 @@ use App\Models\WebsiteSetting;
 use Illuminate\Support\Facades\View;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFour();
         Paginator::useTailwind();
+        
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
         
         try {
             $setting = WebsiteSetting::first();
