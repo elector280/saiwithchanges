@@ -6,7 +6,29 @@ $kernel->bootstrap();
 
 use Illuminate\Support\Facades\DB;
 
-echo "Restoring image paths...<br>";
+echo "<h2>Restoring and Fixing Image Paths...</h2>";
+
+function findOriginalImage($brokenFileName) {
+    // If the file has 2026, let's try to find 2024 or 2025
+    $baseName2024 = str_replace('2026', '2024', basename($brokenFileName));
+    $baseName2025 = str_replace('2026', '2025', basename($brokenFileName));
+    
+    // We will recursively search public/storage for these files
+    $directory = new RecursiveDirectoryIterator(public_path('storage'));
+    $iterator = new RecursiveIteratorIterator($directory);
+    
+    foreach ($iterator as $file) {
+        if ($file->isFile()) {
+            if ($file->getFilename() === $baseName2024 || $file->getFilename() === $baseName2025) {
+                // Return the filename that actually exists
+                return str_replace('2026', strpos($file->getFilename(), '2024') !== false ? '2024' : '2025', $brokenFileName);
+            }
+        }
+    }
+    
+    // Fallback: just return 2024 version
+    return str_replace('2026', '2024', $brokenFileName);
+}
 
 function fixString($val) {
     if (!is_string($val)) return $val;
@@ -14,60 +36,38 @@ function fixString($val) {
 
     // Fix raw image filenames
     if (preg_match('/^[^<>\n]*2026[^<>\n]*\.(jpg|jpeg|png|gif|webp|svg|pdf)$/i', $val)) {
-        $test2024 = str_replace('2026', '2024', $val);
-        $test2025 = str_replace('2026', '2025', $val);
-        
-        $baseDirs = [
-            public_path(),
-            public_path('storage/hero_image'),
-            public_path('storage/logo'),
-            public_path('storage/gallery_image'),
-            public_path('storage'),
-            public_path('images')
-        ];
-        
-        foreach ([$test2024, $test2025] as $candidate) {
-            foreach ($baseDirs as $dir) {
-                if (file_exists($dir . '/' . basename($candidate)) || file_exists($dir . '/' . $candidate) || file_exists(public_path($candidate))) {
-                    return $candidate;
-                }
-            }
-        }
-        return $test2024;
+        return findOriginalImage($val);
     }
 
     // Fix images in HTML attributes
     $val = preg_replace_callback('/(["\'])([^"\']*?2026[^"\']*?\.(?:jpg|jpeg|png|gif|webp|svg|pdf))\1/i', function($matches) {
         $quote = $matches[1];
         $path = $matches[2];
-        $test2024 = str_replace('2026', '2024', $path);
-        $test2025 = str_replace('2026', '2025', $path);
-        
-        foreach ([$test2024, $test2025] as $candidate) {
-             if (file_exists(public_path(ltrim(parse_url($candidate, PHP_URL_PATH), '/')))) {
-                 return $quote . $candidate . $quote;
-             }
-        }
-        return $quote . $test2024 . $quote; 
+        $fixedPath = findOriginalImage($path);
+        return $quote . $fixedPath . $quote; 
     }, $val);
 
     return $val;
 }
 
-$tablesToCheck = ['settings', 'campaigns', 'blogs', 'pages'];
+// Get ALL tables dynamically to ensure we don't miss 'stories' or others
+$tablesToCheck = DB::connection()->getDoctrineSchemaManager()->listTableNames();
+
 foreach ($tablesToCheck as $table) {
-    if (DB::getSchemaBuilder()->hasTable($table)) {
+    try {
         $records = DB::table($table)->get();
         $cols = DB::getSchemaBuilder()->getColumnListing($table);
         $updatedCount = 0;
         foreach ($records as $record) {
             $updateRec = [];
             foreach ($cols as $col) {
-                $val = $record->$col;
-                if (is_string($val) && strpos($val, '2026') !== false) {
-                    $newVal = fixString($val);
-                    if ($newVal !== $val) {
-                        $updateRec[$col] = $newVal;
+                if (isset($record->$col)) {
+                    $val = $record->$col;
+                    if (is_string($val) && strpos($val, '2026') !== false) {
+                        $newVal = fixString($val);
+                        if ($newVal !== $val) {
+                            $updateRec[$col] = $newVal;
+                        }
                     }
                 }
             }
@@ -77,9 +77,12 @@ foreach ($tablesToCheck as $table) {
             }
         }
         if ($updatedCount > 0) {
-            echo "Restored image paths in $updatedCount records in table $table.<br>";
+            echo "Restored image paths in <strong>$updatedCount</strong> records in table <strong>$table</strong>.<br>";
         }
+    } catch (\Exception $e) {
+        // Skip tables without 'id' column or other issues
+        continue;
     }
 }
 
-echo "Done.<br>";
+echo "<br><strong>Done!</strong> Please refresh your website.";
