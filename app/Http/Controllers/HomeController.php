@@ -382,7 +382,10 @@ public function campaignsdetails($path, $slug)
             ->where('slug', $imageSlug)
             ->firstOrFail();
 
-        $path = 'gallery_image/' . $img->image;
+        $fileName = ltrim((string) $img->image, '/');
+        $fileName = explode('?', $fileName)[0];
+        $fileName = preg_replace('#^gallery_image/#', '', $fileName);
+        $path = 'gallery_image/' . $fileName;
         abort_unless(Storage::disk('public')->exists($path), 404);
 
         // 👉 real extension বের করো
@@ -425,6 +428,7 @@ public function showStoryImage($reportSlug, $imageSlug, $ext)
 
     // 2) Resolve filename from DB (image column)
     $fileName = ltrim((string) $story->image, '/');
+    $fileName = explode('?', $fileName)[0];
 
     // If DB already contains folder, avoid double folder
     $fileName = preg_replace('#^story_image/#', '', $fileName);
@@ -473,6 +477,7 @@ public function showStoryFooterImage($reportSlug, $imageSlug, $ext)
 
     // 2) Footer image filename from DB
     $fileName = ltrim((string) $story->footer_image2, '/');
+    $fileName = explode('?', $fileName)[0];
 
     abort_if(empty($fileName), 404);
 

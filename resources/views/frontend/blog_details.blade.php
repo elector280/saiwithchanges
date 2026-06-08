@@ -336,14 +336,22 @@
                   @endphp
 
                   <div class="relative h-40 md:h-auto">
-                    @if(!empty($story->image))
+                    @if(!empty($story->footer_image2))
+                    <img
+                      src="{{ route('gallery.image.story.footer', [
+                        'reportSlug' => $sSlug,
+                        'imageSlug'  => $footerSlug,
+                        'ext'        => $footerExt,
+                    ]) }}"
+                      class="w-full h-full object-cover"  alt="{{ $story->footer_title }}">
+                    @elseif(!empty($story->image))
                     <img
                       src="{{ route('gallery.image.story', [
                         'reportSlug' => $sSlug,
                         'imageSlug'  => $imageSlug,
                         'ext'        => $ext,
                     ]) }}"
-                    alt="{{ $title ?? '' }}"  class="w-full h-full object-cover"  alt="{{ $story->footer_title }}">
+                      class="w-full h-full object-cover"  alt="{{ $story->footer_title }}">
                     @endif
                     <div class="absolute inset-0 bg-[#f04848]/25"></div>
                   </div>

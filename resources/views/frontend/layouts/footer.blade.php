@@ -71,9 +71,9 @@
                 <div>
                     <h3 class="font-semibold uppercase text-white/80">{{ translate('Website') }}</h3>
                     <ul class="mt-3 space-y-2 text-white/70">
-                        <li><a href="{{ route('homees') }}" class="hover:underline"> {{ translate('Home') }}</a></li>
-                        <li><a href="{{ route('aboutUs') }}" class="hover:underline"> {{ translate('About us') }}</a></li>
-                        <li><a href="{{ route('campaigns') }}" class="hover:underline"> {{ translate('Explore campaign') }}</a></li>
+                        <li><a href="{{ route('homees') }}" class="hover:underline text-[#d3d7e0]"> {{ translate('Home') }}</a></li>
+                        <li><a href="{{ route('aboutUs') }}" class="hover:underline text-[#d3d7e0]"> {{ translate('About us') }}</a></li>
+                        <li><a href="{{ route('campaigns') }}" class="hover:underline text-[#d3d7e0]"> {{ translate('Explore campaign') }}</a></li>
                     </ul>
                 </div>
 
@@ -91,9 +91,9 @@
                 <div>
                     <h3 class="font-semibold uppercase text-white/80">{{ translate('Donations') }}</h3>
                     <ul class="mt-3 space-y-2 text-white/70">
-                        <li><a href="{{ route('donation') }}" class="hover:underline"> {{ translate('Donate') }}</a></li> 
-                        <li><a href="{{ route('doubleDonation') }}" class="hover:underline">{{ translate('Double Donation') }}</a></li>
-                        <li><a href="{{ route('dafDonation') }}" class="hover:underline"> {{ translate('DAF Donation') }}</a></li>
+                        <li><a href="{{ route('donation') }}" class="hover:underline text-[#d3d7e0]"> {{ translate('Donate') }}</a></li> 
+                        <li><a href="{{ route('doubleDonation') }}" class="hover:underline text-[#d3d7e0]">{{ translate('Double Donation') }}</a></li>
+                        <li><a href="{{ route('dafDonation') }}" class="hover:underline text-[#d3d7e0]"> {{ translate('DAF Donation') }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -141,9 +141,9 @@
                     <div>
                         <h3 class="font-semibold text-[#FE6668] text-[14px] uppercase"> {{ translate('Website') }}</h3>
                         <ul class="mt-3">
-                            <li class="mt-3"><a href="{{ route('homees') }}" class="hover:underline text-[15px]"> {{ translate('Home') }}</a></li>
-                            <li class="mt-3"><a href="{{ route('aboutUs') }}" class="hover:underline text-[15px]">{{ translate('About us ') }}</a></li>
-                            <li class="mt-3"><a href="{{ route('campaigns') }}" class="hover:underline text-[15px]"> {{ translate('Campaigns') }}</a></li>
+                            <li class="mt-3"><a href="{{ route('homees') }}" class="hover:underline text-[15px] text-[#d3d7e0]"> {{ translate('Home') }}</a></li>
+                            <li class="mt-3"><a href="{{ route('aboutUs') }}" class="hover:underline text-[15px] text-[#d3d7e0]">{{ translate('About us ') }}</a></li>
+                            <li class="mt-3"><a href="{{ route('campaigns') }}" class="hover:underline text-[15px] text-[#d3d7e0]"> {{ translate('Campaigns') }}</a></li>
                         </ul>
 
                     </div>

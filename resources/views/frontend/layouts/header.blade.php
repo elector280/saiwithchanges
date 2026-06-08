@@ -146,7 +146,7 @@
 
                                 @if($campaignUrl)
                                     <a href="{{ $campaignUrl }}"
-                                       class="block px-4 py-2 border-b border-slate-100 hover:bg-red-50 hover:text-[#f04848] normal-case capitalize">
+                                       class="block px-4 py-2 border-b border-slate-100 text-[#D94647] hover:bg-[#D94647] hover:text-white normal-case capitalize">
                                         {{ $item->title }}
                                     </a>
                                 @endif
@@ -172,17 +172,17 @@
                             shadow-xl border border-slate-100 hidden group-hover:block z-40">
 
                             <a href="{{ $locale === 'en' ? route('doubleDonation') : route('doubleDonationEs') }}"
-                               class="block px-4 py-2 border-b border-slate-100 hover:bg-red-50 hover:text-[#f04848] normal-case capitalize">
+                               class="block px-4 py-2 border-b border-slate-100 text-[#D94647] hover:bg-[#D94647] hover:text-white normal-case capitalize">
                                 {{ translate('Employer matching and volunteering') }}
                             </a>
 
                             <a href="{{ $locale === 'en' ? route('dafDonation') : route('dafDonationEs') }}"
-                               class="block px-4 py-2 border-b border-slate-100 hover:bg-red-50 hover:text-[#f04848] normal-case capitalize">
+                               class="block px-4 py-2 border-b border-slate-100 text-[#D94647] hover:bg-[#D94647] hover:text-white normal-case capitalize">
                                 {{ translate('Donor Advised Funds') }}
                             </a>
 
                             <a href="{{ $locale === 'en' ? route('donateCripto') : route('donateCriptoEs') }}"
-                               class="block px-4 py-2 border-b border-slate-100 hover:bg-red-50 hover:text-[#f04848] normal-case capitalize">
+                               class="block px-4 py-2 border-b border-slate-100 text-[#D94647] hover:bg-[#D94647] hover:text-white normal-case capitalize">
                                 {{ translate('How to Donate Cryptocurrency ') }}
                             </a>
                         </div>
