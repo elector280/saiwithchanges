@@ -44,7 +44,7 @@ foreach ($allTables as $t) echo "- $t\n";
 echo "</pre>";
 
 // --- Find the settings table ---
-$possibleNames = ['settings', 'site_settings', 'app_settings', 'system_settings', 'options', 'configurations'];
+$possibleNames = ['website_settings', 'settings', 'site_settings', 'app_settings', 'system_settings', 'options', 'configurations'];
 $settingsTable = null;
 foreach ($possibleNames as $name) {
     if (in_array($name, $allTables)) {
@@ -126,6 +126,18 @@ if (is_dir($dir2)) {
     }
 } else {
     echo "FOLDER MISSING!";
+}
+echo "</pre>";
+
+echo "<hr><h3>APP_ENV and URL config:</h3><pre>";
+echo "APP_ENV: " . ($env['APP_ENV'] ?? 'NOT SET') . "\n";
+echo "APP_URL: " . ($env['APP_URL'] ?? 'NOT SET') . "\n";
+$appEnv = $env['APP_ENV'] ?? '';
+if ($appEnv !== 'production') {
+    echo "\n⚠️  APP_ENV is NOT 'production' — HTTPS images may not be forced!\n";
+    echo "Fix: Set APP_ENV=production in your .env on the server.\n";
+} else {
+    echo "\nAPP_ENV=production ✓ — HTTPS should be forced.\n";
 }
 echo "</pre>";
 
