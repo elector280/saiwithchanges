@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title', $setting->getLocalValue('seo_title_about') ?? translate('About Us | SAI'))
-@section('meta_description', $setting->getLocalValue('seo_description_about') ?? translate('About us page meta description'))
+@section('meta_description', $setting->getLocalValue('seo_description_about') ?: 'Learn about South American Initiative (SAI), our mission, and how we provide humanitarian aid to orphans, sick children, and abandoned animals in Venezuela.')
 @section('meta_keyword', translate('About us page meta keyword'))
 
 @section('meta')

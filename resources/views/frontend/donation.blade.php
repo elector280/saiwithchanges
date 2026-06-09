@@ -2,7 +2,7 @@
 
 
 @section('title', $donation_campaigns->meta_title ?? translate('Donation Campaigns meta title'))
-@section('meta_description', $donation_campaigns->meta_description ?? translate('donation campaign meta description'))
+@section('meta_description', $donation_campaigns->meta_description ?? 'Donate to South American Initiative to provide essential food, medicine, and support for vulnerable children, families, and animals in Venezuela.')
 @section('meta_keyword',  $donation_campaigns->meta_keyword ?? translate('donation page meta keyword'))
 
 @section('meta')

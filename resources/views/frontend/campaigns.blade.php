@@ -2,7 +2,7 @@
 
 
 @section('title', translate('Campaigns | SAI'))
-@section('meta_description', translate('Campaigns page meta description'))
+@section('meta_description', translate('Campaigns page meta description') !== 'Campaigns page meta description' ? translate('Campaigns page meta description') : 'Explore our humanitarian campaigns in Venezuela providing food, medical care, and support to children, seniors, and animals in need.')
 @section('meta_keyword', translate('Campaigns page meta keyword'))
 
 @section('meta')

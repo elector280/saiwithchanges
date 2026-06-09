@@ -3,7 +3,7 @@
 
 
 @section('title', translate('News | SAI'))
-@section('meta_description', translate('News page meta description'))
+@section('meta_description', translate('News page meta description') !== 'News page meta description' ? translate('News page meta description') : 'Read the latest news and articles from our ongoing humanitarian campaigns in Venezuela by the South American Initiative.')
 @section('meta_keyword', translate('News page meta keyword'))
 
 @section('meta')

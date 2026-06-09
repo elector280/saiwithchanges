@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title', $setting->getLocalValue('seo_title_contact') ?? translate('Contact Us | SAI'))
-@section('meta_description', $setting->getLocalValue('seo_description_contact') ?? translate('Contact Us page meta description'))
+@section('meta_description', $setting->getLocalValue('seo_description_contact') ?: 'Contact South American Initiative. Find our email, phone number, and office locations in the USA and Venezuela.')
 @section('meta_keyword', translate('Contact Us page meta keyword'))
 
 @section('meta')

@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="robots" content="index, follow">
-  <title> @yield('title', 'South American Iniciative') </title>
-  <meta name="description" content="@yield('meta_description', 'South American Iniciative')">
-  <meta name="keywords" content="@yield('meta_keyword', 'South American Iniciative')">
+  <title> @yield('title', 'South American Initiative') </title>
+  <meta name="description" content="@yield('meta_description', 'South American Initiative is a 501(c)(3) nonprofit providing free medical care, food, and humanitarian support in Venezuela.')">
+  <meta name="keywords" content="@yield('meta_keyword', 'South American Initiative')">
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />

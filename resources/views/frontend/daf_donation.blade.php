@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title', translate('Donor Advised Funds | SAI'))
-@section('meta_description', translate('Donor Advised Funds page meta description'))
+@section('meta_description', translate('Donor Advised Funds page meta description') !== 'Donor Advised Funds page meta description' ? translate('Donor Advised Funds page meta description') : 'Make a Donor Advised Fund (DAF) donation to South American Initiative and support our humanitarian relief efforts in Venezuela.')
 @section('meta_keyword', translate('Donor Advised Funds page meta keyword'))
 
 @section('meta')

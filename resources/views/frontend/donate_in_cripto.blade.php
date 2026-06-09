@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title', translate('Donate Cryptocurrency | SAI'))
-@section('meta_description', translate('How to donate in cryptocurrency page meta description'))
+@section('meta_description', translate('How to donate in cryptocurrency page meta description') !== 'How to donate in cryptocurrency page meta description' ? translate('How to donate in cryptocurrency page meta description') : 'Donate cryptocurrency to South American Initiative. Your crypto donation helps provide food and medical care to those in need in Venezuela.')
 @section('meta_keyword', translate('How to donate in cryptocurrency page meta keyword'))
 
 @section('meta')

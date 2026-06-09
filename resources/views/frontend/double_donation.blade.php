@@ -2,7 +2,7 @@
 
 
 @section('title', translate('Employee Matching Gifts | SAI'))
-@section('meta_description', translate('Double Your Help with Employee Matching Gifts page meta description'))
+@section('meta_description', translate('Double Your Help with Employee Matching Gifts page meta description') !== 'Double Your Help with Employee Matching Gifts page meta description' ? translate('Double Your Help with Employee Matching Gifts page meta description') : 'Double your donation to South American Initiative with Employee Matching Gifts. See how your company can match your humanitarian contribution.')
 @section('meta_keyword', translate('Double Your Help with Employee Matching Gifts page meta keyword'))
     
 @section('meta')

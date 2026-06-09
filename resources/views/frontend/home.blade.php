@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title',  $setting->getLocalValue('title') ?? translate('Home page meta title'))
-@section('meta_description',  $setting->getLocalValue('subtitle') ?? translate('Home page meta description'))
+@section('meta_description', $setting->getLocalValue('subtitle') ?: 'South American Initiative is a 501(c)(3) nonprofit providing free medical care, food, and humanitarian support to children, families, and communities in Venezuela.')
 @section('meta_keyword',  $setting->getLocalValue('meta_keyword') ?? translate('Home page meta keyword'))
  
 
