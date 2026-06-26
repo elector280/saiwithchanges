@@ -368,10 +368,10 @@
       </div>
 
       {{-- ================= RIGHT: SIDEBAR (Donation + Newsletter) ================= --}}
-      <aside class="space-y-5" id="Payment">
-        <div class="">
+      <aside class="space-y-5 lg:sticky lg:top-28 self-start" id="Payment">
+        <div class="w-full">
           @if(!empty($story->campaign->donorbox_code ))
-              <section class="space-y-2- prose max-w-none">
+              <section class="donorbox-wrapper w-full">
                   {!! $story->campaign->donorbox_code  !!}
               </section>
           @endif
