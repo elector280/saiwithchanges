@@ -383,14 +383,14 @@
       </div>
 
       {{-- ================= RIGHT: SIDEBAR (Donation + Newsletter) ================= --}}
-      <aside class="space-y-5 lg:sticky lg:top-28 self-start" id="Payment" style="max-height: calc(100vh - 7rem); overflow-y: auto; overflow-x: hidden;">
-        <div class="w-full">
-          @if(!empty($story->campaign->donorbox_code ))
-              <section class="donorbox-wrapper w-full">
-                  {!! $story->campaign->donorbox_code  !!}
-              </section>
-          @endif
-        </div>
+      <aside class="space-y-5" id="Payment">
+        @if(!empty($story->campaign->donorbox_code ))
+            <div class="w-full max-w-none bg-white border border-gray-200 rounded-sm shadow-md overflow-hidden
+                        md:mx-0 md:w-full md:max-w-none
+                        [&_iframe]:!w-full [&_iframe]:!max-w-none [&_iframe]:block">
+                {!! $story->campaign->donorbox_code !!}
+            </div>
+        @endif
       </aside>
     </div>
   </div>
@@ -477,7 +477,6 @@
 
 {{-- ✅ Amount UI toggle (optional) --}}
 
-<script src="https://donorbox.org/widget.js" paypalExpress="true"></script>
 <script>
   document.addEventListener('click', function(e){
     const item = e.target.closest('.amount-item');
