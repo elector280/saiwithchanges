@@ -560,13 +560,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.origin === 'https://donorbox.org') {
             try {
                 let data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+                const iframes = document.querySelectorAll('iframe[name="donorbox"], .donorbox-wrapper iframe, iframe[src*="donorbox"]');
                 
                 // When Donorbox changes steps, it sends scrollIntoView
                 if (data.scrollIntoView) {
-                    document.querySelectorAll('iframe[name="donorbox"]').forEach(iframe => {
+                    iframes.forEach(iframe => {
                         // Compress the iframe momentarily so internal 100vh shrinks
-                        iframe.style.height = '150px'; 
-                        iframe.style.minHeight = '0px';
+                        iframe.style.setProperty('height', '150px', 'important'); 
+                        iframe.style.setProperty('min-height', '0px', 'important');
                         // Ask Donorbox to recalculate its height based on the new compressed state
                         if (window.donorbox && window.donorbox.resizeDonationWidget) {
                             setTimeout(() => window.donorbox.resizeDonationWidget(), 50);
@@ -574,9 +575,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 } else if (data.height && parseInt(data.height) > 0) {
                     // Normal resize event
-                    document.querySelectorAll('iframe[name="donorbox"]').forEach(iframe => {
-                        iframe.style.minHeight = '0px'; 
-                        iframe.style.height = data.height + 'px';
+                    iframes.forEach(iframe => {
+                        iframe.style.setProperty('min-height', '0px', 'important'); 
+                        iframe.style.setProperty('height', data.height + 'px', 'important');
                     });
                 }
             } catch (e) {}
