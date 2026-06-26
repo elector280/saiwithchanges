@@ -537,5 +537,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 </div>
+{{-- Script to prevent Donorbox from auto-scrolling the page and causing jumps --}}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const checkIframe = setInterval(() => {
+        const iframes = document.querySelectorAll('iframe[name="donorbox"]');
+        iframes.forEach(iframe => {
+            if (!iframe.dataset.scrollOverridden) {
+                iframe.scrollIntoView = function() {
+                    console.log("Prevented Donorbox auto-scroll jump.");
+                };
+                iframe.dataset.scrollOverridden = 'true';
+            }
+        });
+    }, 500); 
+    setTimeout(() => clearInterval(checkIframe), 10000);
+});
+</script>
 </body>
 </html>

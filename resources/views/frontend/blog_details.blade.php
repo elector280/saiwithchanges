@@ -383,7 +383,7 @@
       </div>
 
       {{-- ================= RIGHT: SIDEBAR (Donation + Newsletter) ================= --}}
-      <aside class="space-y-5 self-start sticky top-[120px]" id="Payment">
+      <aside class="space-y-5 self-start" id="Payment">
         <div class="w-full">
           @if(!empty($story->campaign->donorbox_code ))
               <section class="donorbox-wrapper w-full [&_iframe]:!w-full [&_iframe]:!max-w-none [&_iframe]:block">
