@@ -50,12 +50,25 @@
   /* small helper (optional) */
   .shadow-soft{ box-shadow: 0 10px 30px rgba(0,0,0,.08); }
 
+  :root {
+    --reader-font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --reader-font-size: 16px;
+  }
+
   /* ── Font override: force prose to use site font ── */
   .prose,
   .prose p,
   .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6,
   .prose li, .prose blockquote, .prose strong, .prose em {
-    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    font-family: var(--reader-font-family) !important;
+  }
+
+  #reportMainContent .prose,
+  #reportMainContent .prose p,
+  #reportMainContent .prose li,
+  #reportMainContent .prose blockquote {
+    font-size: var(--reader-font-size) !important;
+    line-height: 1.6 !important;
   }
 
   /* ── Font Selector Panel ── */
@@ -479,6 +492,23 @@
   });
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const fontFamilySelect = document.getElementById('fontFamilySelect');
+    const fontSizeRange = document.getElementById('fontSizeRange');
+    const fontSizeDisplay = document.getElementById('fontSize-display');
 
+    if (fontFamilySelect && fontSizeRange) {
+      fontFamilySelect.addEventListener('change', function() {
+        document.documentElement.style.setProperty('--reader-font-family', this.value);
+      });
+
+      fontSizeRange.addEventListener('input', function() {
+        document.documentElement.style.setProperty('--reader-font-size', this.value + 'px');
+        fontSizeDisplay.textContent = this.value + 'px';
+      });
+    }
+  });
+</script>
 
 @endsection
