@@ -50,8 +50,23 @@
   /* small helper (optional) */
   .shadow-soft{ box-shadow: 0 10px 30px rgba(0,0,0,.08); }
 
+  /* Custom scrollbar for the payment sidebar */
+  #Payment::-webkit-scrollbar {
+    width: 6px;
+  }
+  #Payment::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  #Payment::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 10px;
+  }
+  .donorbox-wrapper iframe {
+     margin: 0 !important;
+  }
+
   :root {
-    --reader-font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --reader-font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     --reader-font-size: 16px;
   }
 
@@ -368,7 +383,7 @@
       </div>
 
       {{-- ================= RIGHT: SIDEBAR (Donation + Newsletter) ================= --}}
-      <aside class="space-y-5 lg:sticky lg:top-28 self-start" id="Payment">
+      <aside class="space-y-5 lg:sticky lg:top-28 self-start" id="Payment" style="max-height: calc(100vh - 7rem); overflow-y: auto; overflow-x: hidden;">
         <div class="w-full">
           @if(!empty($story->campaign->donorbox_code ))
               <section class="donorbox-wrapper w-full">
