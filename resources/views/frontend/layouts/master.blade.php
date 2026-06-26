@@ -546,7 +546,14 @@ document.addEventListener('DOMContentLoaded', () => {
         iframes.forEach(iframe => {
             if (!iframe.dataset.scrollOverridden) {
                 iframe.scrollIntoView = function() {
-                    console.log("Prevented Donorbox auto-scroll jump.");
+                    console.log("Custom scroll to avoid sticky header.");
+                    const headerOffset = 140; // Height of sticky header approx
+                    const elementPosition = iframe.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({
+                         top: offsetPosition,
+                         behavior: "smooth"
+                    });
                 };
                 iframe.dataset.scrollOverridden = 'true';
             }
