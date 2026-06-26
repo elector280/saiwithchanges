@@ -555,13 +555,27 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => clearInterval(checkIframe), 10000);
 
     // 2. Force iframe to shrink when moving to smaller steps (Card details)
+    // Donorbox forms get trapped by their own 100vh CSS if the iframe was tall.
     window.addEventListener('message', (event) => {
         if (event.origin === 'https://donorbox.org') {
             try {
                 let data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
-                if (data.height && parseInt(data.height) > 0) {
+                
+                // When Donorbox changes steps, it sends scrollIntoView
+                if (data.scrollIntoView) {
                     document.querySelectorAll('iframe[name="donorbox"]').forEach(iframe => {
-                        iframe.style.minHeight = '0px'; // clear min-height bug
+                        // Compress the iframe momentarily so internal 100vh shrinks
+                        iframe.style.height = '150px'; 
+                        iframe.style.minHeight = '0px';
+                        // Ask Donorbox to recalculate its height based on the new compressed state
+                        if (window.donorbox && window.donorbox.resizeDonationWidget) {
+                            setTimeout(() => window.donorbox.resizeDonationWidget(), 50);
+                        }
+                    });
+                } else if (data.height && parseInt(data.height) > 0) {
+                    // Normal resize event
+                    document.querySelectorAll('iframe[name="donorbox"]').forEach(iframe => {
+                        iframe.style.minHeight = '0px'; 
                         iframe.style.height = data.height + 'px';
                     });
                 }
