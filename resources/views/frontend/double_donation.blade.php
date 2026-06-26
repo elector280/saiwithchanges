@@ -85,13 +85,13 @@
 
             <!-- ========== RIGHT : DONATION SIDEBAR CARD ========== -->
             <aside class="bg-white border border-gray-200 shadow-md rounded-sm text-xs text-gray-700">
-                <div class="">
-                    @if(!empty($setting->global_donorbox_code))
-                        <section class="space-y-2 prose max-w-none">
-                            {!! $setting->global_donorbox_code !!}
-                        </section>
-                    @endif
-                </div>
+                @if(!empty($setting->global_donorbox_code))
+                    <div class="w-full max-w-none bg-white border border-gray-200 rounded-sm shadow-md overflow-hidden
+                                md:mx-0 md:w-full md:max-w-none
+                                [&_iframe]:!w-full [&_iframe]:!max-w-none [&_iframe]:block">
+                        {!! $setting->global_donorbox_code !!}
+                    </div>
+                @endif
             </aside>
 
         </div>
