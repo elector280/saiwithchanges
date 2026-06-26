@@ -1,5 +1,5 @@
 <aside id="campaignSidebar" aria-label="Donation and newsletter sidebar"
-  class="hidden lg:flex lg:flex-col gap-5 w-full">
+  class="hidden lg:flex lg:flex-col gap-5 w-full sticky top-[120px]">
 
   <div class="sr-only">Donation and newsletter</div>
 
