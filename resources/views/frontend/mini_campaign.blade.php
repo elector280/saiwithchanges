@@ -218,19 +218,17 @@
             <button id="backBtn" class="md:hidden w-full border px-4 py-3 rounded">
                 {{ translate('Back') }}
             </button>
-            @if(!empty($donation_box))
-                <div class="w-full max-w-none bg-white border border-gray-200 rounded-sm shadow-md overflow-hidden
-                            md:mx-0 md:w-full md:max-w-none
-                            [&_iframe]:!w-full [&_iframe]:!max-w-none [&_iframe]:block">
-                    {!! $donation_box !!}
-                </div>
-            @elseif(!empty($setting->global_donorbox_code))
-                <div class="w-full max-w-none bg-white border border-gray-200 rounded-sm shadow-md overflow-hidden
-                            md:mx-0 md:w-full md:max-w-none
-                            [&_iframe]:!w-full [&_iframe]:!max-w-none [&_iframe]:block">
-                    {!! $setting->global_donorbox_code !!}
-                </div>
-            @endif
+            <div>
+                @if(!empty($donation_box))
+                    <section class="prose max-w-none [&_iframe]:!w-full [&_iframe]:!max-w-none [&_iframe]:block">
+                        {!! $donation_box !!}
+                    </section>
+                @elseif(!empty($setting->global_donorbox_code))
+                    <section class="prose max-w-none [&_iframe]:!w-full [&_iframe]:!max-w-none [&_iframe]:block">
+                        {!! $setting->global_donorbox_code !!}
+                    </section>
+                @endif
+            </div>
         </aside>
 
     </div>

@@ -217,19 +217,17 @@
         </button>
 
 
-            @if(!empty($donation_campaigns->donation_box))
-                <div class="w-full max-w-none bg-white border border-gray-200 rounded-sm shadow-md overflow-hidden
-                            md:mx-0 md:w-full md:max-w-none
-                            [&_iframe]:!w-full [&_iframe]:!max-w-none [&_iframe]:block">
-                    {!! $donation_campaigns->donation_box !!}
-                </div>
-            @elseif(!empty($setting->global_donorbox_code))
-                <div class="w-full max-w-none bg-white border border-gray-200 rounded-sm shadow-md overflow-hidden
-                            md:mx-0 md:w-full md:max-w-none
-                            [&_iframe]:!w-full [&_iframe]:!max-w-none [&_iframe]:block">
-                    {!! $setting->global_donorbox_code !!}
-                </div>
-            @endif
+            <div class="">
+                @if(!empty($donation_campaigns->donation_box))
+                    <section class="space-y-2- prose max-w-none [&_iframe]:!w-full [&_iframe]:!max-w-none [&_iframe]:block">
+                        {!! $donation_campaigns->donation_box !!}
+                    </section>
+                @elseif(!empty($setting->global_donorbox_code))
+                    <section class="space-y-2- prose max-w-none [&_iframe]:!w-full [&_iframe]:!max-w-none [&_iframe]:block">
+                        {!! $setting->global_donorbox_code !!}
+                    </section>
+                @endif
+            </div>
         </aside>
     </div>
 </section> 
