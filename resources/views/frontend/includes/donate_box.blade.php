@@ -45,6 +45,7 @@
   #campaignSidebar iframe{
     width: 100% !important;
     max-width: 100% !important;
+    min-height: 0 !important;
     border: 0 !important;
     display: block !important;
   }

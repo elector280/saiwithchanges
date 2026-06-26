@@ -537,9 +537,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 </div>
-{{-- Script to prevent Donorbox from auto-scrolling the page and causing jumps --}}
+{{-- Script to prevent Donorbox from auto-scrolling the page and fix iframe resize whitespace --}}
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Prevent scroll jumps
     const checkIframe = setInterval(() => {
         const iframes = document.querySelectorAll('iframe[name="donorbox"]');
         iframes.forEach(iframe => {
@@ -552,6 +553,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 500); 
     setTimeout(() => clearInterval(checkIframe), 10000);
+
+    // 2. Force iframe to shrink when moving to smaller steps (Card details)
+    window.addEventListener('message', (event) => {
+        if (event.origin === 'https://donorbox.org') {
+            try {
+                let data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+                if (data.height && parseInt(data.height) > 0) {
+                    document.querySelectorAll('iframe[name="donorbox"]').forEach(iframe => {
+                        iframe.style.minHeight = '0px'; // clear min-height bug
+                        iframe.style.height = data.height + 'px';
+                    });
+                }
+            } catch (e) {}
+        }
+    });
 });
 </script>
 </body>
