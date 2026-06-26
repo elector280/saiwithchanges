@@ -138,6 +138,11 @@
   to   { transform: translateX(calc(-1 * var(--marquee-distance))); }
 }
 
+/* Fix for Donorbox iframe auto-scrolling under the sticky header */
+iframe[name=donorbox],
+.donorbox-wrapper iframe {
+  scroll-margin-top: 120px !important;
+}
     </style>
 
     <style>

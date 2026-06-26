@@ -47,6 +47,7 @@
     max-width: 100% !important;
     border: 0 !important;
     display: block !important;
+    scroll-margin-top: 120px !important;
   }
 </style>
 
