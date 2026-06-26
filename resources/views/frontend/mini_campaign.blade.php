@@ -215,7 +215,7 @@
 
         {{-- RIGHT SIDE / SIDEBAR --}}
         <aside id="donationSideBar" class="hidden md:block space-y-14 donationSideBar">
-            <button id="backBtn" class="md:hidden w-full border px-4 py-3 rounded">
+            <button id="backBtn" class="md:hidden w-full border border-white text-white px-4 py-3 rounded">
                 {{ translate('Back') }}
             </button>
             <div>
