@@ -542,7 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Prevent scroll jumps
     const checkIframe = setInterval(() => {
-        const iframes = document.querySelectorAll('iframe[name="donorbox"]');
+        const iframes = document.querySelectorAll('iframe[name="donorbox"], .donorbox-wrapper iframe, iframe[src*="donorbox"]');
         iframes.forEach(iframe => {
             if (!iframe.dataset.scrollOverridden) {
                 iframe.scrollIntoView = function() {
@@ -565,12 +565,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 // When Donorbox changes steps, it sends scrollIntoView
                 if (data.scrollIntoView) {
                     iframes.forEach(iframe => {
+                        const wrapper = iframe.parentElement;
+                        // freeze wrapper height to prevent page jumping
+                        if (wrapper) {
+                            wrapper.style.height = wrapper.getBoundingClientRect().height + 'px';
+                        }
+                        
                         // Compress the iframe momentarily so internal 100vh shrinks
                         iframe.style.setProperty('height', '150px', 'important'); 
                         iframe.style.setProperty('min-height', '0px', 'important');
+                        
                         // Ask Donorbox to recalculate its height based on the new compressed state
                         if (window.donorbox && window.donorbox.resizeDonationWidget) {
-                            setTimeout(() => window.donorbox.resizeDonationWidget(), 50);
+                            setTimeout(() => {
+                                window.donorbox.resizeDonationWidget();
+                                if (wrapper) {
+                                    setTimeout(() => wrapper.style.height = '', 100);
+                                }
+                            }, 50);
                         }
                     });
                 } else if (data.height && parseInt(data.height) > 0) {
