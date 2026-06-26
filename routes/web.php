@@ -275,6 +275,27 @@ Route::get('/es/news/{slug?}', [HomeController::class, 'news'])->name('newsEs');
 
 // Blog / Reports
 Route::get('/report/{slug}', [HomeController::class, 'blogDetails'])->name('blogDetails');
+
+Route::get('/fix-donorbox', function() {
+    $savingLives = App\Models\Campaign::where('title', 'like', '%Saving Lives in Hospitals%')->first();
+    $abandonedPets = App\Models\Campaign::where('title', 'like', '%Abandoned Pets%')->first();
+    
+    if (!$savingLives || !$abandonedPets) {
+        return "Campaigns not found.";
+    }
+    
+    // Extract the URL from abandoned pets
+    preg_match('/src="([^"]+)"/', $abandonedPets->donorbox_code, $matches);
+    $url = $matches[1] ?? 'https://donorbox.org/embed/abandoned-pets';
+    
+    // Replace the URL in saving lives code
+    $newCode = preg_replace('/src="([^"]+)"/', 'src="'.$url.'"', $savingLives->donorbox_code);
+    
+    $abandonedPets->donorbox_code = $newCode;
+    $abandonedPets->save();
+    
+    return "Fixed! Go check the Abandoned Pets page now.";
+});
 Route::get('/es/informe/{slug}', [HomeController::class, 'blogDetails'])->name('blogDetailsEs');
 
 // Other pages
